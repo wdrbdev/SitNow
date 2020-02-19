@@ -1,0 +1,11 @@
+{% extends 'letsgo/base.html' %}
+{% comment %} informs Django's template engine that we will be using static files within the template {% endcomment %}
+{% load staticfiles %}
+
+{% block title_block %}
+    Homepage
+{% endblock %}
+
+{% block body_block %}
+    <div>{{ welcome_msg }}<div>
+{% endblock %}

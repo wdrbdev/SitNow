@@ -1,0 +1,19 @@
+{% extends 'letsgo/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+    Login
+{% endblock %}
+
+{% block body_block %}
+    <h1>Login to Let's Go</h1>
+    <form id="login_form" method="post" action="{% url 'letsgo:login' %}">
+        {% csrf_token %}
+        {% comment %} the name attribute in input tag should match the name in model {% endcomment %}
+        Username: <input type="text" name="username" value="" size="50" />
+        <br />
+        Password: <input type="password" name="password" value="" size="50" />
+        <br />
+        <input type="submit" value="submit" />
+    </form>
+{% endblock %}
