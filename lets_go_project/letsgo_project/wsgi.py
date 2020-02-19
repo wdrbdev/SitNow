@@ -7,10 +7,25 @@ For more information on this file, see
 https://docs.djangoproject.com/en/2.1/howto/deployment/wsgi/
 """
 
+import django.core.handlers.wsgi
+import django
 import os
+import sys
+# Add your project's directory the PYTHONPATH
+path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-from django.core.wsgi import get_wsgi_application
+# path = '/home/letsgo/tango_with_django_project/'
+if path not in sys.path:
+    sys.path.append(path)
 
+# Move to the project directory
+os.chdir(path)
+
+# Tell Django where the settings.py module is located
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'letsgo_project.settings')
 
-application = get_wsgi_application()
+# Set up Django -- let it instantiate everything!
+django.setup()
+
+# Import the Django WSGI to handle requests
+application = django.core.handlers.wsgi.WSGIHandler()

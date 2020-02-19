@@ -16,6 +16,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.conf.urls import include
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     # path for init view
@@ -23,4 +25,4 @@ urlpatterns = [
     # This maps any URLs starting with letsgo/ to be handled by letsgo
     # Like component in React
     path('', include('letsgo.urls')),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
