@@ -35,7 +35,7 @@ SECRET_KEY = 'qehj*_n&g@1*)i7y#63f!_an6ey^d77q#$nnp0cc#qa$y601c6'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = IS_DEBUG
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['letsgo.pythonanywhere.com', ]
 
 # The url for user login and logout
 LOGIN_URL = 'letsgo:login'
