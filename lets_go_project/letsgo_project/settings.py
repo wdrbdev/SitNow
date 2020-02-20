@@ -35,7 +35,7 @@ SECRET_KEY = 'qehj*_n&g@1*)i7y#63f!_an6ey^d77q#$nnp0cc#qa$y601c6'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = IS_DEBUG
 
-ALLOWED_HOSTS = ['letsgo.pythonanywhere.com', ]
+ALLOWED_HOSTS = ['letsgo.pythonanywhere.com', "localhost", ]
 
 # The url for user login and logout
 LOGIN_URL = 'letsgo:login'
@@ -91,12 +91,27 @@ WSGI_APPLICATION = 'letsgo_project.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+if environment == 'development':
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': 'letsgo',
+            'USER': 'letsgo',
+            'PASSWORD': 'K0NUzaFmjzW1c8R1',
+            'HOST': '127.0.0.1',
+            'PORT': 3306,
+        }
     }
-}
+elif evironment == 'production':
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': 'letsgo$letsgo',
+            'USER': 'letsgo',
+            'PASSWORD': 'BSYKlQiVXMy0gIBB',
+            'HOST': 'letsgo.mysql.pythonanywhere-services.com',
+        }
+    }
 
 
 # Password validation
