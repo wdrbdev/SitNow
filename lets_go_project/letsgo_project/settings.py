@@ -102,7 +102,7 @@ if environment == 'development':
             'PORT': 3306,
         }
     }
-elif evironment == 'production':
+elif environment == 'production':
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.mysql',

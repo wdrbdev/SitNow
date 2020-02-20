@@ -15,8 +15,8 @@ services:
       MYSQL_PASSWORD: K0NUzaFmjzW1c8R1
     expose:
       - "3306"
-    volumes:
-      - ./dockerMySQL:/var/run/mysqld
+    # volumes:
+    #   - ./dockerMySQL:/var/run/mysqld
 
   adminer:
     image: adminer
