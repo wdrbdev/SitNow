@@ -1,4 +1,4 @@
-"""letsgo_project URL Configuration
+"""sitnow_project URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/2.1/topics/http/urls/
@@ -21,8 +21,8 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     # path for init view
-    path('admin/', admin.site.urls),
-    # This maps any URLs starting with letsgo/ to be handled by letsgo
+    path("admin/", admin.site.urls),
+    # This maps any URLs starting with sitnow/ to be handled by sitnow
     # Like component in React
-    path('', include('letsgo.urls')),
+    path("", include("sitnow.urls")),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

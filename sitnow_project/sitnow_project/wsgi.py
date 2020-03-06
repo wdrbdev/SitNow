@@ -1,5 +1,5 @@
 """
-WSGI config for letsgo_project project.
+WSGI config for sitnow_project project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 
@@ -11,9 +11,10 @@ import django.core.handlers.wsgi
 import django
 import os
 import sys
+
 # Add your project's directory the PYTHONPATH
 path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-# path = '/home/letsgo/tango_with_django_project/'
+# path = '/home/sitnow/tango_with_django_project/'
 if path not in sys.path:
     sys.path.append(path)
 
@@ -21,7 +22,7 @@ if path not in sys.path:
 os.chdir(path)
 
 # Tell Django where the settings.py module is located
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'letsgo_project.settings')
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "sitnow_project.settings")
 
 # Set up Django -- let it instantiate everything!
 django.setup()

@@ -1,10 +1,11 @@
 from django.shortcuts import render
-from letsgo.forms import UserForm, UserProfileForm
+from sitnow.forms import UserForm, UserProfileForm
 from django.shortcuts import redirect
 from django.urls import reverse
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse
 
 
 # Create your views here.
@@ -12,18 +13,18 @@ from django.contrib.auth.decorators import login_required
 
 def index(request):
     context_dict = {}
-    context_dict['welcome_msg'] = "Welcome to Let's Go"
+    context_dict["welcome_msg"] = "Welcome to Sit Now"
 
-    response = render(request, 'letsgo/index.html', context=context_dict)
+    response = render(request, "sitnow/index.html", context=context_dict)
 
     return response
 
 
 def about(request):
     context_dict = {}
-    context_dict['about_msg'] = "About Let's Go"
+    context_dict["about_msg"] = "About Sit Now"
 
-    response = render(request, 'letsgo/about.html', context=context_dict)
+    response = render(request, "sitnow/about.html", context=context_dict)
 
     return response
 
@@ -36,7 +37,7 @@ def register(request):
     registered = False
 
     # If it's a HTTP POST, we're interested in processing form data.
-    if request.method == 'POST':
+    if request.method == "POST":
         # Attempt to grab information from the raw form information.
         # Note that we make use of both UserForm and UserProfileForm.
         user_form = UserForm(request.POST)
@@ -75,16 +76,20 @@ def register(request):
         profile_form = UserProfileForm()
 
     # Render the template depending on the context.
-    return render(request,
-                  'letsgo/register.html',
-                  context={'user_form': user_form,
-                           'profile_form': profile_form,
-                           'registered': registered})
+    return render(
+        request,
+        "sitnow/register.html",
+        context={
+            "user_form": user_form,
+            "profile_form": profile_form,
+            "registered": registered,
+        },
+    )
 
 
 def user_login(request):
     # If the request is a HTTP POST, try to pull out the relevant information.
-    if request.method == 'POST':
+    if request.method == "POST":
         # Gather the username and password provided by the user.
         # This information is obtained from the login form.
         # We use request.POST.get('<variable>') as opposed
@@ -92,8 +97,8 @@ def user_login(request):
         # request.POST.get('<variable>') returns None if the
         # value does not exist, while request.POST['<variable>']
         # will raise a KeyError exception.
-        username = request.POST.get('username')
-        password = request.POST.get('password')
+        username = request.POST.get("username")
+        password = request.POST.get("password")
 
         # Use Django's machinery to attempt to see if the username/password
         # combination is valid - a User object is returned if it is.
@@ -108,10 +113,10 @@ def user_login(request):
                 # If the account is valid and active, we can log the user in.
                 # We'll send the user back to the homepage.
                 login(request, user)
-                return redirect(reverse('letsgo:index'))
+                return redirect(reverse("sitnow:index"))
             else:
                 # An inactive account was used - no logging in!
-                return HttpResponse("Your Let's Go account is disabled.")
+                return HttpResponse("Your Sit Now account is disabled.")
         else:
             # Bad login details were provided. So we can't log the user in.
             print(f"Invalid login details: {username}, {password}")
@@ -122,7 +127,7 @@ def user_login(request):
     else:
         # No context variables to pass to the template system, hence the
         # blank dictionary object...
-        return render(request, 'letsgo/login.html')
+        return render(request, "sitnow/login.html")
 
 
 # Use the login_required() decorator to ensure only those logged in can
@@ -132,4 +137,9 @@ def user_logout(request):
     # Since we know the user is logged in, we can now just log them out.
     logout(request)
     # Take the user back to the homepage.
-    return redirect(reverse('letsgo:index'))
+    return redirect(reverse("sitnow:index"))
+
+
+def test(request):
+    data = {"name": "Vitor", "location": "Finland", "is_active": True, "count": 28}
+    return JsonResponse(data)

@@ -1,4 +1,4 @@
-{% extends 'letsgo/base.html' %}
+{% extends 'sitnow/base.html' %}
 {% load staticfiles %}
 
 {% block title_block %}
@@ -9,10 +9,10 @@ Sign Up
 <h1>Sign Up for Let's Go</h1>
 {% if registered %}
 <div>Thank you for registering!</div>
-<a href="{% url 'letsgo:index' %}">Return to the homepage.</a><br />
+<a href="{% url 'sitnow:index' %}">Return to the homepage.</a><br />
 {% else %}
 <div>Register here!</div>
-<form id="user_form" method="post" action="{% url 'letsgo:register' %}"
+<form id="user_form" method="post" action="{% url 'sitnow:register' %}"
       enctype="multipart/form-data">
     
     {% csrf_token %}

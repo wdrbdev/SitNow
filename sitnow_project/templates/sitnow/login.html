@@ -1,4 +1,4 @@
-{% extends 'letsgo/base.html' %}
+{% extends 'sitnow/base.html' %}
 {% load staticfiles %}
 
 {% block title_block %}
@@ -7,7 +7,7 @@
 
 {% block body_block %}
     <h1>Login to Let's Go</h1>
-    <form id="login_form" method="post" action="{% url 'letsgo:login' %}">
+    <form id="login_form" method="post" action="{% url 'sitnow:login' %}">
         {% csrf_token %}
         {% comment %} the name attribute in input tag should match the name in model {% endcomment %}
         Username: <input type="text" name="username" value="" size="50" />

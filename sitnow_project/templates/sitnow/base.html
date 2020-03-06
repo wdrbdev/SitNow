@@ -18,13 +18,13 @@
         <div>
             <ul>
             {% if user.is_authenticated %}
-                <li><a href="{% url 'letsgo:logout' %}">Logout</a></li>
+                <li><a href="{% url 'sitnow:logout' %}">Logout</a></li>
             {% else %}
-                <li><a href="{% url 'letsgo:register' %}">Sign Up</a></li>
-                <li><a href="{% url 'letsgo:login' %}">Login</a></li>
+                <li><a href="{% url 'sitnow:register' %}">Sign Up</a></li>
+                <li><a href="{% url 'sitnow:login' %}">Login</a></li>
             {% endif %}
-                <li><a href="{% url 'letsgo:index' %}">Index</a></li>
-                <li><a href="{% url 'letsgo:about' %}">About</a></li>
+                <li><a href="{% url 'sitnow:index' %}">Index</a></li>
+                <li><a href="{% url 'sitnow:about' %}">About</a></li>
             </ul>
         </div>
     </body>
