@@ -6,14 +6,54 @@
         <title>
             Let's Go - 
             {% block title_block %} 
+            SitNow
             {% endblock %}
         </title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     </head>
+
     <body>
+    {% comment %} navigation {% endcomment %}
+        <div>
+            <div id="logo">
+                <img src="https://picsum.photos/112/100" alt="logo">
+            </div>
+            <div id="nav">
+                <ul>
+                    <li><a href="/sitnow/about/">about</a></li>
+                    <li><a href="#">forum</a></li>
+                    <li class="boundary"><a href="#">help</a></li>
+                    <li><a href="#">account</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        {% comment %} content {% endcomment %}
         <div>
           {% block body_block %}
+          
           {% endblock %}
         </div>
+
+        {% comment %} footer {% endcomment %}
+        <div class="info">
+                <div class="copyright">
+                    <div class="title">&copy; internet technology 2020.</div>
+                    <div class="subtitle">building your site with lots of fun</div>
+                </div>
+
+                <div class="social-media">
+                    <ul>
+                        <li><a href="#">f</a></li>
+                        <li><a href="#">t</a></li>
+                        <li><a href="#">g</a></li>
+                        <li><a href="#">w</a></li>
+                    </ul>
+                </div>
+
         <hr />
         <div>
             <ul>
