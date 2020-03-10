@@ -3,6 +3,7 @@ from django.template.defaultfilters import slugify
 from django.contrib.auth.models import User
 
 
+
 # Create your models here.
 
 
@@ -11,6 +12,10 @@ class UserProfile(models.Model):
     PREFERRED_NAME_MAX_LENGTH = 200
     # This line is required. Links UserProfile to a User model instance.
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+
+    # add to upload photo file ################
+    picture = models.ImageField(upload_to='profile_images', blank=True)
+
 
     # The additional attributes we wish to include.
     preferred_name = models.CharField(

@@ -1,0 +1,37 @@
+/* ************* side bar *********** */
+.nav {
+    margin-top: 50px;
+}
+
+.nav button{
+    margin: 3px;
+    /* padding:0; */
+}
+
+.nav button a{
+    color: #000;
+}
+
+/* ************* About title *********** */
+.card {
+    margin-top: 40px;
+    padding: 0 0 0 40px;
+    border: 0px;
+}
+
+.col-lg-3 {
+    padding: 0;
+    margin: 10px 15px;
+    border: 1px solid #666;
+    border-radius: 3px;
+}
+
+.col-lg-3 .card-header {
+    text-align: center;
+    background-color: #666;
+    color: #fff;
+}
+
+.col-lg-3 .card-body {
+    margin-left: 10px;
+} 

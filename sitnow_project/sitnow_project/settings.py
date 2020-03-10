@@ -27,6 +27,7 @@ STATIC_DIR = os.path.join(BASE_DIR, "static")
 STATICFILES_DIRS = [
     STATIC_DIR,
 ]
+
 MEDIA_DIR = os.path.join(BASE_DIR, "media")
 
 # Quick-start development settings - unsuitable for production
@@ -36,7 +37,7 @@ MEDIA_DIR = os.path.join(BASE_DIR, "media")
 SECRET_KEY = "qehj*_n&g@1*)i7y#63f!_an6ey^d77q#$nnp0cc#qa$y601c6"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = IS_DEBUG
+DEBUG = True
 
 ALLOWED_HOSTS = [
     "sitnow.pythonanywhere.com",
@@ -134,7 +135,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
-STATIC_URL = "/static/"
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static"),
+    '/sitnow_project/static/',
+]
+STATIC_URL = '/static/'
 
 # Media files
 MEDIA_ROOT = MEDIA_DIR

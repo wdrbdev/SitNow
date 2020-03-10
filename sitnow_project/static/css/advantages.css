@@ -1,0 +1,37 @@
+/* ************* side bar *********** */
+.nav {
+    margin-top: 50px;
+}
+
+.nav button{
+    margin: 3px;
+}
+
+.nav button a{
+    color: #000;
+}
+
+/* ************* Advantage title *********** */
+.card {
+    margin-top: 40px;
+    padding: 0 0 0 40px;
+    border: 0px;
+}
+
+/* ************* Advantage content *********** */
+.card .row {
+    margin-top: 30px;
+}
+.col-lg-4 {
+    padding: 0 20px;
+    text-align: center;
+}
+
+.col-lg-4 img {
+    margin-left: 50%;
+    transform: translateX(-50%);
+}
+
+.col-lg-4 h2 {
+    margin-top: 20px;
+}

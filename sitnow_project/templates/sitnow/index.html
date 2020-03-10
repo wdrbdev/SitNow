@@ -1,11 +1,60 @@
 {% extends 'sitnow/base.html' %}
-{% comment %} informs Django's template engine that we will be using static files within the template {% endcomment %}
 {% load staticfiles %}
 
 {% block title_block %}
-    Homepage
+SitNow
+{% endblock %}
+
+{% block header_block %}
 {% endblock %}
 
 {% block body_block %}
-    <div>{{ welcome_msg }}<div>
+<div id="content">
+    <div class="container clearfix">
+        <div>{{ welcome_msg }}<div>
+                <div class="wel-grids">
+                    <div class="col-md-6 wel-grid">
+                        <div class="slogan">
+                            <div class="title">slogan</div>
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur cupiditate
+                                quibusdam
+                                necessitatibus fugit quo consequatur itaque rerum dicta corporis dolores.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 wel-grid">
+                        <div class="search">
+                            <div class="filter">
+                                <form id="search_form" method="post" action="{% url 'sitnow:result' %}">
+                                    {% csrf_token %}
+                                    <input type="text" id="curlocation" name="curlocation" placeholder="location">
+
+                                    <select id="filter" name="filter">
+                                        <option value="wifi">wifi</option>
+                                        <option value="microwave">microwave</option>
+                                        <option value="plug">plug</option>
+                                        <option value="provide food/drink">food/drink</option>
+                                        <option value="can eat/drink">can eat/drink</option>
+                                    </select>
+
+                                    <select id="capacity" name="capacity" placeholder="capacity">
+                                        <option value="onetotwo">1 - 2</option>
+                                        <option value="threetofive">3 - 5</option>
+                                        <option value="fivetoeight">5 - 8</option>
+                                        <option value="aboveten">10 +</option>
+                                    </select>
+
+                                    <button type="submit" id="submit-search">submit</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 {% endblock %}

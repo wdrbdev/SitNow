@@ -1,0 +1,49 @@
+{% extends 'sitnow/base.html' %}
+{% load staticfiles %}
+
+
+{% block title_block %}
+SitNow - About Us
+{% endblock %}
+
+{% block header_block %}
+<link rel="stylesheet" href="{% static 'css/aboutus.css' %}">
+{% endblock %}
+
+{% block body_block %}
+<div class="container clearfix">
+    <div class="card-deck mb-4">
+        <nav class="nav flex-column text-center">
+            <button type="button" class="btn btn-outline-secondary btn-sm">
+                <a href="{% url 'sitnow:aboutus' %}" class="text-decoration-none">About Us</a>
+            </button>
+            <button type="button" class="btn btn-outline-secondary btn-sm">
+                <a href="{% url 'sitnow:advantages' %}" class="text-decoration-none">Advantages</a>
+            </button>
+            <button type="button" class="btn btn-outline-secondary btn-sm">
+                <a href="{% url 'sitnow:forwhom' %}" class="text-decoration-none">For Whom</a>
+            </button>
+            <button type="button" class="btn btn-outline-secondary btn-sm">
+                <a href="{% url 'sitnow:tutorial' %}" class="text-decoration-none">Tutorial</a>
+            </button>
+        </nav>
+        <div class="card mb-3">
+            <h1>About us</h1>
+            <p>A seat finder application to get the nearest location to sit and take
+                a rest in the University of Glasgow according to various user requirements.</p>
+            <p>The objective of this application is to provide users, who happen to be at the UoG campus, with the
+                location of a place to have a seat.
+                Since the facilities vary in each area, users can find the most suitable one by filtering by certain
+                requirements.</p>
+            <p>Requirements can be a socket and wifi access, food service (microwave/ hot water tap), quiet study,
+                etc.
+                Apart from giving information about specific spots, the app can guide users to the desired places.
+                They are welcome to rate and leave comments on each location. For example, if the facilities are
+                under
+                renovation or short-term closure.
+                This would ensure users are receiving the most up-to-date information.</p>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

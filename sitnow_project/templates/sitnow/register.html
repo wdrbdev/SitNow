@@ -5,24 +5,42 @@
 Sign Up
 {% endblock %}
 
+{% block header_block %}
+<link rel="stylesheet" href="{% static 'css/register.css' %}">
+{% endblock %}
+
 {% block body_block %}
-<h1>Sign Up for Let's Go</h1>
-{% if registered %}
-<div>Thank you for registering!</div>
-<a href="{% url 'sitnow:index' %}">Return to the homepage.</a><br />
-{% else %}
-<div>Register here!</div>
-<form id="user_form" method="post" action="{% url 'sitnow:register' %}"
-      enctype="multipart/form-data">
-    
-    {% csrf_token %}
-    
-    {% comment %} Display each form {% endcomment %}
-    {{ user_form.as_p }}
-    {{ profile_form.as_p }}
-    
-    {% comment %} Provide a button to click to submit the form. {% endcomment %}
-    <input type="submit" name="submit" value="Register" />
-</form>
-{% endif %}
+<div id="content">
+  <div class="container clearfix">
+    <div class="account-switch" style="text-align: center;">
+      {% comment %} <h3 class="h3 mb-3 font-weight-normal">Sign up for SitNow</h3> {% endcomment %}
+      <a class="login" href="{% url 'sitnow:login' %}">Log In</a>
+      <div class="boundary"></div>
+      <a class="signup" href="{% url 'sitnow:register' %}">Sign Up</a>
+      </ul>
+    </div>
+
+    {% if registered %}
+    <div>Thank you for registering!</div>
+    <a href="{% url 'sitnow:index' %}">Return to the homepage.</a><br />
+    {% else %}
+    {% comment %} <div>Register here!</div> {% endcomment %}
+    <form id="user_form" method="post" action="{% url 'sitnow:register' %}" enctype="multipart/form-data">
+
+      {% csrf_token %}
+      {% comment %} Display each form {% endcomment %}
+      {{ user_form.as_p }}
+      {{ profile_form.as_p }}
+
+      {% comment %} Provide a button to click to submit the form. {% endcomment %}
+      <input type="submit" name="submit" value="Register" />
+    </form>
+    {% endif %}
+
+  </div>
+
+</div>
+
+
+
 {% endblock %}

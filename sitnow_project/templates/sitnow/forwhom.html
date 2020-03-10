@@ -1,0 +1,80 @@
+{% extends 'sitnow/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+SitNow - For Whom
+{% endblock %}
+
+{% block header_block %}
+<link rel="stylesheet" href="{% static 'css/forwhom.css' %}">
+{% endblock %}
+
+{% block body_block %}
+
+<div class="container clearfix">
+  <div class="card-deck mb-4">
+    <nav class="nav flex-column text-center">
+      <button type="button" class="btn btn-outline-secondary btn-sm">
+        <a href="{% url 'sitnow:aboutus' %}" class="text-decoration-none">About Us</a>
+      </button>
+      <button type="button" class="btn btn-outline-secondary btn-sm">
+        <a href="{% url 'sitnow:advantages' %}" class="text-decoration-none">Advantages</a>
+      </button>
+      <button type="button" class="btn btn-outline-secondary btn-sm">
+        <a href="{% url 'sitnow:forwhom' %}" class="text-decoration-none">For Whom</a>
+      </button>
+      <button type="button" class="btn btn-outline-secondary btn-sm">
+        <a href="{% url 'sitnow:tutorial' %}" class="text-decoration-none">Tutorial</a>
+      </button>
+    </nav>
+
+    <div class="card mb-3">
+      <h1>For Whom?</h1>
+      <div class="row">
+
+        <div class="col-lg-3">
+          <div class="card-header">
+            <h4 class="my-0 font-weight-normal">Student</h4>
+          </div>
+          <div class="card-body">
+            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Pariatur, excepturi?</p>
+            <ul class="list-unstyled mt-3 mb-4">
+              <li>Lorem, ipsum dolor.</li>
+              <li>Lorem, ipsum dolor.</li>
+              <li>Lorem, ipsum dolor.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="col-lg-3">
+          <div class="card-header">
+            <h4 class="my-0 font-weight-normal">Staff</h4>
+          </div>
+          <div class="card-body">
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur, maiores?</p>
+            <ul class="list-unstyled mt-3 mb-4">
+              <li>Lorem, ipsum dolor.</li>
+              <li>Lorem, ipsum dolor.</li>
+              <li>Lorem, ipsum dolor.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="col-lg-3">
+          <div class="card-header">
+            <h4 class="my-0 font-weight-normal">Visitors</h4>
+          </div>
+          <div class="card-body">
+            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Praesentium, quos.</p>
+            <ul class="list-unstyled mt-3 mb-4">
+              <li>Lorem, ipsum dolor.</li>
+              <li>Lorem, ipsum dolor.</li>
+              <li>Lorem, ipsum dolor.</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    {% endblock %}

@@ -1,0 +1,24 @@
+{% extends 'sitnow/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+Results
+{% endblock %}
+
+{% block body_block %}
+<div id="content">
+    <div class="container clearfix">
+        <div class="filter">
+            <form id="filter" action="{% url 'sitnow:result' %}" method="post">
+                {% csrf_token %}
+                filter (form) same as index
+                <input type="submit" value="submit" />
+            </form>
+        </div>
+        <div class="wel-grids">
+            <div class="col-md-6 wel-grid">location detail</div>
+            <div class="col-md-6 wel-grid"> searching results</div>
+        </div>
+    </div>
+</div>
+{% endblock %}

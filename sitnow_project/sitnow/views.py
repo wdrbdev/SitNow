@@ -13,18 +13,75 @@ from django.http import JsonResponse
 
 def index(request):
     context_dict = {}
-    context_dict["welcome_msg"] = "Welcome to Sit Now"
+    context_dict["welcome_msg"] = "Welcome to SitNow"
 
     response = render(request, "sitnow/index.html", context=context_dict)
 
     return response
 
 
-def about(request):
+def aboutus(request):
     context_dict = {}
-    context_dict["about_msg"] = "About Sit Now"
+    context_dict["about_msg"] = "About SitNow"
 
-    response = render(request, "sitnow/about.html", context=context_dict)
+    response = render(request, "sitnow/aboutus.html", context=context_dict)
+
+    return response
+
+def advantages(request):
+    context_dict = {}
+    context_dict["advantage_msg"] = "Advantages of SitNow"
+
+    response = render(request, "sitnow/advantages.html", context=context_dict)
+
+    return response
+
+def forwhom(request):
+    context_dict = {}
+    context_dict["forwhom_msg"] = "For Whom SitNow"
+
+    response = render(request, "sitnow/forwhom.html", context=context_dict)
+
+    return response
+
+def tutorial(request):
+    context_dict = {}
+    context_dict["tutorial_msg"] = "Tutorial SitNow"
+
+    response = render(request, "sitnow/tutorial.html", context=context_dict)
+
+    return response
+
+
+def forum(request):
+    context_dict = {}
+    context_dict["forum_msg"] = "forum"
+
+    response = render(request, "sitnow/forum.html", context=context_dict)
+
+    return response
+
+def result(request):
+    context_dict = {}
+    context_dict["result_msg"] = "result"
+
+    response = render(request, "sitnow/result.html", context=context_dict)
+
+    return response
+
+def favorite(request):
+    context_dict = {}
+    context_dict["fovorite_msg"] = "favorite"
+
+    response = render(request, "sitnow/favorite.html", context=context_dict)
+
+    return response
+
+def setting(request):
+    context_dict = {}
+    context_dict["setting_msg"] = "setting"
+
+    response = render(request, "sitnow/setting.html", context=context_dict)
 
     return response
 

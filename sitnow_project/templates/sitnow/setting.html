@@ -1,0 +1,48 @@
+{% extends 'sitnow/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+SitNow - Setting
+{% endblock %}
+
+{% block header_block %}
+{% endblock %}
+
+{% block body_block %}
+<div id="content">
+    <div class="container clearfix">
+        <div class="user-detail">
+            <div class="user-info">
+                <h2 id="user-name">user name</h2>
+                <h5 id="user-email">email@gmail.com</h5>
+            </div>
+
+            <div id="user-photo">
+                <img src="https://picsum.photos/112/100" alt="account photo">
+            </div>
+        </div>
+
+        <div class="setting">
+            <div class="wel-grids">
+                <div class="col-md-3 wel-grid">
+                    <nav class="side-navigation">
+                        <ul>
+                            <li><a href="{% url 'sitnow:favorite' %}">Favorite</a></li>
+                            <li><a href="{% url 'sitnow:setting' %}">Settings</a></li>
+                            <li><a href="{% url 'sitnow:logout' %}">Log out</a></li>
+                        </ul>
+                    </nav>
+                </div>
+
+                <div class="col-md-9 wel-grid">
+                    form here - user info setting (photo and user name and email)
+                </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

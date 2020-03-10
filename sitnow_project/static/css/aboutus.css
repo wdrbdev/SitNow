@@ -1,0 +1,19 @@
+/* ************* side bar *********** */
+.nav {
+    margin-top: 50px;
+}
+
+.nav button{
+    margin: 3px;
+}
+
+.nav button a{
+    color: #000;
+}
+
+/* ************* About title *********** */
+.card {
+    margin-top: 40px;
+    padding: 0 0 0 40px;
+    border: 0px;
+}
