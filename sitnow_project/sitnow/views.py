@@ -5,19 +5,178 @@ from django.urls import reverse
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
-from django.http import JsonResponse
-
-
+from django.http import HttpResponseBadRequest, JsonResponse
+from sitnow.forms import SearchForm
+from django.views.defaults import bad_request
+from sitnow_project.config.keys import *
+from sitnow.models import Comment, Place, UserProfile
+from django.forms.models import model_to_dict
+import json
+from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth.models import User
+from get_places import *
+from sitnow.utils.validation import *
 # Create your views here.
 
 
 def index(request):
-    context_dict = {}
-    context_dict["welcome_msg"] = "Welcome to SitNow"
+    form = SearchForm()
+    if request.method == 'POST':
+        form = SearchForm(request.POST)
+        # Have we been provided with a valid form?
+        if form.is_valid():
+            # Now that the category is saved, we could confirm this.
+            # For now, just redirect the user back to the index view.
+            return redirect('/result/')
+        else:
+            # The supplied form contained errors -
+            # just print them to the terminal.
+            print(form.errors)
+    places = Place.objects.all()
+    places_dicts = []
+    for place in places:
+        places_dicts.append(model_to_dict(place))
+    context_dict = {"form": form, "places": places_dicts,
+                    "GOOGLE_JS_API_KEY": GOOGLE_JS_API_KEY}
+    return render(request, "sitnow/index.html", context=context_dict)
 
-    response = render(request, "sitnow/index.html", context=context_dict)
 
-    return response
+def result(request):
+    # A HTTP POST?
+    if request.method == 'POST':
+        form = SearchForm(request.POST)
+
+        # Have we been provided with a valid form?
+        if form.is_valid():
+            search_location = validate_querydict(request.POST)
+            filtered_places = filter(search_location)
+            k_nearset = get_k_nearest(
+                search_location, filtered_places, 5)
+            k_google_nearset = get_google_k_nearest(
+                search_location, k_nearset, 3)
+            d = {}
+            start = {"latitude": float(search_location["latitude"]), "longitude": float(
+                search_location["longitude"])}
+            d["start"] = start
+
+            locations = Place.objects.all()
+            location_dicts = []
+            for location in locations:
+                location_dicts.append(model_to_dict(location))
+            d["locations"] = location_dicts
+
+            d["form"] = form
+            d["GOOGLE_JS_API_KEY"] = GOOGLE_JS_API_KEY
+
+            if len(k_google_nearset) > 0:
+                i = 1
+                for place in k_google_nearset:
+                    place_dict = model_to_dict(place)
+                    place_dict['rate'] = get_avg_rate(place)
+                    d["place" + str(i)] = place_dict
+                    i += 1
+            else:
+                d['isEmpty'] = True
+                response = render(request, "sitnow/result.html", context=d)
+            response = render(request, "sitnow/result.html", context=d)
+
+            return response
+        else:
+            # The supplied form contained errors -
+            # just print them to the terminal.
+            print(form.errors)
+    return HttpResponseBadRequest(content="400 Bad Request")
+
+
+def place(request):
+    if request.method == 'POST':
+        name = request.POST['name']
+        building = request.POST['building']
+        place = Place.objects.filter(name=name, building=building).first()
+        return JsonResponse(model_to_dict(place), safe=False)
+    return HttpResponseBadRequest(content="400 Bad Request")
+
+
+def get_avg_rate(place):
+    comments = Comment.objects.filter(place=place)
+    if(len(comments) != 0):
+        rate_sum = 0
+        for comment in comments:
+            rate_sum += comment.rate
+        return rate_sum / len(comments)
+    return -1
+
+
+def get_user(request):
+    if request.method == 'POST':
+        d = {}
+        user_profile = model_to_dict(
+            UserProfile.objects.get(user=request.user))
+        d['picture'] = "media/" + str(user_profile['picture'])
+        d['preferred_name'] = user_profile['preferred_name']
+        return JsonResponse(d, safe=False)
+    return HttpResponseBadRequest(content="400 Bad Request")
+
+
+def places(request):
+    places_dicts = []
+    places = Place.objects.all()
+    for place in places:
+        places_dicts.append(model_to_dict(place))
+    return JsonResponse(places_dicts, safe=False)
+
+
+@login_required
+def post_comment(request):
+    if request.method == 'POST':
+        data = dict(request.POST)
+        place = Place.objects.get(pk=int(data['place_id'][0]))
+        user = User.objects.get(pk=request.user.id)
+        comment = Comment.objects.create(place=place, user=user,
+                                         comment=data['comment'], rate=data['rate'][0])
+        comment.save()
+        return JsonResponse(model_to_dict(place), safe=False)
+    return HttpResponseBadRequest(content="400 Bad Request")
+
+
+@csrf_exempt
+def comments(request):
+    if request.method == "POST":
+        place = get_place(request)
+        comments = list(Comment.objects.filter(place=place))
+        comment_dicts = []
+        for comment in comments:
+            comment_dict = model_to_dict(comment)
+            d = {}
+            d['rate'] = comment_dict['rate']
+            d['comment'] = comment_dict['comment']
+            d['user'] = get_comment_user(comment_dict['user'])
+            comment_dicts.append(d)
+        return JsonResponse(comment_dicts, safe=False)
+    return HttpResponseBadRequest(content="400 Bad Request")
+
+
+def get_place(request):
+    name = request.POST['name']
+    google_id = request.POST['google_id']
+    building = request.POST['building']
+    place = Place.objects.get(
+        name=name, google_id=google_id, building=building)
+    return place
+
+
+def get_comment_user(id):
+    user = User.objects.get(pk=id)
+    user_dict = model_to_dict(user)
+
+    user_profile = UserProfile.objects.get(user=user)
+    user_profile_dict = model_to_dict(user_profile)
+
+    d = {}
+    d['id'] = user_dict['id']
+    d['preferred_name'] = user_profile_dict['preferred_name']
+    d['picture'] = "media/" + str(user_profile_dict['picture'])
+    return d
 
 
 def aboutus(request):
@@ -28,6 +187,7 @@ def aboutus(request):
 
     return response
 
+
 def advantages(request):
     context_dict = {}
     context_dict["advantage_msg"] = "Advantages of SitNow"
@@ -36,6 +196,7 @@ def advantages(request):
 
     return response
 
+
 def forwhom(request):
     context_dict = {}
     context_dict["forwhom_msg"] = "For Whom SitNow"
@@ -43,6 +204,7 @@ def forwhom(request):
     response = render(request, "sitnow/forwhom.html", context=context_dict)
 
     return response
+
 
 def tutorial(request):
     context_dict = {}
@@ -56,18 +218,12 @@ def tutorial(request):
 def forum(request):
     context_dict = {}
     context_dict["forum_msg"] = "forum"
+    context_dict["GOOGLE_JS_API_KEY"] = GOOGLE_JS_API_KEY
 
     response = render(request, "sitnow/forum.html", context=context_dict)
 
     return response
 
-def result(request):
-    context_dict = {}
-    context_dict["result_msg"] = "result"
-
-    response = render(request, "sitnow/result.html", context=context_dict)
-
-    return response
 
 def favorite(request):
     context_dict = {}
@@ -76,6 +232,7 @@ def favorite(request):
     response = render(request, "sitnow/favorite.html", context=context_dict)
 
     return response
+
 
 def setting(request):
     context_dict = {}
@@ -116,7 +273,15 @@ def register(request):
             # until we're ready to avoid integrity problems.
             profile = profile_form.save(commit=False)
             profile.user = user
-            # Now we save the UserProfile model instance.
+
+            if profile.preferred_name is "":
+                profile.preferred_name = user.username
+
+            if 'picture' in request.FILES:
+                profile.picture = request.FILES['picture']
+            else:
+                profile.picture = "/media/profile_images/default_profile_img.svg"
+
             profile.save()
 
             # Update our variable to indicate that the template
@@ -189,7 +354,7 @@ def user_login(request):
 
 # Use the login_required() decorator to ensure only those logged in can
 # access the view.
-@login_required
+@login_required(login_url="/login/")
 def user_logout(request):
     # Since we know the user is logged in, we can now just log them out.
     logout(request)
@@ -198,5 +363,6 @@ def user_logout(request):
 
 
 def test(request):
-    data = {"name": "Vitor", "location": "Finland", "is_active": True, "count": 28}
+    data = {"name": "Vitor", "location": "Finland",
+            "is_active": True, "count": 28}
     return JsonResponse(data)

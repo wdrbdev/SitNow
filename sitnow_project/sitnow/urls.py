@@ -16,6 +16,9 @@ urlpatterns = [
     path("logout/", views.user_logout, name="logout"),
     path("forum/", views.forum, name="forum"),
     path("result/", views.result, name="result"),
-
-    # path("test/", views.test, name="test"),
+    path("place/", views.place, name="place"),
+    path("places/", views.places, name="places"),
+    path("comments/", views.comments, name="comments"),
+    path("comment/", views.post_comment, name="comment"),
+    path("getuser/", views.get_user, name="getuser"),
 ]

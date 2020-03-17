@@ -13,8 +13,11 @@ SitNow - My Favorite
     <div class="container clearfix">
         <div class="user-detail">
             <div class="user-info">
-                <h2 id="user-name">user name</h2>
-                <h5 id="user-email">email@gmail.com</h5>
+                {% if request.user.is_authenticated %}
+                    <h2 id="user-name">Welcome {{ request.user.username }}</h2>
+                {% else %}
+                    <a href="{% url django.contrib.auth.login %}">Login</a>
+                {% endif %}
             </div>
 
             <div id="user-photo">
@@ -23,7 +26,7 @@ SitNow - My Favorite
         </div>
 
         <div class="favorites">
-            <div class="wel-grids">
+            <div class="wel-grids row">
                 <div class="col-md-3 wel-grid">
                     <nav class="side-navigation">
                         <ul>

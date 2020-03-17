@@ -9,30 +9,33 @@
         SitNow
         {% endblock %}
     </title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+    {% comment %} Bootstrap {% endcomment %}
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    
+    {% comment %} Font Awesome 5 Icons {% endcomment %}
+    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
 
+    {% comment %} Local Source {% endcomment %}
+    <link rel="stylesheet" href="{% static 'css/base.css' %}" />
     {% block header_block %}
     {% endblock %}
-
 </head>
 
 <body>
-    <div id="header">
-        <div class="contianer clearfix">
+    <div id="header" class="container">
+        <div>
             {% comment %} navigation {% endcomment %}
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <a class="navbar-brand" href="{% url 'sitnow:index' %}">
                     <img src="https://picsum.photos/112/100" width="30" height="30" class="d-inline-block align-top" alt="">
                     {% comment %} <div class="logo">SitNow</div> {% endcomment %}
                 </a>
-                {% comment %}<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
-                    aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>{% endcomment %}
 
                 <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
                     <ul class="navbar-nav">
@@ -53,11 +56,7 @@
                     </ul>
                 </div>
             </nav>
-
         </div>
-
-
-
     </div>
 
 
@@ -67,78 +66,16 @@
         {% endblock %}
     </div>
 
-
     {% comment %} footer {% endcomment %}
-    <footer class="container">
+    <footer class="fixed-bottom container">
         <div class="row justify-content-center">
-            <div class="col-4">
-                <p>&copy; Internet Technology 2020.</p>
+            <div class="col-9">
+                <p>&copy; Internet Technology @ Glasgow University 2020.</p>
             </div>
-            <div class="col-4">
-                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"
-                    id="Layer_1" x="0px" y="0px" width="24" height="24" viewBox="0 0 64 64"
-                    enable-background="new 0 0 64 64" xml:space="preserve">
-                    <g id="facebook_3_" enable-background="new    ">
-                        <g id="facebook">
-                            <g>
-                                <path
-                                    d="M59.059-0.006H4.942c-2.722,0-4.929,2.208-4.929,4.932v54.354c0,2.725,2.207,4.728,4.929,4.728h54.117     c2.721,0,4.928-2.002,4.928-4.728V4.926C63.986,2.202,61.781-0.006,59.059-0.006z M33.615,21.199     c-1.562-0.912-2.803-1.634-4.351-1.634c-1.523,0-2.836,0.383-3.497,1.024c-0.661,0.64-0.992,1.872-0.992,3.692v2.691h8.148     l-1.768,7.494h-6.381v24.894H14.545V34.465H9.759v-7.494h4.787v-2.859c0-3.012,0.355-4.817,1.067-6.301     c0.711-1.483,2.089-3.134,3.998-4.066c1.909-0.932,4.741-1.399,7.661-1.399c2.995,0,5.337,0.994,8.208,1.803L33.615,21.199z" />
-                            </g>
-                        </g>
-                    </g>
-                </svg>
-                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"
-                    id="Layer_1" x="0px" y="0px" width="24" height="24" viewBox="0 0 64 64"
-                    enable-background="new 0 0 64 64" xml:space="preserve">
-                    <g id="twitter_1_" enable-background="new    ">
-                        <g id="twitter">
-                            <g>
-                                <path
-                                    d="M56.568,14.179v-0.032c0.558-0.218,0.998-0.68,1.441-1.022c2-1.541,3.301-3.57,4.26-6.164     c-0.543,0.298-1.088,0.596-1.633,0.894c-1.681,0.853-4.533,2.079-6.728,2.267c-2.586-2.356-5.292-4.209-10.378-4.12     c-0.534,0.064-1.068,0.128-1.602,0.192c-1.037,0.227-2.025,0.508-2.916,0.894c-3.724,1.616-6.263,4.631-7.431,8.814     c-0.465,1.664-0.654,4.445-0.064,6.164c-2.101-0.003-4.135-0.334-5.894-0.767C18.69,19.594,14.372,17.29,9.578,13.54     C8.17,12.439,6.789,11.191,5.67,9.804C5.309,9.357,4.74,8.965,4.485,8.43C4.463,8.42,4.442,8.409,4.421,8.398     c-0.557,1.032-1.08,2.15-1.409,3.417c-1.3,4.994,0.755,9.188,2.947,11.912c0.664,0.826,1.741,1.338,2.402,2.108h0.064     c-0.497,0.184-1.361-0.071-1.794-0.16c-1.024-0.211-1.897-0.405-2.755-0.766c-0.448-0.213-0.897-0.426-1.345-0.639     c-0.021,5.517,2.766,9.103,6.182,11.241c1.114,0.697,2.672,1.636,4.292,1.724c-0.867,0.732-4.575,0.396-5.862,0.256     c1.609,4.142,4.081,6.9,8.328,8.398c1.096,0.387,2.433,0.729,3.908,0.703c-0.783,0.93-2.454,1.688-3.556,2.331     c-2.272,1.329-4.91,2.191-7.88,2.843c-1.191,0.26-2.457,0.207-3.748,0.414c-1.427,0.23-2.92-0.121-4.196-0.16     c0.384,0.234,0.769,0.47,1.153,0.703c1.171,0.713,2.394,1.338,3.716,1.916c2.379,1.041,4.914,1.826,7.72,2.523     c5.658,1.404,13.64,0.773,18.579-0.766c13.754-4.287,22.442-14.293,25.722-29.03c0.564-2.535,0.646-5.414,0.609-8.431     c0.684-0.543,1.367-1.086,2.05-1.629c1.693-1.356,3.28-3.246,4.452-5.11v-0.032C61.768,12.864,59.418,14.149,56.568,14.179z" />
-                            </g>
-                        </g>
-                    </g>
-                </svg>
-                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"
-                    id="Layer_1" x="0px" y="0px" width="24" height="24" viewBox="0 0 64 64"
-                    enable-background="new 0 0 64 64" xml:space="preserve">
-                    <g id="instagram_1_" enable-background="new    ">
-                        <g id="instagram">
-                            <g>
-                                <path
-                                    d="M56,0H8C3.582,0,0,3.582,0,8v48c0,4.418,3.582,8,8,8h48c4.418,0,8-3.582,8-8V8C64,3.582,60.418,0,56,0z M19.673,30.673     c0.013-0.127,0.04-0.249,0.057-0.374c0.042-0.31,0.088-0.618,0.153-0.92c0.029-0.136,0.069-0.267,0.103-0.401     c0.072-0.286,0.147-0.571,0.238-0.849c0.044-0.132,0.095-0.259,0.142-0.389c0.1-0.272,0.204-0.541,0.322-0.804     c0.02-0.045,0.034-0.092,0.055-0.137h0.011c1.968-4.247,6.257-7.2,11.246-7.2c4.988,0,9.277,2.953,11.246,7.2h0.011     c0.021,0.045,0.035,0.092,0.056,0.137c0.117,0.263,0.222,0.532,0.321,0.804c0.048,0.13,0.099,0.257,0.142,0.389     c0.092,0.278,0.166,0.562,0.238,0.849c0.034,0.134,0.074,0.265,0.104,0.401c0.064,0.302,0.109,0.61,0.152,0.92     c0.018,0.125,0.043,0.247,0.058,0.374C44.373,31.109,44.4,31.551,44.4,32c0,6.85-5.553,12.4-12.4,12.4     c-6.848,0-12.4-5.553-12.4-12.4C19.6,31.551,19.627,31.109,19.673,30.673z M56.8,53.6c0,1.768-1.433,3.2-3.2,3.2H10.4     c-1.767,0-3.2-1.433-3.2-3.2V26.8h5.899C12.644,28.456,12.4,30.2,12.4,32c0,10.825,8.775,19.6,19.6,19.6S51.6,42.825,51.6,32     c0-1.8-0.244-3.544-0.699-5.2H56.8V53.6z M56.8,16.8c0,1.767-1.433,3.2-3.2,3.2H47.2c-1.767,0-3.2-1.433-3.2-3.2v-6.4     c0-1.767,1.434-3.2,3.2-3.2H53.6c1.768,0,3.2,1.432,3.2,3.2V16.8z" />
-                            </g>
-                        </g>
-                    </g>
-                </svg>
-                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"
-                    id="Layer_1" x="0px" y="0px" width="24" height="24" viewBox="0 0 64 64"
-                    enable-background="new 0 0 64 64" xml:space="preserve">
-                    <g id="google_plus_1_" enable-background="new    ">
-                        <g id="google_plus">
-                            <g>
-                                <path
-                                    d="M35.471,4.995c0,0-12.66,0-16.879,0C11.023,4.995,3.9,10.999,3.9,17.522c0,6.666,5.158,12.23,12.857,12.23     c0.535,0,1.055,0.083,1.565,0.046c-0.498,0.94-0.855,2.045-0.855,3.142c0,1.854,1.014,3.379,2.297,4.604     c-0.969,0-1.904,0.04-2.926,0.04C7.465,37.584,0,43.452,0,49.533c0,5.986,8.158,10.472,17.533,10.472     c10.686,0,16.463-6.688,16.463-12.678c0-4.8-1.318-7.675-5.777-10.772c-1.525-1.06-4.443-3.642-4.443-5.157     c0-1.776,0.518-2.653,3.24-4.742c2.791-2.143,4.955-4.903,4.955-8.407c0-4.17-2.08-7.36-5.629-9.325h5.352L35.471,4.995z      M29.574,46.295c0.133,0.557,0.207,1.128,0.207,1.711c0,4.838-3.176,8.128-12.283,8.128c-6.478,0-11.158-3.536-11.158-8.375     c0-4.741,5.805-8.69,12.283-8.622c1.512,0.018,2.92,0.256,4.199,0.664C26.34,42.201,28.862,43.559,29.574,46.295z M19.201,28.248     c-4.349-0.126-8.482-4.778-9.232-10.387c-0.752-5.609,2.164-9.9,6.512-9.773c4.349,0.127,8.67,4.629,9.422,10.236     C26.652,23.934,23.547,28.377,19.201,28.248z M54,14.817v-9.76h-4v9.76H40v3.99h10v9.76h4v-9.76h10v-3.99H54L54,14.817z" />
-                            </g>
-                        </g>
-                    </g>
-                </svg>
+            <div class="col-3 text-right">
             </div>
         </div>
     </footer>
-    <hr />
-    {% comment %} <div>
-        <ul>
-            {% if user.is_authenticated %}
-            <li><a href="{% url 'sitnow:logout' %}">Logout</a></li>
-            {% else %}
-            <li><a href="{% url 'sitnow:register' %}">Sign Up</a></li>
-            <li><a href="{% url 'sitnow:login' %}">Login</a></li>
-            {% endif %}
-            <li><a href="{% url 'sitnow:index' %}">Index</a></li>
-            <li><a href="{% url 'sitnow:aboutus' %}">About</a></li>
-        </ul>
-    </div> {% endcomment %}
 </body>
 
 </html>

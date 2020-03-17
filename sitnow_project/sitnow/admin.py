@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.sessions.models import Session
-from sitnow.models import UserProfile, Place, SearchHistory, Comment
+from sitnow.models import UserProfile, Place,  Comment
 
 # Register your models here.
 
@@ -17,6 +17,5 @@ from sitnow.models import UserProfile, Place, SearchHistory, Comment
 # admin.site.register(Session, SessionAdmin)
 
 admin.site.register(UserProfile)
-admin.site.register(SearchHistory)
 admin.site.register(Comment)
 admin.site.register(Place)

@@ -25,4 +25,5 @@ urlpatterns = [
     # This maps any URLs starting with sitnow/ to be handled by sitnow
     # Like component in React
     path("", include("sitnow.urls")),
+
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

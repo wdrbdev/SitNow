@@ -13,7 +13,11 @@ SitNow - Setting
     <div class="container clearfix">
         <div class="user-detail">
             <div class="user-info">
-                <h2 id="user-name">user name</h2>
+            {% if request.user.is_authenticated %}
+                <h2 id="user-name">Welcome '{{ request.user.username }}'</h2>
+            {% else %}
+                <a href="{% url django.contrib.auth.login %}">Login</a>
+            {% endif %}
                 <h5 id="user-email">email@gmail.com</h5>
             </div>
 

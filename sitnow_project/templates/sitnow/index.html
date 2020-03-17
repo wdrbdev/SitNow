@@ -2,59 +2,83 @@
 {% load staticfiles %}
 
 {% block title_block %}
-SitNow
+Sit Now
 {% endblock %}
 
 {% block header_block %}
+    {% comment %} Google {% endcomment %}
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key={{ GOOGLE_JS_API_KEY }}&callback=initMap"></script>
+    <script type="text/javascript" src="{% static 'js/IndexMap.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'css/map.css' %}">
 {% endblock %}
 
 {% block body_block %}
 <div id="content">
-    <div class="container clearfix">
-        <div>{{ welcome_msg }}<div>
-                <div class="wel-grids">
-                    <div class="col-md-6 wel-grid">
-                        <div class="slogan">
-                            <div class="title">slogan</div>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur cupiditate
-                                quibusdam
-                                necessitatibus fugit quo consequatur itaque rerum dicta corporis dolores.
-                            </p>
-                        </div>
+    <div class="container">
+            <div class="wel-grids row">
+                <div class="col-4 wel-grid">
+                    <div class="slogan">
+                        <div class="title">slogan</div>
+                        <p>
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                            Consequuntur cupiditate quibusdam necessitatibus fugit quo
+                            consequatur itaque rerum dicta corporis dolores.
+                        </p>
                     </div>
+                </div>
 
-                    <div class="col-md-6 wel-grid">
-                        <div class="search">
-                            <div class="filter">
-                                <form id="search_form" method="post" action="{% url 'sitnow:result' %}">
-                                    {% csrf_token %}
-                                    <input type="text" id="curlocation" name="curlocation" placeholder="location">
-
-                                    <select id="filter" name="filter">
-                                        <option value="wifi">wifi</option>
-                                        <option value="microwave">microwave</option>
-                                        <option value="plug">plug</option>
-                                        <option value="provide food/drink">food/drink</option>
-                                        <option value="can eat/drink">can eat/drink</option>
-                                    </select>
-
-                                    <select id="capacity" name="capacity" placeholder="capacity">
-                                        <option value="onetotwo">1 - 2</option>
-                                        <option value="threetofive">3 - 5</option>
-                                        <option value="fivetoeight">5 - 8</option>
-                                        <option value="aboveten">10 +</option>
-                                    </select>
-
-                                    <button type="submit" id="submit-search">submit</button>
-                                </form>
+                <div class="col-8 wel-grid">
+                    <div class="search">
+                    <div id="google_map" class="col-6" hidden>
+                        <div id="map"></div>
+                    </div>
+                    <div id="search_form">
+                        <form
+                        id="category_form"
+                        method="post"
+                        action="{% url 'sitnow:result' %}"
+                        >
+                        <select id="location" name="location" required>
+                            <option value="">- Select your start location -</option>
+                            <option id="current_location" data-lat="" data-lng="" value="current_location">Current Location</option> 
+                            {% for place in places %} 
+                                <option data-lat="{{place.latitude}}" data-lng="{{place.longitude}}" value="{{place.building}}">{{place.building}}</option> 
+                            {% endfor %} 
+                        </select>
+                        {% csrf_token %} 
+                        {% for hidden in form.hidden_fields %} 
+                            {{ hidden }} 
+                        {% endfor %} 
+                        
+                        {% for field in form.visible_fields %}
+                            <div>
+                                {{ field.errors }} 
+                                {{ field.help_text }} 
+                                {{ field }}
                             </div>
-                        </div>
+                        {% endfor %}
+                        <button id="hasTable" type="button" class="btn btn-light">Table</button>
+                        <button id="hasWifi" type="button" class="btn btn-light">WIFI</button>
+                        <button id="hasMicrowave" type="button" class="btn btn-light">Microwave</button>
+                        <button id="hasSocket" type="button" class="btn btn-light">Socket</button>
+                        <button id="hasFood" type="button" class="btn btn-light">Food</button>
+                        <button id="noEating" type="button" class="btn btn-light">Eating</button>
+                        <button id="hasCoffee" type="button" class="btn btn-light">Coffee</button>
+                        <button id="hasComputer" type="button" class="btn btn-light">Computer</button>
+                            <input
+                                type="submit"
+                                name="submit"
+                                class="float-right"
+                                value="Search"
+                            />
+                        </form>
+                    </div>
                     </div>
                 </div>
             </div>
         </div>
+        </div>
     </div>
 </div>
-
 
 {% endblock %}

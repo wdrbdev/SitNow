@@ -1,10 +1,17 @@
 from django.db import models
 from django.template.defaultfilters import slugify
 from django.contrib.auth.models import User
-
+import os
 
 
 # Create your models here.
+
+def user_directory_path(instance, filename):
+    upload_dir = 'profile_images'
+    filename = "profile_img." + filename.split(".")[-1]
+    filename = 'user_{0}/{1}'.format(instance.user.id, filename)
+    print(filename)
+    return os.path.join(upload_dir, filename)
 
 
 # Add custom feature on user model provide by Django
@@ -13,13 +20,11 @@ class UserProfile(models.Model):
     # This line is required. Links UserProfile to a User model instance.
     user = models.OneToOneField(User, on_delete=models.CASCADE)
 
-    # add to upload photo file ################
-    picture = models.ImageField(upload_to='profile_images', blank=True)
-
-
     # The additional attributes we wish to include.
     preferred_name = models.CharField(
-        max_length=PREFERRED_NAME_MAX_LENGTH, blank=True, null=True)
+        max_length=PREFERRED_NAME_MAX_LENGTH, blank=True)
+    picture = models.ImageField(upload_to=user_directory_path, blank=True,
+                                default='sitnow_project/media/profile_images/default_profile_img.svg')
 
     # return a meaningful value when a string representation of a `UserProfile` model instance is requested
     def __str__(self):
@@ -51,42 +56,6 @@ class Place(models.Model):
 
     def __str__(self):
         return self.name
-
-
-class SearchHistory(models.Model):
-    CHAR_MAX_LENGTH = 255
-    search_history_id = models.AutoField(primary_key=True)
-    user = models.name = models.ForeignKey(User, on_delete=models.CASCADE)
-
-    latitude = models.FloatField(null=True)
-    longitude = models.FloatField(null=True)
-    time_stamp = models.DateTimeField(auto_now_add=True, blank=True)
-
-    place1 = models.ForeignKey(
-        Place, related_name="place1", on_delete=models.CASCADE
-    )
-    place2 = models.ForeignKey(
-        Place, related_name="place2", on_delete=models.CASCADE
-    )
-    place3 = models.ForeignKey(
-        Place, related_name="place3", on_delete=models.CASCADE
-    )
-
-    hasTable = models.BooleanField(default=True, null=True)
-    hasWifi = models.BooleanField(default=True, null=True)
-    capacity = models.IntegerField(null=True)
-    hasMicrowave = models.BooleanField(default=False, null=True)
-    hasSocket = models.BooleanField(default=False, null=True)
-    hasFood = models.BooleanField(default=False, null=True)
-    hasCoffee = models.BooleanField(default=False, null=True)
-    canEat = models.BooleanField(default=False, null=True)
-    hasComputer = models.BooleanField(default=False, null=True)
-
-    def __str__(self):
-        return "Histroy id: " + str(self.search_history_id)
-
-    class Meta:
-        verbose_name_plural = "Search histories"
 
 
 class Comment(models.Model):

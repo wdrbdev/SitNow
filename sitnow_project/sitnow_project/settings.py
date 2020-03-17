@@ -27,7 +27,6 @@ STATIC_DIR = os.path.join(BASE_DIR, "static")
 STATICFILES_DIRS = [
     STATIC_DIR,
 ]
-
 MEDIA_DIR = os.path.join(BASE_DIR, "media")
 
 # Quick-start development settings - unsuitable for production
@@ -37,11 +36,12 @@ MEDIA_DIR = os.path.join(BASE_DIR, "media")
 SECRET_KEY = "qehj*_n&g@1*)i7y#63f!_an6ey^d77q#$nnp0cc#qa$y601c6"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = IS_DEBUG
 
 ALLOWED_HOSTS = [
     "sitnow.pythonanywhere.com",
     "localhost",
+    '127.0.0.1',
 ]
 
 # The url for user login and logout
@@ -59,7 +59,6 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "sitnow",
-    "blog",
 ]
 
 MIDDLEWARE = [
@@ -77,7 +76,7 @@ ROOT_URLCONF = "sitnow_project.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [TEMPLATE_DIR,],
+        "DIRS": [TEMPLATE_DIR, ],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -112,9 +111,9 @@ AUTH_PASSWORD_VALIDATORS = [
     {
         "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
     },
-    {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",},
-    {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",},
-    {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",},
+    {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator", },
+    {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator", },
+    {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator", },
 ]
 
 
@@ -135,11 +134,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static"),
-    '/sitnow_project/static/',
-]
-STATIC_URL = '/static/'
+STATIC_URL = "/static/"
 
 # Media files
 MEDIA_ROOT = MEDIA_DIR
