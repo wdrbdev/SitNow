@@ -17,40 +17,6 @@ async function getPlace({ name, building }, csrfmiddlewaretoken) {
   return place;
 }
 
-// function addMarkers(map) {
-//   $.get("/places", function(places) {
-//     places.forEach(place => {
-//       var pos = { lat: place.latitude, lng: place.longitude };
-
-//       var marker = new google.maps.Marker({
-//         map,
-//         title: place.name,
-//         position: pos
-//       });
-//       marker.addListener("click", async () => {
-//         if (infowindow) {
-//           infowindow.close();
-//         }
-//         var contentString =
-//           "<div>" +
-//           place.name +
-//           "</div>" +
-//           "<div>" +
-//           "@ " +
-//           place.building +
-//           "</div>";
-//         infowindow = new google.maps.InfoWindow({
-//           content: contentString
-//         });
-//         infowindow.open(map, marker);
-//         addPlaceCard(place);
-//         addCommentCards(place);
-//         addCommentForm(place);
-//       });
-//     });
-//   });
-// }
-
 async function getCardTemplate(filename) {
   let html = await $.get("/static/card_template/" + filename, function(data) {
     return data;
@@ -118,33 +84,6 @@ async function addPlaceCard(place, target_id) {
     }
   });
 }
-
-// async function addCommentCards(place) {
-//   $("#comments").empty();
-//   const comments = await getComment(place);
-//   const card = await getCardTemplate("comments_card.html");
-//   comments.forEach(comment => {
-//     let template = $.parseHTML(card);
-//     $(template)
-//       .find("#user_image")
-//       .attr(
-//         "src",
-//         location.protocol +
-//           "//" +
-//           document.domain +
-//           (location.port ? ":" + location.port : "") +
-//           "/" +
-//           comment.user.picture
-//       );
-//     $(template)
-//       .find("#rate")
-//       .text(comment.rate);
-//     $(template)
-//       .find("#comment")
-//       .text(comment.comment);
-//     $("#comments").append(template);
-//   });
-// }
 
 // Initialize and add the map
 async function initMap() {
@@ -276,17 +215,6 @@ function calculateAndDisplayRoute(
   directionsService,
   directionsRenderer
 ) {
-  console.log({
-    origin: {
-      lat: parseFloat($("#start").data().latitude),
-      lng: parseFloat($("#start").data().longitude)
-    },
-    destination: {
-      lat: parseFloat($(target_id).data().latitude),
-      lng: parseFloat($(target_id).data().longitude)
-    },
-    travelMode: "WALKING"
-  });
   directionsService.route(
     {
       origin: {
@@ -354,6 +282,14 @@ $(document).ready(function() {
     });
   });
 
+  const place_ids = ["#place1", "#place2", "#place3"];
+  place_ids.forEach(place_id => {
+    $(place_id + "_favorite").click(e => {
+      add_favorite(e, $(place_id).data(), window.CSRF_TOKEN);
+    });
+    console.log($(place_id).data());
+  });
+
   $("select#location").change(function() {
     if (
       $(this)
@@ -368,4 +304,42 @@ $(document).ready(function() {
     $("#id_latitude").val(dataset.lat);
     $("#id_longitude").val(dataset.lng);
   });
+
+  insert_stars();
 });
+
+function insert_stars() {
+  target_ids = ["#place1", "#place2", "#place3"];
+  target_ids.forEach(id => {
+    let data = $(id).data();
+    let starPercentage = (data.rate / 5) * 100;
+    let starPercentageRounded = `${Math.round(starPercentage / 10) * 10}%`;
+    $(id)
+      .find(".stars-inner")
+      .css("width", starPercentageRounded);
+  });
+}
+
+async function add_favorite(event, { placeId }, csrfmiddlewaretoken) {
+  await $.ajax({
+    type: "POST",
+    url: "/favorite/",
+    data: {
+      csrfmiddlewaretoken,
+      placeId
+    },
+    success: data => {
+      console.log(data);
+    },
+    dataType: "json"
+  });
+  if (event.target.classList.contains("fa-heart")) {
+    $(event.target)
+      .removeClass("fa-heart")
+      .addClass("fa-heart-o");
+  } else {
+    $(event.target)
+      .removeClass("fa-heart-o")
+      .addClass("fa-heart");
+  }
+}

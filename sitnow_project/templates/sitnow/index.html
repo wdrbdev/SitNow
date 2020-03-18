@@ -41,8 +41,8 @@ Sit Now
                         <select id="location" name="location" required>
                             <option value="">- Select your start location -</option>
                             <option id="current_location" data-lat="" data-lng="" value="current_location">Current Location</option> 
-                            {% for place in places %} 
-                                <option data-lat="{{place.latitude}}" data-lng="{{place.longitude}}" value="{{place.building}}">{{place.building}}</option> 
+                            {% for location in locations %} 
+                                <option data-lat="{{location.latitude}}" data-lng="{{location.longitude}}" value="{{location.building}}">{{location.building}}</option> 
                             {% endfor %} 
                         </select>
                         {% csrf_token %} 

@@ -55,7 +55,7 @@ class Place(models.Model):
     hasComputer = models.BooleanField(default=False, null=True)
 
     def __str__(self):
-        return self.name
+        return self.name + " @ " + self.building
 
 
 class Comment(models.Model):
@@ -66,3 +66,12 @@ class Comment(models.Model):
 
     def __str__(self):
         return self.user.username + " comments " + self.place.name
+
+
+class Favorite(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    place = models.ForeignKey(Place, on_delete=models.CASCADE)
+    favorite = models.BooleanField(default=False, null=True)
+
+    def __str__(self):
+        return self.user.username + " likes " + self.place.name

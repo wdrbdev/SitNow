@@ -1,52 +1,26 @@
-{% extends 'sitnow/base.html' %}
+{% extends 'sitnow/user.html' %}
 {% load staticfiles %}
 
 {% block title_block %}
 SitNow - Setting
 {% endblock %}
 
-{% block header_block %}
-{% endblock %}
 
-{% block body_block %}
-<div id="content">
-    <div class="container clearfix">
-        <div class="user-detail">
-            <div class="user-info">
-            {% if request.user.is_authenticated %}
-                <h2 id="user-name">Welcome '{{ request.user.username }}'</h2>
-            {% else %}
-                <a href="{% url django.contrib.auth.login %}">Login</a>
-            {% endif %}
-                <h5 id="user-email">email@gmail.com</h5>
+{% block setting_block %}
+<form id="user_form" method="post" action="{% url 'sitnow:update_profile' %}" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div>
+        {% for hidden in form.hidden_fields %}
+            {{ hidden }}
+        {% endfor %}
+        {% for field in form.visible_fields %}
+            <div>
+                {{ field.errors }}
+                {{ field.help_text }}
+                {{ field }}
             </div>
-
-            <div id="user-photo">
-                <img src="https://picsum.photos/112/100" alt="account photo">
-            </div>
-        </div>
-
-        <div class="setting">
-            <div class="wel-grids">
-                <div class="col-md-3 wel-grid">
-                    <nav class="side-navigation">
-                        <ul>
-                            <li><a href="{% url 'sitnow:favorite' %}">Favorite</a></li>
-                            <li><a href="{% url 'sitnow:setting' %}">Settings</a></li>
-                            <li><a href="{% url 'sitnow:logout' %}">Log out</a></li>
-                        </ul>
-                    </nav>
-                </div>
-
-                <div class="col-md-9 wel-grid">
-                    form here - user info setting (photo and user name and email)
-                </div>
-
-                </div>
-            </div>
-
-        </div>
+        {% endfor %}
     </div>
-</div>
-
+    <input type="submit" name="submit" value="Confirm" />
+</form>
 {% endblock %}

@@ -9,13 +9,14 @@ from django.http import HttpResponseBadRequest, JsonResponse
 from sitnow.forms import SearchForm
 from django.views.defaults import bad_request
 from sitnow_project.config.keys import *
-from sitnow.models import Comment, Place, UserProfile
+from sitnow.models import Comment, Favorite, Place, UserProfile
 from django.forms.models import model_to_dict
 import json
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.models import User
 from get_places import *
 from sitnow.utils.validation import *
+from sitnow.utils.csv_2_json import *
 # Create your views here.
 
 
@@ -32,11 +33,10 @@ def index(request):
             # The supplied form contained errors -
             # just print them to the terminal.
             print(form.errors)
-    places = Place.objects.all()
-    places_dicts = []
-    for place in places:
-        places_dicts.append(model_to_dict(place))
-    context_dict = {"form": form, "places": places_dicts,
+    BUILDINGS_JSON_PATH = os.path.join(
+        BASE_DIR, "sitnow_project", "buildings.json")
+    locations = read_json(BUILDINGS_JSON_PATH)
+    context_dict = {"form": form, "locations": locations,
                     "GOOGLE_JS_API_KEY": GOOGLE_JS_API_KEY}
     return render(request, "sitnow/index.html", context=context_dict)
 
@@ -59,11 +59,10 @@ def result(request):
                 search_location["longitude"])}
             d["start"] = start
 
-            locations = Place.objects.all()
-            location_dicts = []
-            for location in locations:
-                location_dicts.append(model_to_dict(location))
-            d["locations"] = location_dicts
+            BUILDINGS_JSON_PATH = os.path.join(
+                BASE_DIR, "sitnow_project", "buildings.json")
+            locations = read_json(BUILDINGS_JSON_PATH)
+            d["locations"] = locations
 
             d["form"] = form
             d["GOOGLE_JS_API_KEY"] = GOOGLE_JS_API_KEY
@@ -72,9 +71,19 @@ def result(request):
                 i = 1
                 for place in k_google_nearset:
                     place_dict = model_to_dict(place)
-                    place_dict['rate'] = get_avg_rate(place)
+                    place_dict['rate'], place_dict['n_rates'] = get_avg_rate(
+                        place)
+                    if request.user.is_authenticated:
+                        favorite = Favorite.objects.filter(
+                            user=request.user, place=place).first()
+                        if not favorite:
+                            favorite = Favorite.objects.create(
+                                user=request.user, place=place)
+                        place_dict['favorite'] = model_to_dict(favorite)
+
                     d["place" + str(i)] = place_dict
                     i += 1
+                    print(place_dict)
             else:
                 d['isEmpty'] = True
                 response = render(request, "sitnow/result.html", context=d)
@@ -93,18 +102,30 @@ def place(request):
         name = request.POST['name']
         building = request.POST['building']
         place = Place.objects.filter(name=name, building=building).first()
-        return JsonResponse(model_to_dict(place), safe=False)
+        place_dict = model_to_dict(place)
+        place_dict['rate'], place_dict['n_rates'] = get_avg_rate(
+            place)
+
+        if request.user.is_authenticated:
+            favorite_tuple = Favorite.objects.get_or_create(
+                user=request.user, place=place)
+            if not favorite_tuple[1]:
+                favorite_tuple[0].save()
+            place_dict['favorite'] = model_to_dict(favorite_tuple[0])
+
+        return JsonResponse(place_dict, safe=False)
     return HttpResponseBadRequest(content="400 Bad Request")
 
 
 def get_avg_rate(place):
     comments = Comment.objects.filter(place=place)
+    n_rates = len(comments)
     if(len(comments) != 0):
         rate_sum = 0
         for comment in comments:
             rate_sum += comment.rate
-        return rate_sum / len(comments)
-    return -1
+        return (rate_sum / len(comments), n_rates)
+    return (-1, 0)
 
 
 def get_user(request):
@@ -118,11 +139,31 @@ def get_user(request):
     return HttpResponseBadRequest(content="400 Bad Request")
 
 
+def favorite(request):
+    if request.method == 'POST':
+        place = Place.objects.get(pk=request.POST['placeId'])
+        user = User.objects.get(pk=request.user.id)
+        favorite = Favorite.objects.get_or_create(user=user, place=place)[0]
+        favorite.favorite = not favorite.favorite
+        favorite.save()
+        return JsonResponse(model_to_dict(favorite), safe=False)
+    return HttpResponseBadRequest(content="400 Bad Request")
+
+
 def places(request):
     places_dicts = []
     places = Place.objects.all()
     for place in places:
-        places_dicts.append(model_to_dict(place))
+        d = model_to_dict(place)
+        d['rate'], d['n_rates'] = get_avg_rate(
+            place)
+        if request.user.is_authenticated:
+            favorite_tuple = Favorite.objects.get_or_create(
+                user=request.user, place=place)
+            if not favorite_tuple[1]:
+                favorite_tuple[0].save()
+            d['favorite'] = model_to_dict(favorite_tuple[0])
+        places_dicts.append(d)
     return JsonResponse(places_dicts, safe=False)
 
 
@@ -225,11 +266,11 @@ def forum(request):
     return response
 
 
-def favorite(request):
+def favorites(request):
     context_dict = {}
     context_dict["fovorite_msg"] = "favorite"
 
-    response = render(request, "sitnow/favorite.html", context=context_dict)
+    response = render(request, "sitnow/favorites.html", context=context_dict)
 
     return response
 
@@ -342,7 +383,7 @@ def user_login(request):
         else:
             # Bad login details were provided. So we can't log the user in.
             print(f"Invalid login details: {username}, {password}")
-            return HttpResponse("Invalid login details supplied.")
+            return redirect(reverse("sitnow:login"))
 
     # The request is not a HTTP POST, so display the login form.
     # This scenario would most likely be a HTTP GET.
@@ -362,7 +403,17 @@ def user_logout(request):
     return redirect(reverse("sitnow:index"))
 
 
-def test(request):
-    data = {"name": "Vitor", "location": "Finland",
-            "is_active": True, "count": 28}
-    return JsonResponse(data)
+def update_profile(request):
+    d = {}
+    if request.method == 'POST':
+        form = UserProfileForm(request.POST, instance=request.user.userprofile)
+        if form.is_valid():
+            user_profile = form.save(commit=False)
+            user_profile.user = request.user
+            user_profile.save()
+        return redirect(reverse("sitnow:update_profile"))
+
+    form = UserProfileForm(instance=request.user.userprofile)
+
+    d['form'] = form
+    return render(request, 'sitnow/setting.html', d)

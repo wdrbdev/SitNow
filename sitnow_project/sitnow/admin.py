@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.sessions.models import Session
-from sitnow.models import UserProfile, Place,  Comment
+from sitnow.models import Comment, Favorite, Place, UserProfile
 
 # Register your models here.
 
@@ -19,3 +19,4 @@ from sitnow.models import UserProfile, Place,  Comment
 admin.site.register(UserProfile)
 admin.site.register(Comment)
 admin.site.register(Place)
+admin.site.register(Favorite)

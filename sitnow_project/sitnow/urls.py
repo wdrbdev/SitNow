@@ -11,8 +11,7 @@ urlpatterns = [
     path("tutorial/", views.tutorial, name="tutorial"),
     path("register/", views.register, name="register"),
     path("login/", views.user_login, name="login"),
-    path("favorite/", views.favorite, name="favorite"),
-    path("setting/", views.setting, name="setting"),
+    path("setting/", views.update_profile, name="update_profile"),
     path("logout/", views.user_logout, name="logout"),
     path("forum/", views.forum, name="forum"),
     path("result/", views.result, name="result"),
@@ -21,4 +20,6 @@ urlpatterns = [
     path("comments/", views.comments, name="comments"),
     path("comment/", views.post_comment, name="comment"),
     path("getuser/", views.get_user, name="getuser"),
+    path("favorite/", views.favorite, name="favorite"),
+    path("favorites/", views.favorites, name="favorites"),
 ]

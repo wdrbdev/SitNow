@@ -1,6 +1,12 @@
 <div class="card">
   <img id="place_img" class="card-img-top" alt="Image of the place" src="" />
-  <h5 id="place_name" class="card-title"></h5>
+  <div>
+    <span id="place_favorite" class="float-left"></span>
+    <span id="place_name" class="card-title float-left d-inline-block"></span>
+    <div class="stars-outer float-right">
+      <div id="stars-inner" class="stars-inner"></div><span id="n_rates"><span></span>
+    </div>
+  </div>
   <p id="place_building" class="card-title"></p>
   <div class="row">
     <div class="card-body col-6">
@@ -14,7 +20,10 @@
         Capacity:<span id="capacity" class="float-right"></span>
       </p>
       <p class="float-left">
-        Has Microwave Machine?<span id="hasMicrowave" class="float-right"></span>
+        Has Microwave Machine?<span
+          id="hasMicrowave"
+          class="float-right"
+        ></span>
       </p>
       <p class="float-left">
         Has Electric Socket?<span id="hasSocket" class="float-right"></span>

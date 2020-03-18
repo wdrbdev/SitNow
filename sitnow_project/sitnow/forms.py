@@ -18,8 +18,22 @@ class UserForm(forms.ModelForm):
         )
 
 
+def user_directory_path(instance, filename):
+    upload_dir = 'profile_images'
+    filename = "profile_img." + filename.split(".")[-1]
+    filename = 'user_{0}/{1}'.format(instance.user.id, filename)
+    print(filename)
+    return os.path.join(upload_dir, filename)
+
 # Form for custom user profile
+
+
 class UserProfileForm(forms.ModelForm):
+    PREFERRED_NAME_MAX_LENGTH = 255
+    preferred_name = forms.CharField(
+        max_length=PREFERRED_NAME_MAX_LENGTH, help_text="New preferred name", required=False)
+    picture = forms.ImageField(help_text="New profile picture", required=False)
+
     class Meta:
         model = UserProfile
         fields = ("preferred_name", 'picture',)

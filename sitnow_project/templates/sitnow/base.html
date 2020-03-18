@@ -18,8 +18,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     
-    {% comment %} Font Awesome 5 Icons {% endcomment %}
-    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+    {% comment %} Font Awesome 5 Icons {% endcomment %}  
+    <script src="https://use.fontawesome.com/c0417a3e36.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/13ea3ef126.css">
 
     {% comment %} Local Source {% endcomment %}
     <link rel="stylesheet" href="{% static 'css/base.css' %}" />
@@ -49,7 +50,7 @@
                             <a class="nav-link" href="{% url 'sitnow:forum' %}">Forum |</a>
                         </li>
                         {% if user.is_authenticated %}
-                        <li class="nav-item"><a class="nav-link" href="{% url 'sitnow:favorite' %}">My Favorite</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'sitnow:favorites' %}">My Favorite</a></li>
                         {% else %}
                         <li class="nav-item"><a class="nav-link" href="{% url 'sitnow:login' %}">Login</a></li>
                         {% endif %}
@@ -61,7 +62,7 @@
 
 
     {% comment %} content {% endcomment %}
-    <div>
+    <div class="container">
         {% block body_block %}
         {% endblock %}
     </div>

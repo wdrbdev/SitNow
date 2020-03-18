@@ -68,30 +68,39 @@ Results
                     <div id="start" data-latitude="{{start.latitude}}" data-longitude="{{start.longitude}}" hidden></div>
                 {% endif %}
                 {% if place1 %}
-                <div id="place1" class="card" data-place-id={{place1.id}} data-name="{{ place1.name }}" data-building="{{ place1.building }}" data-latitude="{{place1.latitude}}" data-longitude="{{place1.longitude}}" onclick="initMapPlace1()" style="cursor: pointer;">
-                    <div class="card-body">
-                        <h5 id="place1_name" class="card-title" class="float-left">{{ place1.name }}<span class="float-right">{% if place1.rate == -1 %}TBD{% else %}{{place1.rate}}{% endif %} </span></h5>
-                        <h5 id="place1_building" class="card-title">{{ place1.building }}</h5>
+                <div id="place1" data-place-id={{place1.id}} data-name="{{ place1.name }}" data-building="{{ place1.building }}" data-latitude="{{place1.latitude}}" data-longitude="{{place1.longitude}}" data-rate={{place1.rate}} data-n-rates={{place1.n_rates}} onclick="initMapPlace1()" style="cursor: pointer;">
+                        <div class="row">
+                            <div id="place1_name" class="float-left col-9">{% if user.is_authenticated %}{% if place1.favorite.favorite %}<i id="place1_favorite" class="fa fa-heart" aria-hidden="true"></i>{% else %}<i id="place1_favorite" class="fa fa-heart-o" aria-hidden="true"></i>{% endif %}{% else %}{% endif %}{{ place1.name }}</div>
+                            <div class="col-3">
+                                <div class="stars-outer float-left"><span id="stars-inner" class="stars-inner"></span>({{place1.n_rates}})</div>
+                            </div>
+                        </div>
+                        <p id="place1_building">{{ place1.building }}</p>
                         <p>{{ place1.address }}</p>
-                    </div>
                 </div>
                 {% endif %}
                 {% if place2 %}
-                <div id="place2" class="card" data-place-id={{place2.id}} data-name="{{ place2.name }}" data-building="{{ place2.building }}" data-latitude="{{place2.latitude}}" data-longitude="{{place2.longitude}}" onclick="initMapPlace2()" style="cursor: pointer;">
-                    <div class="card-body">
-                        <h5 id="place2_name" class="card-title" class="float-left">{{ place2.name }}<span class="float-right">{% if place2.rate == -1 %}TBD{% else %}{{place2.rate}}{% endif %} </span></h5>
-                        <h5 id="place2_building" class="card-title">{{ place2.building }}</h5>
+                <div id="place2" data-place-id={{place2.id}} data-name="{{ place2.name }}" data-building="{{ place2.building }}" data-latitude="{{place2.latitude}}" data-longitude="{{place2.longitude}}" data-rate={{place2.rate}} data-n-rates={{place2.n_rates}} onclick="initMapPlace2()" style="cursor: pointer;">
+                        <div class="row">
+                            <div id="place2_name" class="float-left col-9">{% if user.is_authenticated %}{% if place2.favorite.favorite %}<i id="place2_favorite" class="fa fa-heart" aria-hidden="true"></i>{% else %}<i id="place2_favorite" class="fa fa-heart-o" aria-hidden="true"></i>{% endif %}{% else %}{% endif %}{{ place2.name }}</div>
+                            <div class="col-3">
+                                <div class="stars-outer float-left"><span id="stars-inner" class="stars-inner"></span>({{place2.n_rates}})</div>
+                            </div>
+                        </div>
+                        <p id="place2_building">{{ place2.building }}</p>
                         <p>{{ place2.address }}</p>
-                    </div>
                 </div>
                 {% endif %}
                 {% if place3 %}
-                <div id="place3" class="card" data-place-id={{place3.id}} data-name="{{ place3.name }}" data-building="{{ place3.building }}" data-latitude="{{place3.latitude}}" data-longitude="{{place3.longitude}}" onclick="iinitMapPlace3()" style="cursor: pointer;">
-                    <div class="card-body">
-                        <h5 id="place3_building" class="card-title" class="float-left">{{ place3.name }}<span class="float-right">{% if place3.rate == -1 %}TBD{% else %}{{place3.rate}}{% endif %} </span></h5>
-                        <h5 id="place3_building" class="card-title">{{ place3.building }}</h5>
+                <div id="place3" data-place-id={{place3.id}} data-name="{{ place3.name }}" data-building="{{ place3.building }}" data-latitude="{{place3.latitude}}" data-longitude="{{place3.longitude}}" data-rate={{place3.rate}} data-n-rates={{place3.n_rates}} onclick="initMapPlace3()" style="cursor: pointer;">
+                        <div class="row">
+                            <div id="place3_name" class="float-left col-9">{% if user.is_authenticated %}{% if place3.favorite.favorite %}<i id="place3_favorite" class="fa fa-heart" aria-hidden="true"></i>{% else %}<i id="place3_favorite" class="fa fa-heart-o" aria-hidden="true"></i>{% endif %}{% else %}{% endif %}{{ place3.name }}</div>
+                            <div class="col-3">
+                                <div class="stars-outer float-left"><span id="stars-inner" class="stars-inner"></span>({{place3.n_rates}})</div>
+                            </div>
+                        </div>
+                        <p id="place3_building">{{ place3.building }}</p>
                         <p>{{ place3.address }}</p>
-                    </div>
                 </div>
                 {% endif %}
                 {% if isEmpty %}

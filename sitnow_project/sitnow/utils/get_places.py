@@ -74,7 +74,7 @@ def google_distance(current_location, destination_place):
     url = Template(url_template).substitute(d)
     print(url)
     res = requests.get(url).json()
-    time.sleep(1)
+    time.sleep(0.2)
     return round(res['routes'][0]['legs'][0]['duration']['value'] / 60)
 
 

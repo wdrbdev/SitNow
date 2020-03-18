@@ -90,10 +90,39 @@ async function addPlaceCard(place) {
   $(template)
     .find("#hasTable")
     .text(place.permission === null ? "Not required." : place.permission);
-
+  if (place.favorite.favorite === true) {
+    $(template)
+      .find("#place_favorite")
+      .html(
+        `<i id="place2_favorite" class="fa fa-heart" aria-hidden="true"></i>`
+      );
+  } else {
+    $(template)
+      .find("#place_favorite")
+      .html(
+        `<i id="place2_favorite" class="fa fa-heart-o" aria-hidden="true"></i>`
+      );
+  }
+  $(template)
+    .find("#place_favorite")
+    .click(e => {
+      add_favorite(e, place, window.CSRF_TOKEN);
+    });
+  calculate_stars(template, place.rate);
+  $(template)
+    .find("#n_rates")
+    .text(" (" + place.n_rates + ") ");
   $("#place")
     .empty()
     .append(template);
+}
+
+function calculate_stars(template, rate) {
+  const starPercentage = (rate / 5) * 100;
+  const starPercentageRounded = `${Math.round(starPercentage / 10) * 10}%`;
+  $(template)
+    .find(".stars-inner")
+    .css("width", starPercentageRounded);
 }
 
 async function addCommentCards(place) {
@@ -101,6 +130,7 @@ async function addCommentCards(place) {
   const comments = await getComment(place);
   const card = await getCardTemplate("comments_card.html");
   comments.forEach(comment => {
+    console.log(comment);
     let template = $.parseHTML(card);
     if (document.domain === "sitnow.pythonanywhere.com") {
       $(template)
@@ -223,4 +253,26 @@ async function getUser(csrfmiddlewaretoken) {
     },
     dataType: "json"
   });
+}
+
+async function add_favorite(event, { id }, csrfmiddlewaretoken) {
+  await $.ajax({
+    type: "POST",
+    url: "/favorite/",
+    data: {
+      csrfmiddlewaretoken,
+      placeId: id
+    },
+    success: () => {},
+    dataType: "json"
+  });
+  if (event.target.classList.contains("fa-heart")) {
+    $(event.target)
+      .removeClass("fa-heart")
+      .addClass("fa-heart-o");
+  } else {
+    $(event.target)
+      .removeClass("fa-heart-o")
+      .addClass("fa-heart");
+  }
 }

@@ -1,0 +1,27 @@
+{% extends 'sitnow/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+SitNow - Setting
+{% endblock %}
+
+{% block header_block %}
+{% endblock %}
+
+{% block body_block %}
+<div id="content">
+  <div class="container  clearfix row">
+    <div class="col-3">
+      <h2 id="user-name">Welcome '{{ request.user.username }}'</h2>
+      <ul>
+          <li><a href="{% url 'sitnow:update_profile' %}">Settings</a></li>
+          <li><a href="{% url 'sitnow:logout' %}">Log out</a></li>
+      </ul>
+    </div>
+
+    <div class="col-9">
+      {% block setting_block %} {% endblock %}
+    </div>
+  </div>
+</div>
+{% endblock %}
