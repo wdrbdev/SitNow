@@ -43,7 +43,7 @@ async function getCardTemplate(filename) {
 }
 
 async function addPlaceCard(place) {
-  const card = await getCardTemplate("place_card.html");
+  const card = await getCardTemplate("map_place_card.html");
   let template = $.parseHTML(card);
   $(template)
     .find("#place_name")
@@ -90,18 +90,20 @@ async function addPlaceCard(place) {
   $(template)
     .find("#hasTable")
     .text(place.permission === null ? "Not required." : place.permission);
-  if (place.favorite.favorite === true) {
-    $(template)
-      .find("#place_favorite")
-      .html(
-        `<i id="place2_favorite" class="fa fa-heart" aria-hidden="true"></i>`
-      );
-  } else {
-    $(template)
-      .find("#place_favorite")
-      .html(
-        `<i id="place2_favorite" class="fa fa-heart-o" aria-hidden="true"></i>`
-      );
+  if (place.favorite !== undefined) {
+    if (place.favorite.favorite === true) {
+      $(template)
+        .find("#place_favorite")
+        .html(
+          `<i id="place2_favorite" class="fa fa-heart" aria-hidden="true"></i>`
+        );
+    } else {
+      $(template)
+        .find("#place_favorite")
+        .html(
+          `<i id="place2_favorite" class="fa fa-heart-o" aria-hidden="true"></i>`
+        );
+    }
   }
   $(template)
     .find("#place_favorite")
@@ -118,8 +120,11 @@ async function addPlaceCard(place) {
 }
 
 function calculate_stars(template, rate) {
-  const starPercentage = (rate / 5) * 100;
+  const starPercentage = (rate / 6) * 100;
   const starPercentageRounded = `${Math.round(starPercentage / 10) * 10}%`;
+  console.log(rate);
+  console.log(starPercentage);
+  console.log(starPercentageRounded);
   $(template)
     .find(".stars-inner")
     .css("width", starPercentageRounded);
