@@ -91,8 +91,6 @@ async function addPlaceCard(place, target_id) {
 
 // Initialize and add the map
 async function initMap() {
-  var directionsService = new google.maps.DirectionsService();
-  var directionsRenderer = new google.maps.DirectionsRenderer();
   // The location of Glasgow University
   if ($("#place1").length !== 0) {
     var startLocation = {
@@ -110,7 +108,6 @@ async function initMap() {
     zoom: 16,
     center: startLocation
   });
-  directionsRenderer.setMap(map);
 
   // Try HTML5 geolocation.
   if (navigator.geolocation) {
@@ -119,7 +116,6 @@ async function initMap() {
         lat = position.coords.latitude;
         lng = position.coords.longitude;
         var pos = { lat, lng };
-
         $("#current_location").attr("data-lat", lat);
         $("#current_location").attr("data-lng", lng);
 
@@ -138,9 +134,6 @@ async function initMap() {
   place_targets = ["#place1", "#place2", "#place3"];
   place_targets.forEach(place_target => {
     if ($(place_target).length !== 0) {
-      if (infowindow) {
-        infowindow.close();
-      }
       var marker = new google.maps.Marker({
         map,
         title: $(place_target).data().name,
