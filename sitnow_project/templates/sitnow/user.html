@@ -11,7 +11,7 @@ SitNow - Setting
 {% block body_block %}
 <div id="content">
   <div class="container  clearfix row">
-    <div class="col-3">
+    <div id="left-panel" class="col-3">
       <h4 id="user-name">Welcome, {{ user_profile.preferred_name}}!</h4>
       <img src="/media/{{user_profile.picture}}" alt="User Profile Picture" class="rounded-circle" height="120px" width="120px"> 
       <div><a href="{% url 'sitnow:favorites' %}">My Favorites</a></div>
@@ -19,7 +19,7 @@ SitNow - Setting
       <div><a href="{% url 'sitnow:logout' %}">Log out</a></div>
     </div>
 
-    <div class="col-9">
+    <div id="right-panel" class="col-9">
       {% block setting_block %} {% endblock %}
     </div>
   </div>

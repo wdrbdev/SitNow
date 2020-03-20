@@ -31,6 +31,31 @@ div#place.row {
   line-height: 2;
 }
 
-.fa-asterisk {
-  font-size: 0.8rem;
+.place_image {
+  display: block;
+  margin-top: auto;
+  margin-bottom: auto;
+  padding: 3px;
+  /* position: relative; */
+  /* top: 50%;
+  transform: translate(-50%, -50%); */
+}
+
+.places {
+  padding: 6px;
+}
+
+#left-panel,
+#right-panel,
+.has-table,
+.has-table,
+.has-wifi,
+.has-socket,
+.has-food,
+.has-coffee,
+.has-computer,
+.has-microwave,
+.no-eating {
+  padding-left: 0;
+  padding-right: 0;
 }

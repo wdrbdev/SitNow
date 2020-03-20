@@ -150,10 +150,16 @@ async function addCommentCards(place) {
             comment.user.picture
         );
     }
+    let ratting = comment.rate;
+    let starString = "";
+    // TODO
+    for (let i = 0; i < ratting; i++) {
+      starString += `<i class="fa fa-star" aria-hidden="true"></i>`;
+    }
 
     $(template)
       .find("#rate")
-      .text(comment.rate);
+      .html(starString);
     $(template)
       .find("#comment")
       .text(comment.comment);

@@ -400,26 +400,6 @@
     "address": "28 Bute Gardens, Glasgow G12 8RS, UK"
   },
   {
-    "name": "Sofa area",
-    "building": "Graham Kerr Building",
-    "level": 2,
-    "google_id": "ChIJ9UILxdFFiEgRcczDSTMY9Lc",
-    "image_url": "https://disabledgoimageslive.blob.core.windows.net/access-guides/bdc81d97-344b-d244-89b7-232c207176e7/dd0b8ff2-431d-af4b-8e71-5874d562c941.jpg",
-    "permission": "None",
-    "hasTable": false,
-    "hasWifi": true,
-    "capacity": 8,
-    "hasMicrowave": false,
-    "hasSocket": false,
-    "hasFood": false,
-    "noEating": false,
-    "hasCoffee": false,
-    "hasComputer": false,
-    "latitude": 55.8714317,
-    "longitude": -4.2929365,
-    "address": "Graham Kerr Building, 82 Hillhead St, Glasgow G12 8QQ, UK"
-  },
-  {
     "name": "Reception",
     "building": "Davidson Building",
     "level": 1,

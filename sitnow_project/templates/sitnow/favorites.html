@@ -12,13 +12,13 @@ SitNow - Setting
 {% endblock %}
 
 {% block setting_block %}
-    <div class="container">
+    <div>
     {% for favorite in favorites %}
-        <div id="place" class="row">
-            <div class="col-3">
-                <img src="{{favorite.place.image_url}}" alt="Place Image" height="100%" width="100%" />
-            </div>
-            <div class="col-9">
+        <div id="place" class="row places">
+            {% comment %} <div class="col-3"> {% endcomment %}
+                <img src="{{favorite.place.image_url}}" alt="Place Image" height="auto" width="100%" class="place_image col-3" />
+            {% comment %} </div> {% endcomment %}
+            <div id="meta-data" class="col-9">
             <div>
                 <strong class="place-name float-left">{% if user.is_authenticated %}{% if favorite.favorite %}<i id="place_favorite" class="fa fa-heart" aria-hidden="true" onclick="addFavorite(event,{{favorite.place.id}},window.CSRF_TOKEN)"></i>{% else %}<i id="place_favorite" class="fa fa-heart-o" aria-hidden="true" onclick="addFavorite(event,{{favorite.place.id}},window.CSRF_TOKEN)"></i>{% endif %}{% else %}{% endif %}{{favorite.place.name}} </strong>
                 <span data-rate="{{favorite.rate}}" class="place-rate float-right"><span class="stars-outer float-left"><span id="stars-inner" class="stars-inner" style="width: {{favorite.rate}}%;"></span></span><span>({{favorite.n_rates}})</span>
@@ -30,18 +30,18 @@ SitNow - Setting
                 <span class="place-permission">Access permission: {% if not favorite.place.permission %}Not required.{% else %}{{favorite.place.permission}}{% endif %}</span>
             </div>
             <div class="row">
-                    <div class="has-table col-4"><i class="fa fa-asterisk fa-xs" aria-hidden="true"></i>Has table? {{favorite.place.hasTable}}</div>
-                    <div class="has-wifi col-4"><i class="fa fa-asterisk fa-xs" aria-hidden="true"></i>Has wifi? {{favorite.place.hasWifi}}</div>
-                    <div class="has-socket col-4"><i class="fa fa-asterisk fa-xs" aria-hidden="true"></i>Has sicket? {{favorite.place.hasSocket}}</div>
+                    <div class="has-table col-4">&bull;&ensp;Has table? {{favorite.place.hasTable}}</div>
+                    <div class="has-wifi col-4">&bull;&ensp;Has wifi? {{favorite.place.hasWifi}}</div>
+                    <div class="has-socket col-4">&bull;&ensp;Has sicket? {{favorite.place.hasSocket}}</div>
             </div>
             <div class="row">
-                    <div class="has-food col-4"><i class="fa fa-asterisk fa-xs" aria-hidden="true"></i>Providing food? {{favorite.place.hasFood}}</div>
-                    <div class="has-coffee col-4"><i class="fa fa-asterisk fa-xs" aria-hidden="true"></i>Providing coffee {{favorite.place.hasCoffee}}</div>
-                    <div class="has-computer col-4"><i class="fa fa-asterisk fa-xs" aria-hidden="true"></i>Has computer? {{favorite.place.hasComputer}}</div>
+                    <div class="has-food col-4">&bull;&ensp;Providing food? {{favorite.place.hasFood}}</div>
+                    <div class="has-coffee col-4">&bull;&ensp;Providing Cafe'? {{favorite.place.hasCoffee}}</div>
+                    <div class="has-computer col-4">&bull;&ensp;Has computer? {{favorite.place.hasComputer}}</div>
             </div>
             <div class="row">
-                    <div class="has-microwave col-6"><i class="fa fa-asterisk fa-xs" aria-hidden="true"></i>Has Microwave Machine? {{favorite.place.hasMicrowave}}</div>
-                    <div class="no-eating col-6"><i class="fa fa-asterisk fa-xs" aria-hidden="true"></i>No eating allowed? {{favorite.place.noEating}}</div>
+                    <div class="has-microwave col-6">&bull;&ensp;Has Microwave Machine? {{favorite.place.hasMicrowave}}</div>
+                    <div class="no-eating col-6">&bull;&ensp;No eating allowed? {{favorite.place.noEating}}</div>
             </div>            
             </div>
         </div>

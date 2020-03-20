@@ -66,8 +66,8 @@ Results
                 {% if place1 %}
                 <div id="place1" class="card" data-place-id={{place1.id}} data-name="{{ place1.name }}" data-building="{{ place1.building }}" data-latitude="{{place1.latitude}}" data-longitude="{{place1.longitude}}" data-rate={{place1.rate}} data-n-rates={{place1.n_rates}} onclick="initMapPlace1()" style="cursor: pointer;">
                         <div class="row card-body">
-                            <span class="col-1">{% if user.is_authenticated %}{% if place1.favorite.favorite %}<i id="place1_favorite" class="fa fa-heart" aria-hidden="true"></i>{% else %}<i id="place1_favorite" class="fa fa-heart-o" aria-hidden="true"></i>{% endif %}{% else %}{% endif %}</span>
-                            <div class="col-11 row">
+                            {% if user.is_authenticated %}<span class="col-1">{% if place1.favorite.favorite %}<i id="place1_favorite" class="fa fa-heart" aria-hidden="true"></i></span>{% else %}<i id="place1_favorite" class="fa fa-heart-o" aria-hidden="true"></i></span>{% endif %}{% endif %}
+                            {% if user.is_authenticated %}<div class="col-11 row">{% else %}<div class="col-12 row">{% endif %}
                                 <h5 id="place1_name" class="float-left col-8" style="padding:0">{{ place1.name }}</h5>
                                 <div class="col-4">
                                     <div class="stars-outer float-left d-inline"><span id="stars-inner" class="stars-inner"></span></div><span>({{place1.n_rates}})</span>
@@ -82,8 +82,8 @@ Results
                 {% if place2 %}
                 <div id="place2" class="card" data-place-id={{place2.id}} data-name="{{ place2.name }}" data-building="{{ place2.building }}" data-latitude="{{place2.latitude}}" data-longitude="{{place2.longitude}}" data-rate={{place2.rate}} data-n-rates={{place2.n_rates}} onclick="initMapPlace2()" style="cursor: pointer;">
                         <div class="row card-body">
-                            <span class="col-1">{% if user.is_authenticated %}{% if place2.favorite.favorite %}<i id="place2_favorite" class="fa fa-heart" aria-hidden="true"></i>{% else %}<i id="place2_favorite" class="fa fa-heart-o" aria-hidden="true"></i>{% endif %}{% else %}{% endif %}</span>
-                            <div class="col-11 row">
+                            {% if user.is_authenticated %}<span class="col-1">{% if place2.favorite.favorite %}<i id="place2_favorite" class="fa fa-heart" aria-hidden="true"></i></span>{% else %}<i id="place2_favorite" class="fa fa-heart-o" aria-hidden="true"></i></span>{% endif %}{% endif %}
+                            {% if user.is_authenticated %}<div class="col-11 row">{% else %}<div class="col-12 row">{% endif %}
                                 <h5 id="place2_name" class="float-left col-8" style="padding:0">{{ place2.name }}</h5>
                                 <div class="col-4">
                                     <div class="stars-outer float-left d-inline"><span id="stars-inner" class="stars-inner"></span></div><span>({{place2.n_rates}})</span>
@@ -98,8 +98,8 @@ Results
                 {% if place3 %}
                 <div id="place3" class="card" data-place-id={{place3.id}} data-name="{{ place3.name }}" data-building="{{ place3.building }}" data-latitude="{{place3.latitude}}" data-longitude="{{place3.longitude}}" data-rate={{place3.rate}} data-n-rates={{place3.n_rates}} onclick="initMapPlace3()" style="cursor: pointer;">
                         <div class="row card-body">
-                            <span class="col-1">{% if user.is_authenticated %}{% if place3.favorite.favorite %}<i id="place3_favorite" class="fa fa-heart" aria-hidden="true"></i>{% else %}<i id="place3_favorite" class="fa fa-heart-o" aria-hidden="true"></i>{% endif %}{% else %}{% endif %}</span>
-                            <div class="col-11 row">
+                            {% if user.is_authenticated %}<span class="col-1">{% if place3.favorite.favorite %}<i id="place3_favorite" class="fa fa-heart" aria-hidden="true"></i></span>{% else %}<i id="place3_favorite" class="fa fa-heart-o" aria-hidden="true"></i></span>{% endif %}{% endif %}
+                            {% if user.is_authenticated %}<div class="col-11 row">{% else %}<div class="col-12 row">{% endif %}
                                 <h5 id="place3_name" class="float-left col-8" style="padding:0">{{ place3.name }}</h5>
                                 <div class="col-4">
                                     <div class="stars-outer float-left d-inline"><span id="stars-inner" class="stars-inner"></span></div><span>({{place3.n_rates}})</span>
