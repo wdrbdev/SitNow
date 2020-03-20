@@ -43,7 +43,7 @@ async function getCardTemplate(filename) {
 }
 
 async function addPlaceCard(place) {
-  const card = await getCardTemplate("place_card.html");
+  const card = await getCardTemplate("map_place_card.html");
   let template = $.parseHTML(card);
   $(template)
     .find("#place_name")
@@ -90,18 +90,20 @@ async function addPlaceCard(place) {
   $(template)
     .find("#hasTable")
     .text(place.permission === null ? "Not required." : place.permission);
-  if (place.favorite.favorite === true) {
-    $(template)
-      .find("#place_favorite")
-      .html(
-        `<i id="place2_favorite" class="fa fa-heart" aria-hidden="true"></i>`
-      );
-  } else {
-    $(template)
-      .find("#place_favorite")
-      .html(
-        `<i id="place2_favorite" class="fa fa-heart-o" aria-hidden="true"></i>`
-      );
+  if (place.favorite !== undefined) {
+    if (place.favorite.favorite === true) {
+      $(template)
+        .find("#place_favorite")
+        .html(
+          `<i id="place2_favorite" class="fa fa-heart" aria-hidden="true"></i>`
+        );
+    } else {
+      $(template)
+        .find("#place_favorite")
+        .html(
+          `<i id="place2_favorite" class="fa fa-heart-o" aria-hidden="true"></i>`
+        );
+    }
   }
   $(template)
     .find("#place_favorite")
@@ -118,7 +120,7 @@ async function addPlaceCard(place) {
 }
 
 function calculate_stars(template, rate) {
-  const starPercentage = (rate / 5) * 100;
+  const starPercentage = (rate / 6) * 100;
   const starPercentageRounded = `${Math.round(starPercentage / 10) * 10}%`;
   $(template)
     .find(".stars-inner")
@@ -130,7 +132,6 @@ async function addCommentCards(place) {
   const comments = await getComment(place);
   const card = await getCardTemplate("comments_card.html");
   comments.forEach(comment => {
-    console.log(comment);
     let template = $.parseHTML(card);
     if (document.domain === "sitnow.pythonanywhere.com") {
       $(template)
@@ -213,6 +214,45 @@ async function addCommentForm() {
           userProfile.picture
       );
   }
+  const starIcons = [
+    "#comment-star-1",
+    "#comment-star-2",
+    "#comment-star-3",
+    "#comment-star-4",
+    "#comment-star-5"
+  ];
+  starIcons.forEach(starIcon => {
+    $(template)
+      .find(starIcon)
+      .click(() => {
+        starIcons.forEach(starIcon => {
+          $(starIcon)
+            .removeClass("comment-rate fa-star")
+            .addClass("fa-star-o");
+        });
+        let rating = parseInt(starIcon.charAt(starIcon.length - 1));
+        console.log(rating);
+        for (let i = 0; i < rating; i++) {
+          $(starIcons[i])
+            .addClass("comment-rate fa-star")
+            .removeClass("fa-star-o");
+          console.log(starIcons[i]);
+        }
+        $("#rate").val(rating);
+        console.log($(starIcon));
+        console.log($("#rate"));
+      });
+  });
+
+  $(template)
+    .find("#submit-comment")
+    .click(() => {
+      let rateValue = $("#rate").val();
+      if (rateValue === "") {
+        alert("!!!");
+      }
+    });
+
   $("#new_comment").append(template);
   submitAction(window.CSRF_TOKEN);
 }

@@ -25,7 +25,7 @@ async function getCardTemplate(filename) {
 }
 
 async function addPlaceCard(place, target_id) {
-  const card = await getCardTemplate("place_card.html");
+  const card = await getCardTemplate("result_place_card.html");
   let template = $.parseHTML(card);
   $(template)
     .find("#place_name")
@@ -33,7 +33,7 @@ async function addPlaceCard(place, target_id) {
   window.place_name = place.name;
   $(template)
     .find("#place_building")
-    .text(place.building);
+    .text("@ " + place.building);
   window.place_building = place.building;
   $(template)
     .find("#google_id")
@@ -69,10 +69,14 @@ async function addPlaceCard(place, target_id) {
   $(template)
     .find("#hasComputer")
     .text(place.hasComputer ? "Yes" : "No");
+  // $(template)
+  //   .find("#permission")
+  //   .text(place.permission === null ? "Not required." : place.permission);
+  let starPercentage = (place.rate / 5) * 100;
+  let starPercentageRounded = `${Math.round(starPercentage / 10) * 10}%`;
   $(template)
-    .find("#permission")
-    .text(place.permission === null ? "Not required." : place.permission);
-
+    .find(".stars-inner")
+    .css("width", starPercentageRounded);
   // Add mini map
   initDirectionMap(template, target_id);
 
@@ -120,6 +124,7 @@ async function initMap() {
         $("#current_location").attr("data-lng", lng);
 
         fillLocation(pos);
+        showCurrentLocation();
       },
       function() {
         handleLocationError(true, infoWindow, map.getCenter());
@@ -128,7 +133,6 @@ async function initMap() {
   } else {
     // Browser doesn't support Geolocation
     handleLocationError(false, infoWindow, map.getCenter());
-    hideCurrentLocation();
   }
 
   place_targets = ["#place1", "#place2", "#place3"];
@@ -250,8 +254,16 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
 
 function hideCurrentLocation() {
   $("#current_location")
-    .prop("hidden", "hidden")
+    .prop("hidden", true)
+    .prop("disabled", true)
     .val("");
+}
+
+function showCurrentLocation() {
+  $("#current_location")
+    .prop("hidden", false)
+    .prop("disabled", false)
+    .val("current_location");
 }
 
 $(document).ready(function() {
@@ -287,7 +299,6 @@ $(document).ready(function() {
     $(place_id + "_favorite").click(e => {
       add_favorite(e, $(place_id).data(), window.CSRF_TOKEN);
     });
-    console.log($(place_id).data());
   });
 
   $("select#location").change(function() {

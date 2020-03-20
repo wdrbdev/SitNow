@@ -1,0 +1,16 @@
+#content {
+  height: 75vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+#search_form {
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px #000;
+  padding: 42px 12px;
+}
+
+#left-panel {
+  padding: 70px 0;
+}

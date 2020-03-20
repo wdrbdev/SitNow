@@ -12,11 +12,11 @@ SitNow - Setting
 <div id="content">
   <div class="container  clearfix row">
     <div class="col-3">
-      <h2 id="user-name">Welcome '{{ request.user.username }}'</h2>
-      <ul>
-          <li><a href="{% url 'sitnow:update_profile' %}">Settings</a></li>
-          <li><a href="{% url 'sitnow:logout' %}">Log out</a></li>
-      </ul>
+      <h4 id="user-name">Welcome, {{ user_profile.preferred_name}}!</h4>
+      <img src="/media/{{user_profile.picture}}" alt="User Profile Picture" class="rounded-circle" height="120px" width="120px"> 
+      <div><a href="{% url 'sitnow:favorites' %}">My Favorites</a></div>
+      <div><a href="{% url 'sitnow:update_profile' %}">Settings</a></div>
+      <div><a href="{% url 'sitnow:logout' %}">Log out</a></div>
     </div>
 
     <div class="col-9">

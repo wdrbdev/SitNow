@@ -1,25 +1,5 @@
 [
   {
-    "name": "Main Library",
-    "building": "Glasgow University Library",
-    "level": 2,
-    "google_id": "ChIJ615vB81FiEgR8IC4Yq2kyY8",
-    "image_url": "https://www.gla.ac.uk/media/Media_334613_smxx.jpg",
-    "permission": "For studnets and staffs of Glasgow University only, tap your university ID card to access.",
-    "hasTable": true,
-    "hasWifi": true,
-    "capacity": 2322,
-    "hasMicrowave": false,
-    "hasSocket": true,
-    "hasFood": false,
-    "noEating": false,
-    "hasCoffee": false,
-    "hasComputer": true,
-    "latitude": 55.8733426,
-    "longitude": -4.289248,
-    "address": "University Of Glasgow, Hillhead St, Glasgow G12 8QE, UK"
-  },
-  {
     "name": "Student Service",
     "building": "The Fraser Building",
     "level": 2,
@@ -75,8 +55,8 @@
     "noEating": true,
     "hasCoffee": false,
     "hasComputer": false,
-    "latitude": 55.872737,
-    "longitude": -4.284118,
+    "latitude": 55.8726314,
+    "longitude": -4.284052000000001,
     "address": "3 Kelvin Way, Glasgow G12 8NN, UK"
   },
   {
@@ -95,8 +75,8 @@
     "noEating": false,
     "hasCoffee": true,
     "hasComputer": false,
-    "latitude": 55.871829,
-    "longitude": -4.289515,
+    "latitude": 55.87206279999999,
+    "longitude": -4.2882862,
     "address": "University Ave, Glasgow G12 8QQ, UK"
   },
   {
@@ -115,8 +95,8 @@
     "noEating": false,
     "hasCoffee": true,
     "hasComputer": false,
-    "latitude": 55.873218,
-    "longitude": -4.29368,
+    "latitude": 55.8731525,
+    "longitude": -4.293491599999999,
     "address": "Wolfson Medical School Building, Glasgow G12 8LQ, UK"
   },
   {
@@ -135,8 +115,8 @@
     "noEating": false,
     "hasCoffee": true,
     "hasComputer": false,
-    "latitude": 55.873757,
-    "longitude": -4.292505,
+    "latitude": 55.8735672,
+    "longitude": -4.2925851,
     "address": "Boyd Orr Building, Glasgow G12 8QR, UK"
   },
   {
@@ -155,8 +135,8 @@
     "noEating": false,
     "hasCoffee": true,
     "hasComputer": false,
-    "latitude": 55.8717335,
-    "longitude": -4.278972,
+    "latitude": 55.8717315,
+    "longitude": -4.279621199999999,
     "address": "11 Eldon St, Glasgow G3 6NH, UK"
   },
   {
@@ -175,8 +155,8 @@
     "noEating": false,
     "hasCoffee": true,
     "hasComputer": false,
-    "latitude": 55.871966,
-    "longitude": -4.288985,
+    "latitude": 55.8719236,
+    "longitude": -4.2891137,
     "address": "Gilbert Scott Building, University Ave, Glasgow G12 8QQ, UK"
   },
   {
@@ -195,8 +175,8 @@
     "noEating": false,
     "hasCoffee": true,
     "hasComputer": false,
-    "latitude": 55.873722,
-    "longitude": -4.291659,
+    "latitude": 55.87370989999999,
+    "longitude": -4.2917144,
     "address": "16 University Gardens, Glasgow G12 8QN, UK"
   },
   {
@@ -235,8 +215,8 @@
     "noEating": false,
     "hasCoffee": false,
     "hasComputer": false,
-    "latitude": 55.87386,
-    "longitude": -4.291395,
+    "latitude": 55.87370989999999,
+    "longitude": -4.2917144,
     "address": "16 University Gardens, Glasgow G12 8QN, UK"
   },
   {
@@ -255,8 +235,8 @@
     "noEating": false,
     "hasCoffee": true,
     "hasComputer": false,
-    "latitude": 55.873705,
-    "longitude": -4.291658,
+    "latitude": 55.87370989999999,
+    "longitude": -4.2917144,
     "address": "16 University Gardens, Glasgow G12 8QN, UK"
   },
   {
@@ -275,8 +255,8 @@
     "noEating": false,
     "hasCoffee": true,
     "hasComputer": false,
-    "latitude": 55.872402,
-    "longitude": -4.285164,
+    "latitude": 55.8723812,
+    "longitude": -4.2851665,
     "address": "32 University Ave, Glasgow G12 8LX, UK"
   },
   {
@@ -295,8 +275,8 @@
     "noEating": false,
     "hasCoffee": true,
     "hasComputer": false,
-    "latitude": 55.872464,
-    "longitude": -4.284777,
+    "latitude": 55.8723812,
+    "longitude": -4.2851665,
     "address": "32 University Ave, Glasgow G12 8LX, UK"
   },
   {
@@ -315,8 +295,8 @@
     "noEating": false,
     "hasCoffee": true,
     "hasComputer": false,
-    "latitude": 55.872823,
-    "longitude": -4.284421,
+    "latitude": 55.8723812,
+    "longitude": -4.2851665,
     "address": "32 University Ave, Glasgow G12 8LX, UK"
   },
   {
@@ -335,8 +315,8 @@
     "noEating": true,
     "hasCoffee": false,
     "hasComputer": true,
-    "latitude": 55.871815,
-    "longitude": -4.279837,
+    "latitude": 55.8717315,
+    "longitude": -4.279621199999999,
     "address": "11 Eldon St, Glasgow G3 6NH, UK"
   },
   {
@@ -435,8 +415,8 @@
     "noEating": true,
     "hasCoffee": false,
     "hasComputer": false,
-    "latitude": 55.870951,
-    "longitude": -4.290995,
+    "latitude": 55.8709702,
+    "longitude": -4.2915936,
     "address": "Davidson Building, Glasgow G11 6PB, UK"
   },
   {
@@ -475,8 +455,8 @@
     "noEating": true,
     "hasCoffee": false,
     "hasComputer": true,
-    "latitude": 55.872017,
-    "longitude": -4.293387,
+    "latitude": 55.8719964,
+    "longitude": -4.2933843,
     "address": "Joseph Black Building, University Ave, Glasgow G12 8QQ, UK"
   },
   {
@@ -535,8 +515,8 @@
     "noEating": false,
     "hasCoffee": false,
     "hasComputer": false,
-    "latitude": 55.872623,
-    "longitude": -4.294516,
+    "latitude": 55.87260729999999,
+    "longitude": -4.2944843,
     "address": "132 University Pl, Glasgow G12 8TA, UK"
   },
   {
@@ -555,8 +535,8 @@
     "noEating": true,
     "hasCoffee": false,
     "hasComputer": false,
-    "latitude": 55.872507,
-    "longitude": -4.294575,
+    "latitude": 55.87260729999999,
+    "longitude": -4.2944843,
     "address": "132 University Pl, Glasgow G12 8TA, UK"
   },
   {
@@ -595,8 +575,8 @@
     "noEating": true,
     "hasCoffee": false,
     "hasComputer": false,
-    "latitude": 55.869109,
-    "longitude": -4.292811,
+    "latitude": 55.86900070000001,
+    "longitude": -4.2932081,
     "address": "1445 Argyle St, Glasgow G3 8AW, UK"
   },
   {
@@ -604,7 +584,7 @@
     "building": "Kelvin Hall",
     "level": 3,
     "google_id": "ChIJhRwc-tBFiEgRbLs3EJOuEig",
-    "image_url": "https://kelvinhallprod.blob.core.windows.net/cache/d/5/6/8/b/3/d568b30d237efa923a642ecc2107c4dd870546c5.jpg",
+    "image_url": "https://pagepark.co.uk/wp/wp-content/uploads/2017/11/Kelvin-Hall-Cafe.gif",
     "permission": "None",
     "hasTable": true,
     "hasWifi": true,
@@ -675,8 +655,8 @@
     "noEating": true,
     "hasCoffee": false,
     "hasComputer": true,
-    "latitude": 55.873166,
-    "longitude": -4.293388,
+    "latitude": 55.8731525,
+    "longitude": -4.293491599999999,
     "address": "Wolfson Medical School Building, Glasgow G12 8LQ, UK"
   },
   {
@@ -695,8 +675,8 @@
     "noEating": true,
     "hasCoffee": false,
     "hasComputer": true,
-    "latitude": 55.873648,
-    "longitude": -4.292712,
+    "latitude": 55.8735672,
+    "longitude": -4.2925851,
     "address": "Boyd Orr Building, Glasgow G12 8QR, UK"
   },
   {
@@ -735,8 +715,8 @@
     "noEating": true,
     "hasCoffee": false,
     "hasComputer": false,
-    "latitude": 55.871549,
-    "longitude": -4.288117,
+    "latitude": 55.87147030000001,
+    "longitude": -4.2884926,
     "address": "University of Glasgow, Gilbert Scott Building, University Ave, Glasgow G12 8QQ, UK"
   },
   {
@@ -755,8 +735,8 @@
     "noEating": true,
     "hasCoffee": false,
     "hasComputer": false,
-    "latitude": 55.871181,
-    "longitude": -4.289705,
+    "latitude": 55.87147030000001,
+    "longitude": -4.2884926,
     "address": "University of Glasgow, Gilbert Scott Building, University Ave, Glasgow G12 8QQ, UK"
   },
   {
@@ -775,8 +755,8 @@
     "noEating": true,
     "hasCoffee": false,
     "hasComputer": false,
-    "latitude": 55.871539,
-    "longitude": -4.292926,
+    "latitude": 55.8714317,
+    "longitude": -4.2929365,
     "address": "Graham Kerr Building, 82 Hillhead St, Glasgow G12 8QQ, UK"
   },
   {
@@ -875,8 +855,8 @@
     "noEating": true,
     "hasCoffee": false,
     "hasComputer": false,
-    "latitude": 55.873643,
-    "longitude": -4.290775,
+    "latitude": 55.8735569,
+    "longitude": -4.2909882,
     "address": "Sir Alexander Stone Building, Glasgow G12 8QL, UK"
   },
   {
@@ -895,8 +875,8 @@
     "noEating": true,
     "hasCoffee": false,
     "hasComputer": false,
-    "latitude": 55.873605,
-    "longitude": -4.289979,
+    "latitude": 55.8737664,
+    "longitude": -4.2898664,
     "address": "28 Bute Gardens, Glasgow G12 8RS, UK"
   },
   {
@@ -915,8 +895,8 @@
     "noEating": true,
     "hasCoffee": false,
     "hasComputer": true,
-    "latitude": 55.873152,
-    "longitude": -4.293283,
+    "latitude": 55.8731525,
+    "longitude": -4.293491599999999,
     "address": "Wolfson Medical School Building, Glasgow G12 8LQ, UK"
   },
   {
@@ -935,8 +915,8 @@
     "noEating": true,
     "hasCoffee": false,
     "hasComputer": false,
-    "latitude": 55.87408,
-    "longitude": -4.292695,
+    "latitude": 55.8740534,
+    "longitude": -4.2928603,
     "address": "Gregory Building, Glasgow G12, UK"
   },
   {
@@ -955,8 +935,8 @@
     "noEating": true,
     "hasCoffee": false,
     "hasComputer": false,
-    "latitude": 55.871097,
-    "longitude": -4.287457,
+    "latitude": 55.87113979999999,
+    "longitude": -4.2874553,
     "address": "8NN, University Ave, Glasgow G12 8QQ, UK"
   },
   {
@@ -975,8 +955,8 @@
     "noEating": true,
     "hasCoffee": false,
     "hasComputer": false,
-    "latitude": 55.871653,
-    "longitude": -4.278531,
+    "latitude": 55.8717315,
+    "longitude": -4.279621199999999,
     "address": "11 Eldon St, Glasgow G3 6NH, UK"
   },
   {
@@ -995,8 +975,8 @@
     "noEating": true,
     "hasCoffee": false,
     "hasComputer": false,
-    "latitude": 55.872244,
-    "longitude": -4.289735,
+    "latitude": 55.87226159999999,
+    "longitude": -4.2899937,
     "address": "The Square, Glasgow G12 8QJ, UK"
   },
   {
@@ -1035,8 +1015,8 @@
     "noEating": false,
     "hasCoffee": true,
     "hasComputer": false,
-    "latitude": 55.873183,
-    "longitude": -4.288289,
+    "latitude": 55.873081,
+    "longitude": -4.287935299999999,
     "address": "65 Hillhead St, Glasgow G12 8QF, UK"
   },
   {
@@ -1055,8 +1035,28 @@
     "noEating": false,
     "hasCoffee": true,
     "hasComputer": false,
-    "latitude": 55.873322,
-    "longitude": -4.288835,
+    "latitude": 55.8733667,
+    "longitude": -4.288945699999999,
+    "address": "University Of Glasgow, Hillhead St, Glasgow G12 8QE, UK"
+  },
+  {
+    "name": "Main Library",
+    "building": "Glasgow University Library",
+    "level": 2,
+    "google_id": "ChIJ615vB81FiEgR8IC4Yq2kyY8",
+    "image_url": "https://www.gla.ac.uk/media/Media_334613_smxx.jpg",
+    "permission": "For studnets and staffs of Glasgow University only, tap your university ID card to access.",
+    "hasTable": true,
+    "hasWifi": true,
+    "capacity": 2322,
+    "hasMicrowave": false,
+    "hasSocket": true,
+    "hasFood": false,
+    "noEating": false,
+    "hasCoffee": false,
+    "hasComputer": true,
+    "latitude": 55.8733667,
+    "longitude": -4.288945699999999,
     "address": "University Of Glasgow, Hillhead St, Glasgow G12 8QE, UK"
   },
   {
@@ -1075,8 +1075,8 @@
     "noEating": true,
     "hasCoffee": false,
     "hasComputer": true,
-    "latitude": 55.873386,
-    "longitude": -4.289341,
+    "latitude": 55.8733667,
+    "longitude": -4.288945699999999,
     "address": "University Of Glasgow, Hillhead St, Glasgow G12 8QE, UK"
   },
   {
@@ -1095,8 +1095,8 @@
     "noEating": false,
     "hasCoffee": false,
     "hasComputer": true,
-    "latitude": 55.873743,
-    "longitude": -4.289744,
+    "latitude": 55.87147030000001,
+    "longitude": -4.2884926,
     "address": "University of Glasgow, Gilbert Scott Building, University Ave, Glasgow G12 8QQ, UK"
   },
   {
@@ -1115,8 +1115,8 @@
     "noEating": false,
     "hasCoffee": false,
     "hasComputer": false,
-    "latitude": 55.874075,
-    "longitude": -4.288977,
+    "latitude": 55.8742069,
+    "longitude": -4.2888531,
     "address": "Hetherington Building, Glasgow G12, UK"
   }
 ]
