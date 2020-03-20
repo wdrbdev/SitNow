@@ -7,10 +7,10 @@ SitNow - Map
 
 {% block header_block %}
         <script type="text/javascript"> window.CSRF_TOKEN = "{{ csrf_token }}" </script>
-        {% comment %} Google {% endcomment %}
-        <script async defer src="https://maps.googleapis.com/maps/api/js?key={{GOOGLE_JS_API_KEY}}&callback=initMap"></script>
         <script type="text/javascript" src="{% static 'js/MapMap.js' %}"></script>
         <link rel="stylesheet" href="{% static 'css/map.css' %}">
+        {% comment %} Google {% endcomment %}
+        <script async defer src="https://maps.googleapis.com/maps/api/js?key={{GOOGLE_JS_API_KEY}}&callback=initMap"></script>
 {% endblock %}
 
 {% block body_block %}

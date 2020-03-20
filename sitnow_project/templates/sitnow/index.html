@@ -7,10 +7,10 @@ Sit Now
 
 {% block header_block %}
     {% comment %} Google {% endcomment %}
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key={{ GOOGLE_JS_API_KEY }}&callback=initMap"></script>
     <script type="text/javascript" src="{% static 'js/IndexMap.js' %}"></script>
     <link rel="stylesheet" href="{% static 'css/index.css' %}">
     <link rel="stylesheet" href="{% static 'css/map.css' %}">
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key={{ GOOGLE_JS_API_KEY }}&callback=initMap"></script>
 {% endblock %}
 
 {% block body_block %}
