@@ -1,4 +1,4 @@
-{% extends 'sitnow/about.html' %}
+{% extends 'sitnow/base.html' %}
 {% load staticfiles %}
 
 {% block title_block %}
@@ -9,48 +9,72 @@ SitNow - For Whom
 <link rel="stylesheet" href="{% static 'css/forwhom.css' %}">
 {% endblock %}
 
-{% block about_block %}
-    <div>
+{% block body_block %}
+
+<div class="container clearfix">
+  <div class="card-deck mb-4">
+    <nav class="nav flex-column text-center">
+      <button type="button" class="btn btn-outline-secondary btn-sm">
+        <a href="{% url 'sitnow:aboutus' %}" class="text-decoration-none">About Us</a>
+      </button>
+      <button type="button" class="btn btn-outline-secondary btn-sm">
+        <a href="{% url 'sitnow:advantages' %}" class="text-decoration-none">Advantages</a>
+      </button>
+      <button type="button" class="btn btn-outline-secondary btn-sm">
+        <a href="{% url 'sitnow:forwhom' %}" class="text-decoration-none">For Whom</a>
+      </button>
+      <button type="button" class="btn btn-outline-secondary btn-sm">
+        <a href="{% url 'sitnow:tutorial' %}" class="text-decoration-none">Tutorial</a>
+      </button>
+    </nav>
+
+    <div class="card mb-3">
       <h1>For Whom?</h1>
       <div class="row">
 
-        <div class="col-lg-4">
-          <div class="card-header shadow-sm">
-            <h4 class="my-0 font-weight-normal">Students</h4>
+        <div class="col-lg-3">
+          <div class="card-header">
+            <h4 class="my-0 font-weight-normal">Student</h4>
           </div>
-          <img class="card-img-bottom" src="{% static 'img/for_whom/student.jpg' %}" alt="Student image" style="width:100%">
           <div class="card-body">
-            <p>This is Elvin. </p>
-            <p>He is the leader of the UoG football club.</p>
-            <p>During a thrilling football match, his ankle was severely injured. The recovery can take up to 4 months. To continue his studies, he must not stand for a long time. </p>
-            <p>Therefore, he desperately needs to know where he can rest comfortably during gaps in his schedule.</p>
+            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Pariatur, excepturi?</p>
+            <ul class="list-unstyled mt-3 mb-4">
+              <li>Lorem, ipsum dolor.</li>
+              <li>Lorem, ipsum dolor.</li>
+              <li>Lorem, ipsum dolor.</li>
+            </ul>
           </div>
         </div>
 
-        <div class="col-lg-4">
-          <div class="card-header shadow-sm">
+        <div class="col-lg-3">
+          <div class="card-header">
             <h4 class="my-0 font-weight-normal">Staff</h4>
           </div>
-          <img class="card-img-bottom" src="{% static 'img/for_whom/staff.jpg' %}" alt="Stsff image" style="width:100%">
           <div class="card-body">
-            <p>This is Olivia. </p>
-            <p>She works for the UoG as a senior event coordinator.</p>
-            <p>Instead of sitting at her office. She spends most of her time working onsite in different school buildings.</p>
-            <p>It is important that she has the knowledge of suitable places to hold urgent meetings, attend guests and spend her break in each school building.</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur, maiores?</p>
+            <ul class="list-unstyled mt-3 mb-4">
+              <li>Lorem, ipsum dolor.</li>
+              <li>Lorem, ipsum dolor.</li>
+              <li>Lorem, ipsum dolor.</li>
+            </ul>
           </div>
         </div>
 
-        <div class="col-lg-4">
-          <div class="card-header shadow-sm">
+        <div class="col-lg-3">
+          <div class="card-header">
             <h4 class="my-0 font-weight-normal">Visitors</h4>
           </div>
-          <img class="card-img-bottom" src="{% static 'img/for_whom/visitor.jpg' %}" alt="Visitor image" style="width:100%">
           <div class="card-body">
-            <p>This is Amelia.</p>
-            <p>She is from Ireland. She attends a Student Marketing Competition at University of Glasgow.</p>
-            <p>She did not perform well in the first pitch. She wants to know where she can have some coffee and prepare for the next pitch.</p>
-            <p>Moreover, she sometimes needs a place to continue her project with teammates.</p>
+            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Praesentium, quos.</p>
+            <ul class="list-unstyled mt-3 mb-4">
+              <li>Lorem, ipsum dolor.</li>
+              <li>Lorem, ipsum dolor.</li>
+              <li>Lorem, ipsum dolor.</li>
+            </ul>
           </div>
         </div>
 
-{% endblock %}
+      </div>
+    </div>
+
+    {% endblock %}

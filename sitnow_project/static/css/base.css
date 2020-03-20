@@ -1,0 +1,12 @@
+.navbar a.navbar-brand{
+    margin: 0;
+    float: left;
+    display: inline-block;
+}
+
+.navbar>a.navbar-brand>.logo{ 
+    margin: 0;
+    float: left;
+    display: inline-block;
+}
+

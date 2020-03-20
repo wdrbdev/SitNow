@@ -1,3 +1,15 @@
+import sys
+path = sys.path.append('../')
+if path not in sys.path:
+    sys.path.append(path)
+
+import os
+os.environ.setdefault('DJANGO_SETTINGS_MODULE',
+                      'sitnow_project.settings')
+
+import django
+django.setup()
+
 import requests
 from django.contrib.auth.models import User
 from sitnow.models import Comment, Place, UserProfile
@@ -7,7 +19,6 @@ import heapq
 import time
 from math import sqrt
 from string import Template
-import sys
 
 
 def distance(current_location, destination_place):
@@ -15,7 +26,7 @@ def distance(current_location, destination_place):
 
 
 def filter(current_location):
-    filter = {}
+    filter_dict = {}
     for key, value in current_location.items():
         if(key is '_state'):
             continue
@@ -25,20 +36,19 @@ def filter(current_location):
         else:
             filter_list = [value]
 
-        filter[key] = filter_list
+        filter_dict[key] = filter_list
 
-    places = Place.objects.filter(hasTable__in=filter['hasTable'],
-                                  hasWifi__in=filter['hasWifi'],
+    places = Place.objects.filter(hasTable__in=filter_dict['hasTable'],
+                                  hasWifi__in=filter_dict['hasWifi'],
                                   capacity__range=(
-                                      filter['capacity'][0], sys.maxsize),
-                                  hasMicrowave__in=filter['hasMicrowave'],
-                                  hasSocket__in=filter['hasSocket'],
-                                  hasFood__in=filter['hasFood'],
-                                  hasCoffee__in=filter['hasCoffee'],
-                                  noEating__in=filter['noEating'],
-                                  hasComputer__in=filter['hasComputer'])
-
-    return list(places)
+                                      filter_dict['capacity'][0], sys.maxsize),
+                                  hasMicrowave__in=filter_dict['hasMicrowave'],
+                                  hasSocket__in=filter_dict['hasSocket'],
+                                  hasFood__in=filter_dict['hasFood'],
+                                  hasCoffee__in=filter_dict['hasCoffee'],
+                                  noEating__in=filter_dict['noEating'],
+                                  hasComputer__in=filter_dict['hasComputer'])
+    return places
 
 
 def get_k_nearest(current_location, places, k=5):

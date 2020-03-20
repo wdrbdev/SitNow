@@ -9,16 +9,16 @@ Sit Now
     {% comment %} Google {% endcomment %}
     <script async defer src="https://maps.googleapis.com/maps/api/js?key={{ GOOGLE_JS_API_KEY }}&callback=initMap"></script>
     <script type="text/javascript" src="{% static 'js/IndexMap.js' %}"></script>
-    <link rel="stylesheet" href="{% static 'css/index.css' %}">
     <link rel="stylesheet" href="{% static 'css/map.css' %}">
 {% endblock %}
 
 {% block body_block %}
-    <div id="content" class="container">
-            <div id="parent-panel" class="wel-grids row ">
-                <div id="left-panel" class="col-5 wel-grid">
+<div id="content">
+    <div class="container">
+            <div class="wel-grids row">
+                <div class="col-4 wel-grid">
                     <div class="slogan">
-                        <h2 class="title">Sit Now</h2>
+                        <div class="title">slogan</div>
                         <p>
                             Lorem ipsum dolor sit amet consectetur adipisicing elit.
                             Consequuntur cupiditate quibusdam necessitatibus fugit quo
@@ -27,43 +27,37 @@ Sit Now
                     </div>
                 </div>
 
-                <div id="right-panel" class="col-7 wel-grid ">
+                <div class="col-8 wel-grid">
                     <div class="search">
                     <div id="google_map" class="col-6" hidden>
                         <div id="map"></div>
                     </div>
-                    <div id="search_form" class="card">
-                        <h5 class="card-title">Start finding a seat for you! </h5>
+                    <div id="search_form">
                         <form
                         id="category_form"
                         method="post"
                         action="{% url 'sitnow:result' %}"
                         >
-                        <div class="form-group">
-                            <span>Choose your start location</span>
-                            <select id="location" name="location" required>
-                                <option value="">- Select your start location -</option>
-                                <option id="current_location" data-lat="" data-lng="" value="current_location">Current Location</option> 
-                                {% for location in locations %} 
-                                    <option data-lat="{{location.latitude}}" data-lng="{{location.longitude}}" value="{{location.building}}">{{location.building}}</option> 
-                                {% endfor %} 
-                            </select>
-                        </div>
+                        <select id="location" name="location" required>
+                            <option value="">- Select your start location -</option>
+                            <option id="current_location" data-lat="" data-lng="" value="current_location">Current Location</option> 
+                            {% for location in locations %} 
+                                <option data-lat="{{location.latitude}}" data-lng="{{location.longitude}}" value="{{location.building}}">{{location.building}}</option> 
+                            {% endfor %} 
+                        </select>
                         {% csrf_token %} 
                         {% for hidden in form.hidden_fields %} 
                             {{ hidden }} 
                         {% endfor %} 
                         
                         {% for field in form.visible_fields %}
-                            <div class="form-group">
+                            <div>
                                 {{ field.errors }} 
                                 {{ field.help_text }} 
                                 {{ field }}
                             </div>
                         {% endfor %}
-                        
-                        <div class="form-group">
-                        <p>Choose your filter</p>
+                        <button id="hasTable" type="button" class="btn btn-light">Table</button>
                         <button id="hasWifi" type="button" class="btn btn-light">WIFI</button>
                         <button id="hasMicrowave" type="button" class="btn btn-light">Microwave</button>
                         <button id="hasSocket" type="button" class="btn btn-light">Socket</button>
@@ -71,8 +65,12 @@ Sit Now
                         <button id="noEating" type="button" class="btn btn-light">Eating</button>
                         <button id="hasCoffee" type="button" class="btn btn-light">Coffee</button>
                         <button id="hasComputer" type="button" class="btn btn-light">Computer</button>
-                        </div>
-                            <div class="text-center"><button type="submit" name="submit" class="float-center btn-lg btn btn-primary" value="Search">Search</button></div>
+                            <input
+                                type="submit"
+                                name="submit"
+                                class="float-right"
+                                value="Search"
+                            />
                         </form>
                     </div>
                     </div>
@@ -81,6 +79,6 @@ Sit Now
         </div>
         </div>
     </div>
-
+</div>
 
 {% endblock %}

@@ -14,9 +14,9 @@ from django.forms.models import model_to_dict
 import json
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.models import User
+from get_places import *
 from sitnow.utils.validation import *
 from sitnow.utils.csv_2_json import *
-from sitnow.utils.get_places import *
 # Create your views here.
 
 
@@ -229,6 +229,15 @@ def aboutus(request):
     return response
 
 
+def advantages(request):
+    context_dict = {}
+    context_dict["advantage_msg"] = "Advantages of SitNow"
+
+    response = render(request, "sitnow/advantages.html", context=context_dict)
+
+    return response
+
+
 def forwhom(request):
     context_dict = {}
     context_dict["forwhom_msg"] = "For Whom SitNow"
@@ -247,51 +256,32 @@ def tutorial(request):
     return response
 
 
-def map(request):
+def forum(request):
     context_dict = {}
-    context_dict["map_msg"] = "map"
+    context_dict["forum_msg"] = "forum"
     context_dict["GOOGLE_JS_API_KEY"] = GOOGLE_JS_API_KEY
 
-    response = render(request, "sitnow/map.html", context=context_dict)
+    response = render(request, "sitnow/forum.html", context=context_dict)
 
     return response
 
 
-@login_required
 def favorites(request):
     context_dict = {}
-    favorites = list(Favorite.objects.filter(user=request.user, favorite=True))
-    favorite_places = []
-    for favorite in favorites:
-        d = {}
-        favorite_dict = model_to_dict(favorite)
-        place = Place.objects.get(pk=favorite_dict["place"])
-        d["place"] = model_to_dict(place)
-        d["favorite"] = favorite_dict["favorite"]
-        rate, d['n_rates'] = get_avg_rate(
-            place)
-        d['rate'] = round((rate * 100 / 5) / 10) * 10 if rate != -1 else 0
-        favorite_places.append(d)
-        print(d)
+    context_dict["fovorite_msg"] = "favorite"
 
-    user_profile = UserProfile.objects.get(user=request.user)
-    context_dict["user_profile"] = model_to_dict(user_profile)
-    if context_dict["user_profile"]["picture"] == "/media/profile_images/default_profile_img.svg":
-        context_dict["user_profile"]["picture"] = "/profile_images/default_profile_img.svg"
-    context_dict["favorites"] = favorite_places
+    response = render(request, "sitnow/favorites.html", context=context_dict)
 
-    return render(request, "sitnow/favorites.html", context=context_dict)
+    return response
 
 
-# @login_required
-# def setting(request):
-#     context_dict = {}
-#     context_dict["setting_msg"] = "setting"
+def setting(request):
+    context_dict = {}
+    context_dict["setting_msg"] = "setting"
 
-#     print(context_dict["user_profile"])
-#     response = render(request, "sitnow/setting.html", context=context_dict)
+    response = render(request, "sitnow/setting.html", context=context_dict)
 
-#     return response
+    return response
 
 
 def register(request):
@@ -420,20 +410,10 @@ def update_profile(request):
         if form.is_valid():
             user_profile = form.save(commit=False)
             user_profile.user = request.user
-
-            if 'picture' in request.FILES:
-                user_profile.picture = request.FILES['picture']
-
-            # Now we save the UserProfile model instance.
             user_profile.save()
         return redirect(reverse("sitnow:update_profile"))
 
     form = UserProfileForm(instance=request.user.userprofile)
 
     d['form'] = form
-
-    user_profile = UserProfile.objects.get(user=request.user)
-    d["user_profile"] = model_to_dict(user_profile)
-    if d["user_profile"]["picture"] == "/media/profile_images/default_profile_img.svg":
-        d["user_profile"]["picture"] = "/profile_images/default_profile_img.svg"
     return render(request, 'sitnow/setting.html', d)

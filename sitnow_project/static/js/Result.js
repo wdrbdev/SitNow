@@ -25,7 +25,7 @@ async function getCardTemplate(filename) {
 }
 
 async function addPlaceCard(place, target_id) {
-  const card = await getCardTemplate("result_place_card.html");
+  const card = await getCardTemplate("place_card.html");
   let template = $.parseHTML(card);
   $(template)
     .find("#place_name")
@@ -33,7 +33,7 @@ async function addPlaceCard(place, target_id) {
   window.place_name = place.name;
   $(template)
     .find("#place_building")
-    .text("@ " + place.building);
+    .text(place.building);
   window.place_building = place.building;
   $(template)
     .find("#google_id")
@@ -69,14 +69,10 @@ async function addPlaceCard(place, target_id) {
   $(template)
     .find("#hasComputer")
     .text(place.hasComputer ? "Yes" : "No");
-  // $(template)
-  //   .find("#permission")
-  //   .text(place.permission === null ? "Not required." : place.permission);
-  let starPercentage = (place.rate / 5) * 100;
-  let starPercentageRounded = `${Math.round(starPercentage / 10) * 10}%`;
   $(template)
-    .find(".stars-inner")
-    .css("width", starPercentageRounded);
+    .find("#permission")
+    .text(place.permission === null ? "Not required." : place.permission);
+
   // Add mini map
   initDirectionMap(template, target_id);
 
@@ -291,6 +287,7 @@ $(document).ready(function() {
     $(place_id + "_favorite").click(e => {
       add_favorite(e, $(place_id).data(), window.CSRF_TOKEN);
     });
+    console.log($(place_id).data());
   });
 
   $("select#location").change(function() {

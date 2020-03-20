@@ -1,55 +1,55 @@
-{% extends 'sitnow/user.html' %}
+{% extends 'sitnow/base.html' %}
 {% load staticfiles %}
 
 {% block title_block %}
-SitNow - Setting
+SitNow - My Favorite
 {% endblock %}
 
 {% block header_block %}
-        <script type="text/javascript"> window.CSRF_TOKEN = "{{ csrf_token }}" </script>
-        <script type="text/javascript" src="{% static 'js/favorites.js' %}"></script>
-        <link rel="stylesheet" href="{% static 'css/favorites.css' %}">
 {% endblock %}
 
-{% block setting_block %}
-    <div class="container">
-    {% for favorite in favorites %}
-        <div id="place" class="row">
-            <div class="col-3">
-                <img src="{{favorite.place.image_url}}" alt="Place Image" height="100%" width="100%" />
+{% block body_block %}
+<div id="content">
+    <div class="container clearfix">
+        <div class="user-detail">
+            <div class="user-info">
+                {% if request.user.is_authenticated %}
+                    <h2 id="user-name">Welcome {{ request.user.username }}</h2>
+                {% else %}
+                    <a href="{% url django.contrib.auth.login %}">Login</a>
+                {% endif %}
             </div>
-            <div class="col-9">
-            <div>
-                <strong class="place-name float-left">{% if user.is_authenticated %}{% if favorite.favorite %}<i id="place_favorite" class="fa fa-heart" aria-hidden="true" onclick="addFavorite(event,{{favorite.place.id}},window.CSRF_TOKEN)"></i>{% else %}<i id="place_favorite" class="fa fa-heart-o" aria-hidden="true" onclick="addFavorite(event,{{favorite.place.id}},window.CSRF_TOKEN)"></i>{% endif %}{% else %}{% endif %}{{favorite.place.name}} </strong>
-                <span data-rate="{{favorite.rate}}" class="place-rate float-right"><span class="stars-outer float-left"><span id="stars-inner" class="stars-inner" style="width: {{favorite.rate}}%;"></span></span><span>({{favorite.n_rates}})</span>
-            </div>
-            <strong class="place-building">{{favorite.place.building}}</strong>
-            <div>
-                <span class="place-level">Level: {{favorite.place.level}}</span>
-                <span class="place-capacity">Capacity: {{favorite.place.rate}}</span>
-                <span class="place-permission">Access permission: {% if not favorite.place.permission %}Not required.{% else %}{{favorite.place.permission}}{% endif %}</span>
-            </div>
-            <div class="row">
-                    <div class="has-table col-4"><i class="fa fa-asterisk fa-xs" aria-hidden="true"></i>Has table? {{favorite.place.hasTable}}</div>
-                    <div class="has-wifi col-4"><i class="fa fa-asterisk fa-xs" aria-hidden="true"></i>Has wifi? {{favorite.place.hasWifi}}</div>
-                    <div class="has-socket col-4"><i class="fa fa-asterisk fa-xs" aria-hidden="true"></i>Has sicket? {{favorite.place.hasSocket}}</div>
-            </div>
-            <div class="row">
-                    <div class="has-food col-4"><i class="fa fa-asterisk fa-xs" aria-hidden="true"></i>Providing food? {{favorite.place.hasFood}}</div>
-                    <div class="has-coffee col-4"><i class="fa fa-asterisk fa-xs" aria-hidden="true"></i>Providing coffee {{favorite.place.hasCoffee}}</div>
-                    <div class="has-computer col-4"><i class="fa fa-asterisk fa-xs" aria-hidden="true"></i>Has computer? {{favorite.place.hasComputer}}</div>
-            </div>
-            <div class="row">
-                    <div class="has-microwave col-6"><i class="fa fa-asterisk fa-xs" aria-hidden="true"></i>Has Microwave Machine? {{favorite.place.hasMicrowave}}</div>
-                    <div class="no-eating col-6"><i class="fa fa-asterisk fa-xs" aria-hidden="true"></i>No eating allowed? {{favorite.place.noEating}}</div>
-            </div>            
+
+            <div id="user-photo">
+                <img src="https://picsum.photos/112/100" alt="account photo">
             </div>
         </div>
-    {% endfor %}
-    {% if not favorites %}
-    <h3>You haven't add any place in your favorite.</h3>
-    <a href="{% url 'sitnow:map' %}">Go to see the map now!</a>
-    {% endif %}
+
+        <div class="favorites">
+            <div class="wel-grids row">
+                <div class="col-md-3 wel-grid">
+                    <nav class="side-navigation">
+                        <ul>
+                            <li><a href="{% url 'sitnow:favorites' %}">Favorite</a></li>
+                            <li><a href="{% url 'sitnow:update_profile' %}">Settings</a></li>
+                            <li><a href="{% url 'sitnow:logout' %}">Log out</a></li>
+                        </ul>
+                    </nav>
+                </div>
+
+                <div class="col-md-9 wel-grid">
+                    <div class="card favorite-place" value="">
+                        <div class="card-body">
+                            <h2 id="card-title">building name</h2>
+                            <h4 id="card-subtitle">location name</h4>
+                            <div id="card-text">address</div>
+                            <div id="rating">rating</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
     </div>
-    
-{% endblock %}
+    {% endblock %}

@@ -10,20 +10,18 @@ Results
     <script type="text/javascript"> window.CSRF_TOKEN = "{{ csrf_token }}" </script>
     <script type="text/javascript" src="{% static 'js/Result.js' %}"></script>
     <link rel="stylesheet" href="{% static 'css/map.css' %}">
-    <link rel="stylesheet" href="{% static 'css/result.css' %}">
 {% endblock %}
 
 {% block body_block %}
-<div id="content">
+<div id="content" class="container">
     <div>
-        <div class="search card justify-content-center">
+        <div class="search d-flex justify-content-center">
             <div id="search_form">
                 <form
                 id="category_form"
                 method="post"
                 action="{% url 'sitnow:result' %}"
                 >
-                <span>Start Location</span>
                 <select id="location" name="location" required>
                     <option value="">- Select your start location -</option>
                     <option id="current_location" data-lat="" data-lng="" value="current_location">Current Location</option> 
@@ -51,7 +49,12 @@ Results
                 <button id="noEating" type="button" class="btn btn-light">Eating</button>
                 <button id="hasCoffee" type="button" class="btn btn-light">Coffee</button>
                 <button id="hasComputer" type="button" class="btn btn-light">Computer</button>
-                <button type="submit" name="submit" class="float-right btn btn-primary" value="Search">Search</button>
+                    <input
+                        type="submit"
+                        name="submit"
+                        class="float-right"
+                        value="Search"
+                    />
                 </form>
             </div>
             </div>
@@ -60,61 +63,51 @@ Results
     <div class="row">
 
         <div id="left_panel" class="wel-grids col-6">
+            <div class="wel-grid">location detail</div>
                 {% if start %}
                     <div id="start" data-latitude="{{start.latitude}}" data-longitude="{{start.longitude}}" hidden></div>
                 {% endif %}
                 {% if place1 %}
-                <div id="place1" class="card" data-place-id={{place1.id}} data-name="{{ place1.name }}" data-building="{{ place1.building }}" data-latitude="{{place1.latitude}}" data-longitude="{{place1.longitude}}" data-rate={{place1.rate}} data-n-rates={{place1.n_rates}} onclick="initMapPlace1()" style="cursor: pointer;">
-                        <div class="row card-body">
-                            <span class="col-1">{% if user.is_authenticated %}{% if place1.favorite.favorite %}<i id="place1_favorite" class="fa fa-heart" aria-hidden="true"></i>{% else %}<i id="place1_favorite" class="fa fa-heart-o" aria-hidden="true"></i>{% endif %}{% else %}{% endif %}</span>
-                            <div class="col-11 row">
-                                <h5 id="place1_name" class="float-left col-8" style="padding:0">{{ place1.name }}</h5>
-                                <div class="col-4">
-                                    <div class="stars-outer float-left d-inline"><span id="stars-inner" class="stars-inner"></span></div><span>({{place1.n_rates}})</span>
-                                </div>
-                                <p id="place1_building">@ {{ place1.building }}</p>
+                <div id="place1" data-place-id={{place1.id}} data-name="{{ place1.name }}" data-building="{{ place1.building }}" data-latitude="{{place1.latitude}}" data-longitude="{{place1.longitude}}" data-rate={{place1.rate}} data-n-rates={{place1.n_rates}} onclick="initMapPlace1()" style="cursor: pointer;">
+                        <div class="row">
+                            <div id="place1_name" class="float-left col-9">{% if user.is_authenticated %}{% if place1.favorite.favorite %}<i id="place1_favorite" class="fa fa-heart" aria-hidden="true"></i>{% else %}<i id="place1_favorite" class="fa fa-heart-o" aria-hidden="true"></i>{% endif %}{% else %}{% endif %}{{ place1.name }}</div>
+                            <div class="col-3">
+                                <div class="stars-outer float-left"><span id="stars-inner" class="stars-inner"></span>({{place1.n_rates}})</div>
                             </div>
-                            <p class="text-muted">&nbsp;-&nbsp;{{ place1.address }} <br/>
-                            &nbsp;-&nbsp;Access:&nbsp;{% if place1.permission != "None" %}{{place1.permission}}{% else %}Not required.{% endif %}</p>
                         </div>
+                        <p id="place1_building">{{ place1.building }}</p>
+                        <p>{{ place1.address }}</p>
                 </div>
                 {% endif %}
                 {% if place2 %}
-                <div id="place2" class="card" data-place-id={{place2.id}} data-name="{{ place2.name }}" data-building="{{ place2.building }}" data-latitude="{{place2.latitude}}" data-longitude="{{place2.longitude}}" data-rate={{place2.rate}} data-n-rates={{place2.n_rates}} onclick="initMapPlace2()" style="cursor: pointer;">
-                        <div class="row card-body">
-                            <span class="col-1">{% if user.is_authenticated %}{% if place2.favorite.favorite %}<i id="place2_favorite" class="fa fa-heart" aria-hidden="true"></i>{% else %}<i id="place2_favorite" class="fa fa-heart-o" aria-hidden="true"></i>{% endif %}{% else %}{% endif %}</span>
-                            <div class="col-11 row">
-                                <h5 id="place2_name" class="float-left col-8" style="padding:0">{{ place2.name }}</h5>
-                                <div class="col-4">
-                                    <div class="stars-outer float-left d-inline"><span id="stars-inner" class="stars-inner"></span></div><span>({{place2.n_rates}})</span>
-                                </div>
-                                <p id="place2_building">@ {{ place2.building }}</p>
+                <div id="place2" data-place-id={{place2.id}} data-name="{{ place2.name }}" data-building="{{ place2.building }}" data-latitude="{{place2.latitude}}" data-longitude="{{place2.longitude}}" data-rate={{place2.rate}} data-n-rates={{place2.n_rates}} onclick="initMapPlace2()" style="cursor: pointer;">
+                        <div class="row">
+                            <div id="place2_name" class="float-left col-9">{% if user.is_authenticated %}{% if place2.favorite.favorite %}<i id="place2_favorite" class="fa fa-heart" aria-hidden="true"></i>{% else %}<i id="place2_favorite" class="fa fa-heart-o" aria-hidden="true"></i>{% endif %}{% else %}{% endif %}{{ place2.name }}</div>
+                            <div class="col-3">
+                                <div class="stars-outer float-left"><span id="stars-inner" class="stars-inner"></span>({{place2.n_rates}})</div>
                             </div>
-                            <p class="text-muted">&nbsp;-&nbsp;{{ place2.address }} <br/>
-                            &nbsp;-&nbsp;Access:&nbsp;{% if place2.permission != "None" %}{{place2.permission}}{% else %}Not required.{% endif %}</p>
                         </div>
+                        <p id="place2_building">{{ place2.building }}</p>
+                        <p>{{ place2.address }}</p>
                 </div>
                 {% endif %}
                 {% if place3 %}
-                <div id="place3" class="card" data-place-id={{place3.id}} data-name="{{ place3.name }}" data-building="{{ place3.building }}" data-latitude="{{place3.latitude}}" data-longitude="{{place3.longitude}}" data-rate={{place3.rate}} data-n-rates={{place3.n_rates}} onclick="initMapPlace3()" style="cursor: pointer;">
-                        <div class="row card-body">
-                            <span class="col-1">{% if user.is_authenticated %}{% if place3.favorite.favorite %}<i id="place3_favorite" class="fa fa-heart" aria-hidden="true"></i>{% else %}<i id="place3_favorite" class="fa fa-heart-o" aria-hidden="true"></i>{% endif %}{% else %}{% endif %}</span>
-                            <div class="col-11 row">
-                                <h5 id="place3_name" class="float-left col-8" style="padding:0">{{ place3.name }}</h5>
-                                <div class="col-4">
-                                    <div class="stars-outer float-left d-inline"><span id="stars-inner" class="stars-inner"></span></div><span>({{place3.n_rates}})</span>
-                                </div>
-                                <p id="place3_building">@ {{ place3.building }}</p>
+                <div id="place3" data-place-id={{place3.id}} data-name="{{ place3.name }}" data-building="{{ place3.building }}" data-latitude="{{place3.latitude}}" data-longitude="{{place3.longitude}}" data-rate={{place3.rate}} data-n-rates={{place3.n_rates}} onclick="initMapPlace3()" style="cursor: pointer;">
+                        <div class="row">
+                            <div id="place3_name" class="float-left col-9">{% if user.is_authenticated %}{% if place3.favorite.favorite %}<i id="place3_favorite" class="fa fa-heart" aria-hidden="true"></i>{% else %}<i id="place3_favorite" class="fa fa-heart-o" aria-hidden="true"></i>{% endif %}{% else %}{% endif %}{{ place3.name }}</div>
+                            <div class="col-3">
+                                <div class="stars-outer float-left"><span id="stars-inner" class="stars-inner"></span>({{place3.n_rates}})</div>
                             </div>
-                            <p class="text-muted">&nbsp;-&nbsp;{{ place3.address }} <br/>
-                            &nbsp;-&nbsp;Access:&nbsp;{% if place3.permission != "None" %}{{place3.permission}}{% else %}Not required.{% endif %}</p>
                         </div>
+                        <p id="place3_building">{{ place3.building }}</p>
+                        <p>{{ place3.address }}</p>
                 </div>
                 {% endif %}
                 {% if isEmpty %}
                     <div>No result according to the search criteria.</div>
                     <a href="/" class="btn btn-primary">Search Again</a>
                 {% endif %}
+            <div class="col-md-6 wel-grid"> searching results</div>
         </div>
 
         <div id="right_panel" class="filter col-6">

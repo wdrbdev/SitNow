@@ -1,4 +1,4 @@
-{% extends 'sitnow/about.html' %}
+{% extends 'sitnow/base.html' %}
 {% load staticfiles %}
 
 {% block title_block %}
@@ -9,11 +9,30 @@ SitNow - Tutorial
 <link rel="stylesheet" href="{% static 'css/tutorial.css' %}">
 {% endblock %}
 
-{% block about_block %}
-<div>
-    <h1>Tutorial</h1>
-    {% comment %} change link {% endcomment %}
-    <iframe width="892" height="502" src="https://www.youtube.com/embed/6-hhIKk3Fmo" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+{% block body_block %}
+<div class="container clearfix">
+    <div class="card-deck mb-4">
+        <nav class="nav flex-column text-center">
+            <button type="button" class="btn btn-outline-secondary btn-sm">
+                <a href="{% url 'sitnow:aboutus' %}" class="text-decoration-none">About Us</a>
+            </button>
+            <button type="button" class="btn btn-outline-secondary btn-sm">
+                <a href="{% url 'sitnow:advantages' %}" class="text-decoration-none">Advantages</a>
+            </button>
+            <button type="button" class="btn btn-outline-secondary btn-sm">
+                <a href="{% url 'sitnow:forwhom' %}" class="text-decoration-none">For Whom</a>
+            </button>
+            <button type="button" class="btn btn-outline-secondary btn-sm">
+                <a href="{% url 'sitnow:tutorial' %}" class="text-decoration-none">Tutorial</a>
+            </button>
+        </nav>
+        <div class="card mb-3">
+            <h1>Tutorial</h1>
+            {% comment %} change link {% endcomment %}
+            <iframe width="892" height="502" src="https://www.youtube.com/embed/6-hhIKk3Fmo" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+    </div>
 </div>
+
 {% endblock %}
 
