@@ -26,7 +26,7 @@ Results
                 <span>Start Location</span>
                 <select id="location" name="location" required>
                     <option value="">- Select your start location -</option>
-                    <option id="current_location" data-lat="" data-lng="" value="current_location">Current Location</option> 
+                    <option id="current_location" data-lat="" data-lng="" value="" hidden="true" disabled="true">Current Location</option> 
                     {% for location in locations %} 
                         <option data-lat="{{location.latitude}}" data-lng="{{location.longitude}}" value="{{location.building}}">{{location.building}}</option> 
                     {% endfor %} 

@@ -122,9 +122,6 @@ async function addPlaceCard(place) {
 function calculate_stars(template, rate) {
   const starPercentage = (rate / 6) * 100;
   const starPercentageRounded = `${Math.round(starPercentage / 10) * 10}%`;
-  console.log(rate);
-  console.log(starPercentage);
-  console.log(starPercentageRounded);
   $(template)
     .find(".stars-inner")
     .css("width", starPercentageRounded);
@@ -135,7 +132,6 @@ async function addCommentCards(place) {
   const comments = await getComment(place);
   const card = await getCardTemplate("comments_card.html");
   comments.forEach(comment => {
-    console.log(comment);
     let template = $.parseHTML(card);
     if (document.domain === "sitnow.pythonanywhere.com") {
       $(template)
@@ -218,6 +214,45 @@ async function addCommentForm() {
           userProfile.picture
       );
   }
+  const starIcons = [
+    "#comment-star-1",
+    "#comment-star-2",
+    "#comment-star-3",
+    "#comment-star-4",
+    "#comment-star-5"
+  ];
+  starIcons.forEach(starIcon => {
+    $(template)
+      .find(starIcon)
+      .click(() => {
+        starIcons.forEach(starIcon => {
+          $(starIcon)
+            .removeClass("comment-rate fa-star")
+            .addClass("fa-star-o");
+        });
+        let rating = parseInt(starIcon.charAt(starIcon.length - 1));
+        console.log(rating);
+        for (let i = 0; i < rating; i++) {
+          $(starIcons[i])
+            .addClass("comment-rate fa-star")
+            .removeClass("fa-star-o");
+          console.log(starIcons[i]);
+        }
+        $("#rate").val(rating);
+        console.log($(starIcon));
+        console.log($("#rate"));
+      });
+  });
+
+  $(template)
+    .find("#submit-comment")
+    .click(() => {
+      let rateValue = $("#rate").val();
+      if (rateValue === "") {
+        alert("!!!");
+      }
+    });
+
   $("#new_comment").append(template);
   submitAction(window.CSRF_TOKEN);
 }

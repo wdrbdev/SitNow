@@ -124,6 +124,7 @@ async function initMap() {
         $("#current_location").attr("data-lng", lng);
 
         fillLocation(pos);
+        showCurrentLocation();
       },
       function() {
         handleLocationError(true, infoWindow, map.getCenter());
@@ -132,7 +133,6 @@ async function initMap() {
   } else {
     // Browser doesn't support Geolocation
     handleLocationError(false, infoWindow, map.getCenter());
-    hideCurrentLocation();
   }
 
   place_targets = ["#place1", "#place2", "#place3"];
@@ -254,8 +254,16 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
 
 function hideCurrentLocation() {
   $("#current_location")
-    .prop("hidden", "hidden")
+    .prop("hidden", true)
+    .prop("disabled", true)
     .val("");
+}
+
+function showCurrentLocation() {
+  $("#current_location")
+    .prop("hidden", false)
+    .prop("disabled", false)
+    .val("current_location");
 }
 
 $(document).ready(function() {

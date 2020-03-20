@@ -51,9 +51,9 @@ def result(request):
             search_location = validate_querydict(request.POST)
             filtered_places = filter(search_location)
             k_nearset = get_k_nearest(
-                search_location, filtered_places, 5)
+                search_location, filtered_places, 4)
             k_google_nearset = get_google_k_nearest(
-                search_location, k_nearset, 3)
+                search_location, k_nearset, 2)
             d = {}
             start = {"latitude": float(search_location["latitude"]), "longitude": float(
                 search_location["longitude"])}

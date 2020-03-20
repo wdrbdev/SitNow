@@ -7,3 +7,13 @@ p.text-muted {
 #place3_building {
   margin-bottom: 4px;
 }
+
+#place_img {
+  display: block;
+  /* margin-top: auto; */
+  margin-bottom: auto;
+  padding: 0;
+  position: relative;
+  top: 0%;
+  /* transform: translateY(-50%); */
+}

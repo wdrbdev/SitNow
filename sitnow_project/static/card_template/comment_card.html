@@ -1,24 +1,34 @@
 <div class="card">
   <div class="card-body">
     <div class="row">
-      <div class="col-2">
-        <img
-          id="user_image"
-          alt="User"
-          style="width:auto;height:48px;padding:0;margin-left: auto;margin-right: auto;"
-        />
-      </div>
-      <div class="col-10">
+      <div class="col-12">
         <form id="comment_form" name="comment_form">
           <div class="form-group">
-            <label for="rate">Rate the place</label>
-            <select id="rate" name="rate" class="fa" style="font-family: 'FontAwesome';">
+            <label for="rate" class="float-right">Rate the place          <span>
+            <i id="comment-star-1" class="fa fa-star-o" aria-hidden="true"></i>
+            <i id="comment-star-2" class="fa fa-star-o" aria-hidden="true"></i>
+            <i id="comment-star-3" class="fa fa-star-o" aria-hidden="true"></i>
+            <i id="comment-star-4" class="fa fa-star-o" aria-hidden="true"></i>
+            <i id="comment-star-5" class="fa fa-star-o" aria-hidden="true"></i>
+          </span></label>
+            <!-- <select id="rate" name="rate" class="fa" style="font-family: 'FontAwesome';">
               <option value="1" >★</option>
               <option value="2">★★</option>
               <option value="3">★★★</option>
               <option value="4">★★★★</option>
               <option value="5">★★★★★</option>
-            </select>
+            </select> -->
+            <input
+              type="number"
+              id="rate"
+              name="rate"
+              min="1"
+              max="5"
+              step="1"
+              value=""
+              required
+              hidden
+            />
           </div>
           <div class="form-group">
             <label for="current-user-comment">Write your comment</label>
@@ -36,7 +46,7 @@
             name="csrfmiddlewaretoken"
             value=""
           />
-          <button type="submit" class="btn btn-primary">Submit</button>
+          <button id="submit-comment"type="submit" class="btn btn-primary float-right">Submit</button>
         </form>
       </div>
     </div>
