@@ -82,9 +82,11 @@ async function addPlaceCard(place, target_id) {
 
   target_ids = ["#place1", "#place2", "#place3"];
   target_ids.forEach(id => {
-    $(id + "_card").empty();
-    if (id === target_id) {
-      $(id + "_card").append(template);
+    if ($(id).length !== 0) {
+      $(id + "_card").empty();
+      if (id === target_id) {
+        $(id + "_card").append(template);
+      }
     }
   });
 }
@@ -165,16 +167,22 @@ async function initMap() {
 }
 
 async function initMapPlace1() {
-  place = await getPlace($("#place1").data(), window.CSRF_TOKEN);
-  addPlaceCard(place, "#place1");
+  if ($("#place1").length !== 0) {
+    place = await getPlace($("#place1").data(), window.CSRF_TOKEN);
+    addPlaceCard(place, "#place1");
+  }
 }
 async function initMapPlace2() {
-  place = await getPlace($("#place2").data(), window.CSRF_TOKEN);
-  addPlaceCard(place, "#place2");
+  if ($("#place2").length !== 0) {
+    place = await getPlace($("#place2").data(), window.CSRF_TOKEN);
+    addPlaceCard(place, "#place2");
+  }
 }
 async function initMapPlace3() {
-  place = await getPlace($("#place3").data(), window.CSRF_TOKEN);
-  addPlaceCard(place, "#place3");
+  if ($("#place3").length !== 0) {
+    place = await getPlace($("#place3").data(), window.CSRF_TOKEN);
+    addPlaceCard(place, "#place3");
+  }
 }
 
 function fillLocation({ lat, lng }) {
@@ -289,9 +297,11 @@ $(document).ready(function() {
 
   const place_ids = ["#place1", "#place2", "#place3"];
   place_ids.forEach(place_id => {
-    $(place_id + "_favorite").click(e => {
-      add_favorite(e, $(place_id).data(), window.CSRF_TOKEN);
-    });
+    if ($(place_id).length !== 0) {
+      $(place_id + "_favorite").click(e => {
+        add_favorite(e, $(place_id).data(), window.CSRF_TOKEN);
+      });
+    }
   });
 
   $("select#location").change(function() {
@@ -315,12 +325,14 @@ $(document).ready(function() {
 function insert_stars() {
   target_ids = ["#place1", "#place2", "#place3"];
   target_ids.forEach(id => {
-    let data = $(id).data();
-    let starPercentage = (data.rate / 5) * 100;
-    let starPercentageRounded = `${Math.round(starPercentage / 10) * 10}%`;
-    $(id)
-      .find(".stars-inner")
-      .css("width", starPercentageRounded);
+    if ($(id).length !== 0) {
+      let data = $(id).data();
+      let starPercentage = (data.rate / 5) * 100;
+      let starPercentageRounded = `${Math.round(starPercentage / 10) * 10}%`;
+      $(id)
+        .find(".stars-inner")
+        .css("width", starPercentageRounded);
+    }
   });
 }
 
