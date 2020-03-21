@@ -1,44 +1,37 @@
 /* ****** account switch ****** */
 .account-switch {
-    margin-top: 40px;
-    margin-bottom: 20px;
+  margin-top: 40px;
+  margin-bottom: 20px;
 }
 
 .account-switch a {
-    color: #aaa;
-    text-decoration: none;
-    font-size: 14px;
-    padding: 3px 5px;
-    /* font-weight: 200px; */
+  color: #aaa;
+  text-decoration: none;
+  font-size: 14px;
+  padding: 3px 5px;
+  /* font-weight: 200px; */
 }
 
-.account-switch .signup{
-    color: black;
+.account-switch .signup {
+  color: black;
 }
 
 .boundary {
-    display: inline-block;
+  display: inline-block;
 }
 
 .boundary:after {
-    content: "|";
-    padding: 0 12px;
-    color: #555;
+  content: "|";
+  padding: 0 12px;
+  color: #555;
 }
 
-/* ****** input ****** */
-.form-signin {
-    /* display: inline-block; */
-    /* left: 50%;
-    right: 50%;
-    width: 40%; */
-    margin-left: 50%;
-    transform: translateX(-50%);
+#register-btn {
+  color: white;
+  background-color: #005398;
 }
 
-
-input[type="text"] {
-    display: inline-block;
-    margin: 10px 0;
-    width: 100%;
+#user_form {
+  padding: 6px 25%;
 }
+

@@ -14,15 +14,14 @@ Results
 {% endblock %}
 
 {% block body_block %}
-<div id="content">
-    <div>
-        <div class="search card justify-content-center">
-            <div id="search_form">
+<div id="content" class="row  justify-content-md-center">
+            <div id="search-form" class="search d-flex card justify-content-center col-9">
                 <form
-                id="category_form"
+                id="category-form"
                 method="post"
                 action="{% url 'sitnow:result' %}"
                 >
+                <span>
                 <span>Start Location</span>
                 <select id="location" name="location" required>
                     <option value="">- Select your start location -</option>
@@ -35,14 +34,16 @@ Results
                 {% for hidden in form.hidden_fields %} 
                     {{ hidden }} 
                 {% endfor %} 
-                
                 {% for field in form.visible_fields %}
-                    <div>
+                    <span>
+                        <label>Persons</label>
                         {{ field.errors }} 
                         {{ field.help_text }} 
                         {{ field }}
-                    </div>
+                    </span>
                 {% endfor %}
+                </span>
+                <div class="">
                 <button id="hasTable" type="button" class="btn btn-light">Table</button>
                 <button id="hasWifi" type="button" class="btn btn-light">WIFI</button>
                 <button id="hasMicrowave" type="button" class="btn btn-light">Microwave</button>
@@ -52,12 +53,11 @@ Results
                 <button id="hasCoffee" type="button" class="btn btn-light">Coffee</button>
                 <button id="hasComputer" type="button" class="btn btn-light">Computer</button>
                 <button type="submit" name="submit" class="float-right btn btn-primary" value="Search">Search</button>
+                </div>
                 </form>
             </div>
-            </div>
-    </div>
 
-    <div class="row">
+    <div class="row col-12">
 
         <div id="left_panel" class="wel-grids col-6">
                 {% if start %}

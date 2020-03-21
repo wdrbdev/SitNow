@@ -17,6 +17,10 @@ class UserForm(forms.ModelForm):
             "password",
         )
 
+    def __init__(self, *args, **kwargs):
+        super(UserForm, self).__init__(*args, **kwargs)
+        self.fields["username"].help_text = None
+
 
 def user_directory_path(instance, filename):
     upload_dir = 'profile_images'
@@ -31,8 +35,8 @@ def user_directory_path(instance, filename):
 class UserProfileForm(forms.ModelForm):
     PREFERRED_NAME_MAX_LENGTH = 255
     preferred_name = forms.CharField(
-        max_length=PREFERRED_NAME_MAX_LENGTH, help_text="New preferred name", required=False)
-    picture = forms.ImageField(help_text="New profile picture", required=False)
+        max_length=PREFERRED_NAME_MAX_LENGTH, required=False)
+    picture = forms.ImageField(required=False)
 
     class Meta:
         model = UserProfile

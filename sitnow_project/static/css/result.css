@@ -17,3 +17,7 @@ p.text-muted {
   top: 0%;
   /* transform: translateY(-50%); */
 }
+
+#search-form {
+  margin: 12px;
+}
