@@ -154,7 +154,7 @@ async function addCommentCards(place) {
     let starString = "";
     // TODO
     for (let i = 0; i < ratting; i++) {
-      starString += `<i class="fa fa-star" aria-hidden="true"></i>`;
+      starString += `<i class="fa fa-star" aria-hidden="true" style="color:#f8ce0b;"></i>`;
     }
 
     $(template)

@@ -565,7 +565,7 @@
     "level": 3,
     "google_id": "ChIJhRwc-tBFiEgRbLs3EJOuEig",
     "image_url": "https://www.gla.ac.uk/media/Media_532089_smxx.jpg",
-    "permission": "None",
+    "permission": null,
     "hasTable": true,
     "hasWifi": true,
     "capacity": 32,

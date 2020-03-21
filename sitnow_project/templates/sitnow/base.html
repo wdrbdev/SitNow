@@ -6,7 +6,7 @@
 <head>
     <title>
         {% block title_block %}
-        SitNow
+        Sit Now
         {% endblock %}
     </title>
     {% comment %} Bootstrap {% endcomment %}
@@ -24,59 +24,68 @@
 
     {% comment %} Local Source {% endcomment %}
     <link rel="stylesheet" href="{% static 'css/base.css' %}" />
+    <script type="text/javascript" src="{% static 'js/base.js' %}"></script>
+
     {% block header_block %}
     {% endblock %}
 </head>
 
 <body>
-    <div id="header" class="container">
-        <div>
-            {% comment %} navigation {% endcomment %}
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                <a class="navbar-brand" href="{% url 'sitnow:index' %}">
-                    <img src="https://picsum.photos/112/100" width="30" height="30" class="d-inline-block align-top" alt="">
-                    {% comment %} <div class="logo">SitNow</div> {% endcomment %}
-                </a>
+<div class="body">
+    <div id="header">
+    <div>
+        {% comment %} navigation {% endcomment %}
+        <nav id="navbar" class="navbar navbar-expand-lg navbar-dark container" style="background-color: #003865;">
+        <a class="navbar-brand" href="{% url 'sitnow:index' %}">
+            <img src="{% static 'img/logo/white_logo.svg' %}" alt="Logo" width="100px" height="40px" />
+        </a>
+         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-                <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
-                    <ul class="navbar-nav">
-                        <li class="nav-item active">
-                            <a class="nav-link" href="{% url 'sitnow:index' %}">Home |</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'sitnow:aboutus' %}">About Us |</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'sitnow:map' %}">Map |</a>
-                        </li>
-                        {% if user.is_authenticated %}
-                        <li class="nav-item"><a class="nav-link" href="{% url 'sitnow:favorites' %}">My Favorite</a></li>
-                        {% else %}
-                        <li class="nav-item"><a class="nav-link" href="{% url 'sitnow:login' %}">Login</a></li>
-                        {% endif %}
-                    </ul>
-                </div>
-            </nav>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto">
+            <li id="nav-home" class="nav-item">
+                <a class="nav-link" href="{% url 'sitnow:index' %}">Home</a>
+            </li>
+            <li id="nav-aboutus" class="nav-item">
+                <a class="nav-link" href="{% url 'sitnow:aboutus' %}">About Us</a>
+            </li>
+            <li id="nav-map" class="nav-item">
+                <a class="nav-link" href="{% url 'sitnow:map' %}">Map</a>
+            </li>
+            {% if user.is_authenticated %}
+            <li id="nav-favorites" class="nav-item">
+                <a class="nav-link" href="{% url 'sitnow:favorites' %}"
+                >My Favorites</a
+                >
+            </li>
+            {% else %}
+            <li id="nav-login" class="nav-item">
+                <a class="nav-link" href="{% url 'sitnow:login' %}">Login</a>
+            </li>
+            {% endif %}
+            </ul>
         </div>
+        </nav>
+    </div>
     </div>
 
 
+
     {% comment %} content {% endcomment %}
-    <div id="body-block"class="container">
+    <div id="body-block" class="container ">
         {% block body_block %}
         {% endblock %}
     </div>
 
     {% comment %} footer {% endcomment %}
-    <footer class="fixed-bottom container">
-        <div class="row justify-content-center">
-            <div class="col-9">
-                <p>&copy; Internet Technology @ Glasgow University 2020.</p>
-            </div>
-            <div class="col-3 text-right">
-            </div>
+    <footer id="footer" class="fixed-bottom container" style="background-color: #003865;">
+        <div class="row">
+                <span id="footer-main-text" class="align-middle text-left">&copy; Internet Technology @ Glasgow University 2020.</span>
         </div>
     </footer>
+</div>
 </body>
 
 </html>

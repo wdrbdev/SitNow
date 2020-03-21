@@ -1,0 +1,42 @@
+
+
+@font-face {
+  font-family: "Adobe Garamond";
+  src: url(/static/fonts/AGaramondPro-Regular.otf);
+}
+
+@font-face {
+  font-family: "Adobe Garamond";
+  src: url(/static/fonts/AGaramondPro-Bold.otf);
+  font-weight: bold;
+}
+@font-face {
+  font-family: "Adobe Garamond";
+  src: url(/static/fonts/AGaramondPro-Italic.otf);
+  font-weight: normal;
+  font-style: italic;
+}
+
+html * {
+  font-family: "Adobe Garamond";
+}
+
+#body {
+  /* display: flex;
+  flex-direction: column; */
+  /* height: 100vh; */
+}
+
+.nav-link {
+  color: white;
+}
+
+.nav-link:hover {
+  color: white;
+}
+
+#footer-main-text {
+  color: white !important;
+  line-height: 50px;
+  padding-left: 16px;
+}

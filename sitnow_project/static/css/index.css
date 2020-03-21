@@ -6,11 +6,32 @@
 }
 
 #search_form {
-  border-radius: 5px;
+  /* border-radius: 5px;
   box-shadow: 0px 0px 10px #000;
-  padding: 42px 12px;
+  padding: 42px 12px; */
 }
 
+#slogan-title {
+  color: #005398;
+  font-size: 84px;
+}
 #left-panel {
-  padding: 70px 0;
+  padding: 70px 24px;
+}
+.asteriskField {
+  display: none;
+}
+
+#submit-btn {
+  color: white;
+  background-color: #005398;
+}
+
+#index-content {
+  margin: 15vh auto;
+  height: 100vh;
+  /* display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; */
 }

@@ -1,0 +1,17 @@
+a.btn.side-btn {
+  margin: 6px;
+}
+
+#about-content {
+  margin: 10vh auto;
+  height: 100vh;
+}
+
+.icon-card {
+  color: white;
+  background-color: #0075b0;
+  padding: 3px;
+  margin: 6px;
+  vertical-align: middle;
+  border-radius: 12px;
+}

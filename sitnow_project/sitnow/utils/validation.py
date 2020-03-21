@@ -14,7 +14,7 @@ def validate_querydict(querydict):
               'hasCoffee',
               'hasComputer']
 
-    int_switcher = {'1': 0, '2': 0, '3': 31}
+    int_switcher = {'1': 0, '2': 12, '3': 31}
     boolean_switcher = {'None': None, 'True': True}
     for key, value in querydict.items():
         if key in fields:

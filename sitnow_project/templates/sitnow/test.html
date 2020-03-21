@@ -1,13 +1,32 @@
-<div class="container row">
-  <div class="col-3">
-    <h2 id="user-name">Welcome '{{ request.user.username }}'</h2>
-    <ul>
-        <li><a href="{% url 'sitnow:update_profile' %}">Settings</a></li>
-        <li><a href="{% url 'sitnow:logout' %}">Log out</a></li>
-    </ul>
-  </div>
+<div id="header" class="container">
+  <div>
+    {% comment %} navigation {% endcomment %}
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="{% url 'sitnow:index' %}"
+        ><img src="{% static 'img/logo/white_logo.svg' %}" alt="Logo"
+      /></a>
 
-  <div class="col-9">
-    {% block setting_block %} {% endblock %}
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li id="home" class="nav-item">
+            <a class="nav-link" href="{% url 'sitnow:index' %}">Home</a>
+          </li>
+          <li id="aboutus" class="nav-item">
+            <a class="nav-link" href="{% url 'sitnow:aboutus' %}">About Us</a>
+          </li>
+          <li id="map" class="nav-item">
+            <a class="nav-link" href="{% url 'sitnow:map' %}">Map</a>
+          </li>
+          <li id="login" class="nav-item">
+            <a class="nav-link" href="{% url 'sitnow:login' %}">Login</a>
+          </li>
+          <li id="favorites" class="nav-item">
+            <a class="nav-link" href="{% url 'sitnow:favorites' %}"
+              >My Favorites</a
+            >
+          </li>
+        </ul>
+      </div>
+    </nav>
   </div>
 </div>

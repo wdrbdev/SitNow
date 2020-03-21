@@ -6,7 +6,7 @@ var map, infoWindow, marker;
 var uOfG = { lat: 55.872928, lng: -4.289289 };
 
 function initMap() {
-  map = new google.maps.Map(document.getElementById("map"), {
+  map = new google.maps.Map(document.getElementById("google_map"), {
     zoom: 16,
     center: uOfG
   });
@@ -30,7 +30,7 @@ function initMap() {
         // map.setCenter(pos);
 
         fillLocation(pos);
-        showCurrentLocation()
+        showCurrentLocation();
       },
       function() {
         handleLocationError(true, infoWindow, map.getCenter());
@@ -87,7 +87,7 @@ function fillLocation({ lat, lng }) {
 }
 
 function backup() {
-  map = new google.maps.Map(document.getElementById("map"), {
+  map = new google.maps.Map(document.getElementById("google_map"), {
     center: { lat: 55.872928, lng: -4.289289 },
     zoom: 16
   });

@@ -3,16 +3,14 @@
 
 
 {% block title_block %}
-SitNow - About Us
+Sit Now - About Us
 {% endblock %}
 
-{% block header_block %}
-<link rel="stylesheet" href="{% static 'css/aboutus.css' %}">
-{% endblock %}
+
 
 {% block about_block %}
-       <div >
-            <div class="Aboutus-content">
+       <div>
+            <div class="aboutus-content">
                 <h1>About us</h1>
                 <p>A seat finder application to get the nearest location to sit and take
                     a rest in the University of Glasgow according to various user requirements.</p>
@@ -30,38 +28,18 @@ SitNow - About Us
             </div>
 
             <div class="advantage">
-                <div class="row">
-                    <div class="col-lg-4">
-                        <svg class="bi bi-alarm-fill" width="4em" height="4em" viewBox="0 0 20 20" fill="currentColor"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd"
-                                d="M7.5 2.5A.5.5 0 018 2h4a.5.5 0 010 1h-1v1.07a7.002 7.002 0 013.537 12.26l.817.816a.5.5 0 01-.708.708l-.924-.925A6.967 6.967 0 0110 18a6.967 6.967 0 01-3.722-1.07l-.924.924a.5.5 0 01-.708-.708l.817-.816A7.002 7.002 0 019 4.07V3H8a.5.5 0 01-.5-.5zM2.86 7.387A2.5 2.5 0 116.387 3.86 8.035 8.035 0 002.86 7.387zM15.5 3c-.753 0-1.429.333-1.887.86a8.035 8.035 0 013.527 3.527A2.5 2.5 0 0015.5 3zm-5 4a.5.5 0 00-1 0v3.882l-1.447 2.894a.5.5 0 10.894.448l1.5-3A.5.5 0 0010.5 11V7z"
-                                clip-rule="evenodd"></path>
-                        </svg>
-                        <p>Save time</p>
+                <div class="row d-flex justify-content-center">
+                    <div class="col-3 row icon-card">
+                        <i class="fa fa-thumbs-o-up fa-3x col-3" aria-hidden="true"></i>
+                        <span class="col-9">Easy and efficient <br/>to use</span>
                     </div>
-                    <div class="col-lg-4">
-                        <svg class="bi bi-search" width="4em" height="4em" viewBox="0 0 20 20" fill="currentColor"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd"
-                                d="M12.442 12.442a1 1 0 011.415 0l3.85 3.85a1 1 0 01-1.414 1.415l-3.85-3.85a1 1 0 010-1.415z"
-                                clip-rule="evenodd"></path>
-                            <path fill-rule="evenodd"
-                                d="M8.5 14a5.5 5.5 0 100-11 5.5 5.5 0 000 11zM15 8.5a6.5 6.5 0 11-13 0 6.5 6.5 0 0113 0z"
-                                clip-rule="evenodd"></path>
-                        </svg>
-                        <p>Searching for the top 3 suitable and nearest locations to seat </p>
+                    <div class="col-3 row icon-card">
+                        <i class="fa fa-search fa-3x col-3" aria-hidden="true"></i>
+                        <span class="col-9">Find the nearest suitable locations</span>
                     </div>
-                    <div class="col-lg-4">
-                        <svg class="bi bi-geo" width="4em" height="4em" viewBox="0 0 20 20" fill="currentColor"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                            <path d="M9.5 6h1v9a.5.5 0 01-1 0V6z"></path>
-                            <path fill-rule="evenodd"
-                                d="M8.489 14.095a.5.5 0 01-.383.594c-.565.123-1.003.292-1.286.472-.302.192-.32.321-.32.339 0 .013.005.085.146.21.14.124.372.26.701.383.655.245 1.593.407 2.653.407s1.998-.162 2.653-.407c.329-.124.56-.259.701-.383.14-.125.146-.197.146-.21 0-.018-.018-.147-.32-.339-.283-.18-.721-.35-1.286-.472a.5.5 0 11.212-.977c.63.137 1.193.34 1.61.606.4.253.784.645.784 1.182 0 .402-.219.724-.483.958-.264.235-.618.423-1.013.57-.793.298-1.855.472-3.004.472s-2.21-.174-3.004-.471c-.395-.148-.749-.337-1.013-.571-.264-.234-.483-.556-.483-.958 0-.537.384-.929.783-1.182.418-.266.98-.47 1.611-.606a.5.5 0 01.595.383z"
-                                clip-rule="evenodd"></path>
-                        </svg>
-                        <p>Quick choose one target</p>
+                    <div class="col-3 row icon-card">
+                        <i class="fa fa-map-pin fa-3x col-3" aria-hidden="true"></i>
+                        <span class="col-9">Diverse choices of seating places</span>
                     </div>
                 </div>
             </div>

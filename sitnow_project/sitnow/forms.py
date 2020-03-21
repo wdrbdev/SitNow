@@ -45,15 +45,15 @@ class SearchForm(forms.Form):
     longitude = forms.FloatField(
         required=True, help_text="Your longitude", widget=forms.HiddenInput())
 
-    CAPACITY = [("1", "1 - 2 persons"),
-                ("2", "3 - 8 persons"),
+    CAPACITY = [("1", "0 - 1 persons"),
+                ("2", "2 - 8 persons"),
                 ("3", "Above 8 persons"), ]
     hasTable = forms.CharField(
         help_text="Has Table?", widget=forms.HiddenInput(), initial="None")
     hasWifi = forms.CharField(
         help_text="Has WIFI?", widget=forms.HiddenInput(), initial="None")
     capacity = forms.ChoiceField(
-        choices=CAPACITY, help_text="How many people with you?")
+        choices=CAPACITY)
     hasMicrowave = forms.CharField(
         help_text="Has Microwave", widget=forms.HiddenInput(), initial="None")
     hasSocket = forms.CharField(
@@ -66,3 +66,7 @@ class SearchForm(forms.Form):
         help_text="Providing Coffee?", widget=forms.HiddenInput(), initial="None")
     hasComputer = forms.CharField(
         help_text="Has computer?", widget=forms.HiddenInput(), initial="None")
+
+    def __init__(self, *args, **kwargs):
+        super(SearchForm, self).__init__(*args, **kwargs)
+        self.fields['capacity'].label = "How many people with you?"

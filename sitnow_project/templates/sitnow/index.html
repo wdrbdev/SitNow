@@ -1,5 +1,7 @@
 {% extends 'sitnow/base.html' %}
 {% load staticfiles %}
+{% load crispy_forms_tags %}
+
 
 {% block title_block %}
 Sit Now
@@ -14,34 +16,32 @@ Sit Now
 {% endblock %}
 
 {% block body_block %}
-    <div id="content" class="container">
+    <div id="index-content" class="container">
             <div id="parent-panel" class="wel-grids row ">
-                <div id="left-panel" class="col-5 wel-grid">
+                <div id="left-panel" class="col-md-7 wel-grid">
                     <div class="slogan">
-                        <h2 class="title">Sit Now</h2>
-                        <p>
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                            Consequuntur cupiditate quibusdam necessitatibus fugit quo
-                            consequatur itaque rerum dicta corporis dolores.
-                        </p>
+                        <h1 id="slogan-title" class="title display-2" style="font-family: Adobe Garamond Bold;"><strong>Sit Now</strong></h1>
+                        <strong>
+                            A seat finder application to get the nearest location to sit and take a rest in the University of Glasgow according to various user requirements.
+                        </strong>
                     </div>
                 </div>
 
-                <div id="right-panel" class="col-7 wel-grid ">
+                <div id="right-panel" class="col-md-5 wel-grid ">
                     <div class="search">
-                    <div id="google_map" class="col-6" hidden>
+                    <div id="google_map" class="col-7" hidden>
                         <div id="map"></div>
                     </div>
-                    <div id="search_form" class="card">
-                        <h5 class="card-title">Start finding a seat for you! </h5>
+                    <div id="search_form">
+                        <h3 class="card-title">Start finding your seat! </h3>
                         <form
                         id="category_form"
                         method="post"
                         action="{% url 'sitnow:result' %}"
                         >
                         <div class="form-group">
-                            <span>Choose your start location</span>
-                            <select id="location" name="location" required>
+                            <p>Choose your start location</p>
+                            <select id="location" name="location" class="form-control" required>
                                 <option value="">- Select your start location -</option>
                                 <option id="current_location" data-lat="" data-lng="" value=""  hidden="true" disabled="true">Current Location</option> 
                                 {% for location in locations %} 
@@ -50,29 +50,28 @@ Sit Now
                             </select>
                         </div>
                         {% csrf_token %} 
-                        {% for hidden in form.hidden_fields %} 
-                            {{ hidden }} 
-                        {% endfor %} 
-                        
+                        {% for hidden in form.hidden_fields %}
+                            {{ hidden }}
+                        {% endfor %}
                         {% for field in form.visible_fields %}
-                            <div class="form-group">
-                                {{ field.errors }} 
-                                {{ field.help_text }} 
-                                {{ field }}
-                            </div>
+                        <div class="form-group form">
+                            {{ field|as_crispy_field }}
+                        </div>
                         {% endfor %}
                         
                         <div class="form-group">
                         <p>Choose your filter</p>
+                        <button id="hasTable" type="button" class="btn btn-light">Table</button>
                         <button id="hasWifi" type="button" class="btn btn-light">WIFI</button>
-                        <button id="hasMicrowave" type="button" class="btn btn-light">Microwave</button>
                         <button id="hasSocket" type="button" class="btn btn-light">Socket</button>
-                        <button id="hasFood" type="button" class="btn btn-light">Food</button>
-                        <button id="noEating" type="button" class="btn btn-light">Eating</button>
-                        <button id="hasCoffee" type="button" class="btn btn-light">Coffee</button>
+                        <button id="noEating" type="button" class="btn btn-light">No Eating</button>
                         <button id="hasComputer" type="button" class="btn btn-light">Computer</button>
+                        <br/>
+                        <button id="hasFood" type="button" class="btn btn-light">Providing Food</button>
+                        <button id="hasCoffee" type="button" class="btn btn-light">Providing Coffee</button>
+                        <button id="hasMicrowave" type="button" class="btn btn-light">Microwave Oven</button>
                         </div>
-                            <div class="text-center"><button type="submit" name="submit" class="float-center btn-lg btn btn-primary" value="Search">Search</button></div>
+                            <div class="text-center"><button id="submit-btn" type="submit" name="submit" class="float-center btn-lg btn btn-block" value="Search">Search</button></div>
                         </form>
                     </div>
                     </div>
