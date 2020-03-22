@@ -1,17 +1,19 @@
 <div class="card">
-  <div class="card-body">
+  <div>
     <div class="row">
       <div class="col-12">
         <form id="comment_form" name="comment_form">
           <div class="form-group">
-            <label for="rate" class="float-right">Rate the place          <span>
-            <i id="comment-star-1" class="fa fa-star-o" aria-hidden="true"></i>
-            <i id="comment-star-2" class="fa fa-star-o" aria-hidden="true"></i>
-            <i id="comment-star-3" class="fa fa-star-o" aria-hidden="true"></i>
-            <i id="comment-star-4" class="fa fa-star-o" aria-hidden="true"></i>
-            <i id="comment-star-5" class="fa fa-star-o" aria-hidden="true"></i>
-          </span></label>
-            <!-- <select id="rate" name="rate" class="fa" style="font-family: 'FontAwesome';">
+            <!-- <label for="rate" class="float-right">Rate the place -->
+              <span class="float-right">
+              <i id="comment-star-1" class="fa fa-star-o" aria-hidden="true"></i>
+              <i id="comment-star-2" class="fa fa-star-o" aria-hidden="true"></i>
+              <i id="comment-star-3" class="fa fa-star-o" aria-hidden="true"></i>
+              <i id="comment-star-4" class="fa fa-star-o" aria-hidden="true"></i>
+              <i id="comment-star-5" class="fa fa-star-o" aria-hidden="true"></i>
+              </span>
+            <!-- </label> -->
+            <!-- <select id="rate" name="rate" class="fa">
               <option value="1" >★</option>
               <option value="2">★★</option>
               <option value="3">★★★</option>
@@ -20,13 +22,12 @@
             </select> -->
             <input
               type="number"
-              id="rate"
+              id="rate-input"
               name="rate"
               min="1"
               max="5"
               step="1"
               value=""
-              required
               hidden
             />
           </div>
@@ -39,7 +40,7 @@
               value=""
             />
           </div>
-          <input type="hidden" id="place_id" name="place_id" />
+          <input type="hidden" id="place_id" name="place_id" hidden/>
           <input
             id="csrf_token"
             type="hidden"

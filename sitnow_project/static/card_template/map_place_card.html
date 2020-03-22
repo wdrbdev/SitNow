@@ -3,14 +3,17 @@
     <span id="place_favorite" class="float-right"></span>
     <span id="place_name" class="card-title float-left d-inline-block"></span>
   </h3>
-  <div class="d-inline">
-    <h5 id="place_building" class="card-title float-left d-inline"></h5>
-    <span id="n_rates" class="float-right"></span>
-    <span class="stars-outer float-right">
-      <span id="stars-inner" class="stars-inner"></span>
-    </span>
+  <div id="top-panel" class="row d-flex">
+    <h5 id="place_building" class="d-inline col-9"></h5>
+    <div class="col-3 building-block">
+      <span id="n_rates" class="float-right"></span>
+      <span class="fa stars-outer">
+        <span id="stars-inner" class="fa stars-inner"></span>
+      </span>
+    </div>
   </div>
-  <hr />
+  <div id="address" class="text-muted"></div>
+
   <div class="row card-body">
     <img
       id="place_img"
@@ -21,9 +24,9 @@
       width="auto"
     />
     <div class="col-6">
+        <span>&bull;&ensp;Capacity:&nbsp; <span id="capacity"></span></span><br/>
         <span>&bull;&ensp;Has table?&nbsp; <span id="hasTable"></span></span><br/>
         <span>&bull;&ensp;Has WIFI?&nbsp; <span id="hasWifi"></span></span><br/>
-        <span>&bull;&ensp;Capacity:&nbsp; <span id="capacity"></span></span><br/>
         <span>
           &bull;&ensp;Has Microwave Oven?&nbsp;
           <span id="hasMicrowave"></span>

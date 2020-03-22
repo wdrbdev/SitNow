@@ -13,7 +13,6 @@ class UserForm(forms.ModelForm):
         model = User
         fields = (
             "username",
-            "email",
             "password",
         )
 
@@ -49,8 +48,8 @@ class SearchForm(forms.Form):
     longitude = forms.FloatField(
         required=True, help_text="Your longitude", widget=forms.HiddenInput())
 
-    CAPACITY = [("1", "0 - 1 persons"),
-                ("2", "2 - 8 persons"),
+    CAPACITY = [("1", "0 - 4 persons"),
+                ("2", "4 - 8 persons"),
                 ("3", "Above 8 persons"), ]
     hasTable = forms.CharField(
         help_text="Has Table?", widget=forms.HiddenInput(), initial="None")

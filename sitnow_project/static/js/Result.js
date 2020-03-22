@@ -44,31 +44,76 @@ async function addPlaceCard(place, target_id) {
     .attr("src", place.image_url);
   $(template)
     .find("#hasTable")
-    .text(place.hasTable ? "Yes" : "No");
+    .html(
+      place.hasTable
+        ? `<i class="fa fa-check-square" aria-hidden="true"></i>`
+        : `<i class="fa fa-minus-square" aria-hidden="true"></i>`
+    );
+  // .text(place.hasTable ? "Yes" : "No");
   $(template)
     .find("#hasWifi")
-    .text(place.hasWifi ? "Yes" : "No");
+    .html(
+      place.hasWifi
+        ? `<i class="fa fa-check-square" aria-hidden="true"></i>`
+        : `<i class="fa fa-minus-square" aria-hidden="true"></i>`
+    );
+  // .text(place.hasWifi ? "Yes" : "No");
   $(template)
     .find("#capacity")
-    .text(place.capacity);
+    .html(place.capacity);
   $(template)
     .find("#hasMicrowave")
-    .text(place.hasMicrowave ? "Yes" : "No");
+    .html(
+      place.hasMicrowave
+        ? `<i class="fa fa-check-square" aria-hidden="true"></i>`
+        : `<i class="fa fa-minus-square" aria-hidden="true"></i>`
+    );
+  // .text(place.hasMicrowave ? "Yes" : "No");
   $(template)
     .find("#hasSocket")
-    .text(place.hasSocket ? "Yes" : "No");
+    .html(
+      place.hasSocket
+        ? `<i class="fa fa-check-square" aria-hidden="true"></i>`
+        : `<i class="fa fa-minus-square" aria-hidden="true"></i>`
+    );
+  // .text(place.hasSocket ? "Yes" : "No");
+
   $(template)
     .find("#hasFood")
-    .text(place.hasFood ? "Yes" : "No");
+    .html(
+      place.hasFood
+        ? `<i class="fa fa-check-square" aria-hidden="true"></i>`
+        : `<i class="fa fa-minus-square" aria-hidden="true"></i>`
+    );
+
+  // .text(place.hasFood ? "Yes" : "No");
   $(template)
     .find("#hasCoffee")
-    .text(place.hasCoffee ? "Yes" : "No");
+    .html(
+      place.hasCoffee
+        ? `<i class="fa fa-check-square" aria-hidden="true"></i>`
+        : `<i class="fa fa-minus-square" aria-hidden="true"></i>`
+    );
+
+  // .text(place.hasCoffee ? "Yes" : "No");
   $(template)
     .find("#noEating")
-    .text(place.noEating ? "Yes" : "No");
+    .html(
+      place.noEating
+        ? `<i class="fa fa-check-square" aria-hidden="true"></i>`
+        : `<i class="fa fa-minus-square" aria-hidden="true"></i>`
+    );
+
+  // .text(place.noEating ? "Yes" : "No");
   $(template)
     .find("#hasComputer")
-    .text(place.hasComputer ? "Yes" : "No");
+    .html(
+      place.hasComputer
+        ? `<i class="fa fa-check-square" aria-hidden="true"></i>`
+        : `<i class="fa fa-minus-square" aria-hidden="true"></i>`
+    );
+
+  // .text(place.hasComputer ? "Yes" : "No");
   // $(template)
   //   .find("#permission")
   //   .text(place.permission === null ? "Not required." : place.permission);

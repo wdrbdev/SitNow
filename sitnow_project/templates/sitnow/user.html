@@ -9,14 +9,16 @@ Sit Now - Setting
 {% endblock %}
 
 {% block body_block %}
-<div id="content">
-  <div class="container  clearfix row">
-    <div id="left-panel" class="col-3">
-      <h4 id="user-name">Welcome, {{ user_profile.preferred_name}}!</h4>
+<div id="setting-content">
+  <div class="container clearfix row">
+    <div id="left-panel" class="col-3 justify-content-center text-center">
+      <h4 id="user-name">Welcome, <br/>{{ user_profile.preferred_name}}!</h4>
       <img src="/media/{{user_profile.picture}}" alt="User Profile Picture" class="rounded-circle" height="120px" width="120px"> 
-      <div><a href="{% url 'sitnow:favorites' %}">My Favorites</a></div>
-      <div><a href="{% url 'sitnow:update_profile' %}">Settings</a></div>
-      <div><a href="{% url 'sitnow:logout' %}">Log out</a></div>
+      <div class="links row  justify-content-center ">
+        <a href="{% url 'sitnow:favorites' %}" type="button" class="btn btn-outline-dark btn-block col-8">Favorites</a><br/>
+        <a href="{% url 'sitnow:update_profile' %}"  type="button" class="btn btn-outline-dark btn-block col-8">Settings</a><br/>
+        <a href="{% url 'sitnow:logout' %}"  type="button" class="btn btn-outline-dark btn-block col-8">Log out</a><br/>
+      </div>
     </div>
 
     <div id="right-panel" class="col-9">

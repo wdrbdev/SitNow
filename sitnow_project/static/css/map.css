@@ -1,7 +1,7 @@
 /* Set the size of the div element that contains the map */
 #map,
 #mini_map {
-  height: 400px; /* The height is 400 pixels */
+  height: 500px; /* The height is 400 pixels */
   width: 100%; /* The width is the width of the web page */
 }
 
@@ -32,16 +32,16 @@
 .comment-rate {
   color: #f8ce0b;
 }
-
+/* 
 #place_img {
   display: block;
-  /* margin-top: auto; */
+  margin-top: auto;
   margin-bottom: auto;
   padding: 0;
   position: relative;
   top: 0%;
-  /* transform: translateY(-50%); */
-}
+  transform: translateY(-50%);
+} */
 
 #user_image {
   width: auto;
@@ -53,5 +53,36 @@
 
 #map-content {
   margin: 5vh auto;
-  height: 100vh;
+  height: 500px;
+}
+
+.building-block {
+  margin: 0;
+}
+
+hr {
+  margin: 8px 0;
+}
+
+#top-panel h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin-bottom: 3px;
+}
+
+.card {
+  padding: 12px;
+}
+
+#place-container {
+  height: 768px;
+  overflow-x: scroll;
+  overflow-y: scroll;
+}
+
+.card {
+  margin: 4px;
 }

@@ -14,13 +14,15 @@
       rel="stylesheet"
       href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     />
+    <link rel="icon" href="{% static '/img/logo/favicon.ico' %}"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     
-    {% comment %} Font Awesome 5 Icons {% endcomment %}  
-    <script src="https://use.fontawesome.com/c0417a3e36.js"></script>
-    <link rel="stylesheet" href="https://use.fontawesome.com/13ea3ef126.css">
+    {% comment %} Font Awesome 4 Icons {% endcomment %}  
+    <script src="https://use.fontawesome.com/1d3b2eb351.js"></script>
+     <link rel="stylesheet" href="{% static 'css/font-awesome.css' %}" />
+
 
     {% comment %} Local Source {% endcomment %}
     <link rel="stylesheet" href="{% static 'css/base.css' %}" />
@@ -33,9 +35,9 @@
 <body>
 <div class="body">
     <div id="header">
-    <div>
+    <div style="background-color: #003865;">
         {% comment %} navigation {% endcomment %}
-        <nav id="navbar" class="navbar navbar-expand-lg navbar-dark container" style="background-color: #003865;">
+        <nav id="navbar" class="navbar navbar-expand-lg navbar-dark container">
         <a class="navbar-brand" href="{% url 'sitnow:index' %}">
             <img src="{% static 'img/logo/white_logo.svg' %}" alt="Logo" width="100px" height="40px" />
         </a>
@@ -79,12 +81,12 @@
         {% endblock %}
     </div>
 
-    {% comment %} footer {% endcomment %}
-    <footer id="footer" class="fixed-bottom container" style="background-color: #003865;">
-        <div class="row">
-                <span id="footer-main-text" class="align-middle text-left">&copy; Internet Technology @ Glasgow University 2020.</span>
-        </div>
-    </footer>
+    {% comment %} footer {% endcomment %}>
+        <footer id="footer" class="fixed-bottom" style="background-color: #003865;">
+            <div class="container">
+                    <span id="footer-main-text" class="align-middle">&copy; Internet Technology @ Glasgow University 2020.</span>
+            </div>
+        </footer>
 </div>
 </body>
 

@@ -23,7 +23,8 @@
 
 div#place.row {
   border-style: solid;
-  margin: 6px;
+  border-width: thin;
+  margin: 3px;
 }
 
 .col-3,
@@ -58,4 +59,10 @@ div#place.row {
 .no-eating {
   padding-left: 0;
   padding-right: 0;
+}
+
+#favorite-content {
+  height: 768px;
+  overflow-x: scroll;
+  overflow-y: scroll;
 }

@@ -1,21 +1,28 @@
 "use strict";
 let infowindow;
+let markers = [];
 
 function addMarkers(map) {
   $.get("/places", function(places) {
     places.forEach(place => {
-      var pos = { lat: place.latitude, lng: place.longitude };
-
-      var marker = new google.maps.Marker({
+      let position = { lat: place.latitude, lng: place.longitude };
+      let url = "/static/img/pin/green_pin.svg";
+      let icon = {
+        url,
+        scaledSize: new google.maps.Size(40, 40)
+      };
+      let marker = new google.maps.Marker({
         map,
-        title: place.name,
-        position: pos
+        icon,
+        position,
+        title: place.name
       });
+      markers.push(marker);
       marker.addListener("click", async () => {
         if (infowindow) {
           infowindow.close();
         }
-        var contentString =
+        let contentString =
           "<div>" +
           place.name +
           "</div>" +
@@ -26,10 +33,20 @@ function addMarkers(map) {
         infowindow = new google.maps.InfoWindow({
           content: contentString
         });
+        markers.forEach(marker => {
+          marker.setIcon({
+            url,
+            scaledSize: new google.maps.Size(40, 40)
+          });
+        });
+        marker.setIcon({
+          url: "/static/img/pin/yellow_pin.svg",
+          scaledSize: new google.maps.Size(40, 40)
+        });
         infowindow.open(map, marker);
         addPlaceCard(place);
         addCommentCards(place);
-        addCommentForm();
+        addCommentForm(place);
       });
     });
   });
@@ -62,34 +79,82 @@ async function addPlaceCard(place) {
     .attr("src", place.image_url);
   $(template)
     .find("#hasTable")
-    .text(place.hasTable ? "Yes" : "No");
+    .html(
+      place.hasTable
+        ? `<i class="fa fa-check-square" aria-hidden="true"></i>`
+        : `<i class="fa fa-minus-square" aria-hidden="true"></i>`
+    );
+  // .text(place.hasTable ? "Yes" : "No");
   $(template)
     .find("#hasWifi")
-    .text(place.hasWifi ? "Yes" : "No");
+    .html(
+      place.hasWifi
+        ? `<i class="fa fa-check-square" aria-hidden="true"></i>`
+        : `<i class="fa fa-minus-square" aria-hidden="true"></i>`
+    );
+  // .text(place.hasWifi ? "Yes" : "No");
   $(template)
     .find("#capacity")
-    .text(place.capacity);
+    .html(place.capacity);
   $(template)
     .find("#hasMicrowave")
-    .text(place.hasMicrowave ? "Yes" : "No");
+    .html(
+      place.hasMicrowave
+        ? `<i class="fa fa-check-square" aria-hidden="true"></i>`
+        : `<i class="fa fa-minus-square" aria-hidden="true"></i>`
+    );
+
+  // .text(place.hasMicrowave ? "Yes" : "No");
   $(template)
     .find("#hasSocket")
-    .text(place.hasSocket ? "Yes" : "No");
+    .html(
+      place.hasSocket
+        ? `<i class="fa fa-check-square" aria-hidden="true"></i>`
+        : `<i class="fa fa-minus-square" aria-hidden="true"></i>`
+    );
+
+  // .text(place.hasSocket ? "Yes" : "No");
   $(template)
     .find("#hasFood")
-    .text(place.hasFood ? "Yes" : "No");
+    .html(
+      place.hasFood
+        ? `<i class="fa fa-check-square" aria-hidden="true"></i>`
+        : `<i class="fa fa-minus-square" aria-hidden="true"></i>`
+    );
+  // .text(place.hasFood ? "Yes" : "No");
   $(template)
     .find("#hasCoffee")
-    .text(place.hasCoffee ? "Yes" : "No");
+    .html(
+      place.hasCoffee
+        ? `<i class="fa fa-check-square" aria-hidden="true"></i>`
+        : `<i class="fa fa-minus-square" aria-hidden="true"></i>`
+    );
+
+  // .text(place.hasCoffee ? "Yes" : "No");
   $(template)
     .find("#noEating")
-    .text(place.noEating ? "Yes" : "No");
+    .html(
+      place.noEating
+        ? `<i class="fa fa-check-square" aria-hidden="true"></i>`
+        : `<i class="fa fa-minus-square" aria-hidden="true"></i>`
+    );
+
+  // .text(place.noEating ? "Yes" : "No");
   $(template)
     .find("#hasComputer")
-    .text(place.hasComputer ? "Yes" : "No");
+    .html(
+      place.hasComputer
+        ? `<i class="fa fa-check-square" aria-hidden="true"></i>`
+        : `<i class="fa fa-minus-square" aria-hidden="true"></i>`
+    );
+
+  // .text(place.hasComputer ? "Yes" : "No");
   $(template)
-    .find("#hasTable")
-    .text(place.permission === null ? "Not required." : place.permission);
+    .find("#address")
+    .text(place.address);
+  // $(template)
+  //   .find("#permission")
+  //   .text(place.permission === null ? "Not required." : place.permission);
   if (place.favorite !== undefined) {
     if (place.favorite.favorite === true) {
       $(template)
@@ -152,11 +217,9 @@ async function addCommentCards(place) {
     }
     let ratting = comment.rate;
     let starString = "";
-    // TODO
     for (let i = 0; i < ratting; i++) {
       starString += `<i class="fa fa-star" aria-hidden="true" style="color:#f8ce0b;"></i>`;
     }
-
     $(template)
       .find("#rate")
       .html(starString);
@@ -196,7 +259,7 @@ async function getComment({ name, building, google_id }) {
   });
 }
 
-async function addCommentForm() {
+async function addCommentForm(place) {
   $("#new_comment").empty();
   $("#comments").empty();
   const card = await getCardTemplate("comment_card.html");
@@ -220,6 +283,11 @@ async function addCommentForm() {
           userProfile.picture
       );
   }
+
+  $(template)
+    .find("#place_id")
+    .val(place.id);
+  console.log(place.id);
   const starIcons = [
     "#comment-star-1",
     "#comment-star-2",
@@ -237,27 +305,15 @@ async function addCommentForm() {
             .addClass("fa-star-o");
         });
         let rating = parseInt(starIcon.charAt(starIcon.length - 1));
-        console.log(rating);
         for (let i = 0; i < rating; i++) {
           $(starIcons[i])
             .addClass("comment-rate fa-star")
             .removeClass("fa-star-o");
-          console.log(starIcons[i]);
         }
-        $("#rate").val(rating);
-        console.log($(starIcon));
-        console.log($("#rate"));
+        $("#rate-input").val(rating);
+        console.log($("#current-user-comment").val());
       });
   });
-
-  $(template)
-    .find("#submit-comment")
-    .click(() => {
-      let rateValue = $("#rate").val();
-      if (rateValue === "") {
-        alert("!!!");
-      }
-    });
 
   $("#new_comment").append(template);
   submitAction(window.CSRF_TOKEN);
@@ -266,24 +322,40 @@ async function addCommentForm() {
 async function submitAction(csrfmiddlewaretoken) {
   $("#comment_form").submit(async function(event) {
     event.preventDefault();
-    await $.ajax({
-      type: "POST",
-      url: "/comment/",
-      data: {
-        csrfmiddlewaretoken,
-        rate: $("select#rate")
-          .children("option:selected")
-          .val(),
-        comment: $("#current-user-comment").val(),
-        place_id: $("#place_id").val()
-      },
-      success: place => {
-        addCommentCards(place);
-        $("#comment_form")[0].reset();
-        return place;
-      },
-      dataType: "json"
-    });
+    console.log($("#rate-input").val());
+    if ($("#rate-input").val().length === 0) {
+      alert("Must choose a rate.");
+      return;
+    } else {
+      await $.ajax({
+        type: "POST",
+        url: "/comment/",
+        data: {
+          csrfmiddlewaretoken,
+          rate: $("#rate-input").val(),
+          comment: $("#current-user-comment").val(),
+          place_id: $("#place_id").val()
+        },
+        success: place => {
+          addCommentCards(place);
+          $("#comment_form")[0].reset();
+          return place;
+        },
+        dataType: "json"
+      });
+      const starIcons = [
+        "#comment-star-1",
+        "#comment-star-2",
+        "#comment-star-3",
+        "#comment-star-4",
+        "#comment-star-5"
+      ];
+      starIcons.forEach(starIcon => {
+        $(starIcon)
+          .removeClass("comment-rate fa-star")
+          .addClass("fa-star-o");
+      });
+    }
   });
 }
 

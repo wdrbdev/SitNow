@@ -67,6 +67,7 @@ def result(request):
             d["form"] = form
             d["GOOGLE_JS_API_KEY"] = GOOGLE_JS_API_KEY
 
+            d["n_results"] = len(k_google_nearset)
             if len(k_google_nearset) > 0:
                 i = 1
                 for place in k_google_nearset:
@@ -171,10 +172,15 @@ def places(request):
 def post_comment(request):
     if request.method == 'POST':
         data = dict(request.POST)
+        print(data)
         place = Place.objects.get(pk=int(data['place_id'][0]))
         user = User.objects.get(pk=request.user.id)
-        comment = Comment.objects.create(place=place, user=user,
-                                         comment=data['comment'], rate=data['rate'][0])
+        try:
+            comment = Comment.objects.create(place=place, user=user,
+                                             comment="\"" + data['comment'][0] + "\"", rate=data['rate'][0])
+        except KeyError:
+            comment = Comment.objects.create(place=place, user=user,
+                                             comment="", rate=data['rate'][0])
         comment.save()
         return JsonResponse(model_to_dict(place), safe=False)
     return HttpResponseBadRequest(content="400 Bad Request")

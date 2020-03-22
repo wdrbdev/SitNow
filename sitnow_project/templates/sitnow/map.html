@@ -23,12 +23,13 @@ Sit Now - Map
                 </div>
             </div>
 
-            <div class="col-md-6 wel-grid">
+            <div id="place-container"class="col-md-6 wel-grid">
                 <div id="place"></div>
-                <div id="comments"></div>
                 {% if user.is_authenticated %}
-                <div id="new_comment"></div>
-                {% endif %}
+                <div id="new_comment" class="overflow-auto"></div>
+                {% endif %}                
+                <div id="comments"></div>
+
             </div>
 
         </div>
