@@ -13,6 +13,8 @@ crawler.ipynb
 populate_on_pythonanywhere.txt
 **/migrations/
 get_places copy*.py
+*copy*.*
+.vscode
 
 ##############################
 Python
