@@ -1,32 +1,17 @@
-<div id="header" class="container">
-  <div>
-    {% comment %} navigation {% endcomment %}
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <a class="navbar-brand" href="{% url 'sitnow:index' %}"
-        ><img src="{% static 'img/logo/white_logo.svg' %}" alt="Logo"
-      /></a>
+                <div id="place3" class="" data-place-id={{place3.id}} data-name="{{ place3.name }}" data-building="{{ place3.building }}" data-latitude="{{place3.latitude}}" data-longitude="{{place3.longitude}}" data-rate={{place3.rate}} data-n-rates={{place3.n_rates}} onclick="initMapPlace3()" style="cursor: pointer;">
+                        <div class="row">
+                            {% if user.is_authenticated %}<span class="col-1">{% if place3.favorite.favorite %}<i id="place3_favorite" class="fa fa-heart" aria-hidden="true"></i></span>{% else %}<i id="place3_favorite" class="fa fa-heart-o" aria-hidden="true"></i></span>{% endif %}{% endif %}
+                            {% if user.is_authenticated %}<div class="col-11 row card">{% else %}<div class="col-12 row card">{% endif %}
+                                <div class="col-8 row">
+                                    <h5 id="place3_name" class="float-left col-12">{{ place3.name }}</h5>
+                                    <p id="place3_building" class="float-left  col-12">@ {{ place3.building }}</p>
+                                </div>
+                                <div class="col-4">
+                                    <span class="float-right">({{place3.n_rates}})</span><div class="stars-outer float-right d-inline"><span id="stars-inner" class="stars-inner"></span></div>
+                                </div>
+                            </div>
 
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-          <li id="home" class="nav-item">
-            <a class="nav-link" href="{% url 'sitnow:index' %}">Home</a>
-          </li>
-          <li id="aboutus" class="nav-item">
-            <a class="nav-link" href="{% url 'sitnow:aboutus' %}">About Us</a>
-          </li>
-          <li id="map" class="nav-item">
-            <a class="nav-link" href="{% url 'sitnow:map' %}">Map</a>
-          </li>
-          <li id="login" class="nav-item">
-            <a class="nav-link" href="{% url 'sitnow:login' %}">Login</a>
-          </li>
-          <li id="favorites" class="nav-item">
-            <a class="nav-link" href="{% url 'sitnow:favorites' %}"
-              >My Favorites</a
-            >
-          </li>
-        </ul>
-      </div>
-    </nav>
-  </div>
-</div>
+                            {% comment %} <p class="text-muted">&nbsp;-&nbsp;{{ place3.address }} <br/>
+                            &nbsp;-&nbsp;Access:&nbsp;{% if place3.permission != "None" %}{{place3.permission}}{% else %}Not required.{% endif %}</p> {% endcomment %}
+                        </div>
+                </div>
