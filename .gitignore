@@ -4,13 +4,15 @@ Sit Now project
 dev.py
 dev.cnf
 prod.cnf
-media/profile_images/user_*/*
+sitnow_project/media/profile_images/user_*/*.jpg
 commit-msg.md
 mysql_script.bash
 pythonanywhere.bash
 dockerMySQL
 crawler.ipynb
 populate_on_pythonanywhere.txt
+**/migrations/
+get_places copy*.py
 
 ##############################
 Python
