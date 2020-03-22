@@ -19,35 +19,35 @@ import heapq
 import time
 from math import sqrt
 from string import Template
+import sys
 
 
 def distance(current_location, destination_place):
     return sqrt((current_location['latitude'] - destination_place.latitude)**2 + (current_location['longitude'] - destination_place.longitude)**2)
 
 
-def filter(current_location):
-    filter = {}
+def place_filter(current_location):
+    places = Place.objects.all()
     for key, value in current_location.items():
         if(key is '_state'):
             continue
 
-        if(value == None):
-            filter_list = [True, False]
-        else:
-            filter_list = [value]
-
-        filter[key] = filter_list
-
-    places = Place.objects.filter(hasTable__in=filter['hasTable'],
-                                  hasWifi__in=filter['hasWifi'],
-                                  capacity__range=(
-                                      filter['capacity'][0], sys.maxsize),
-                                  hasMicrowave__in=filter['hasMicrowave'],
-                                  hasSocket__in=filter['hasSocket'],
-                                  hasFood__in=filter['hasFood'],
-                                  hasCoffee__in=filter['hasCoffee'],
-                                  noEating__in=filter['noEating'],
-                                  hasComputer__in=filter['hasComputer'])
+        if(key == 'hasTable' and value == True):
+            places = places.filter(hasTable=value)
+        if(key == 'hasWifi' and value == True):
+            places = places.filter(hasWifi=value)
+        if(key == 'capacity' and value == True):
+            places = places.filter(capacity__range=(value, sys.maxsize))
+        if(key == 'hasMicrowave' and value == True):
+            places = places.filter(hasMicrowave=value)
+        if(key == 'hasSocket' and value == True):
+            places = places.filter(hasSocket=value)
+        if(key == 'hasCoffee' and value == True):
+            places = places.filter(hasCoffee=value)
+        if(key == 'noEating' and value == True):
+            places = places.filter(noEating=value)
+        if(key == 'hasComputer' and value == True):
+            places = places.filter(hasComputer=value)
 
     return list(places)
 
@@ -75,7 +75,7 @@ def google_distance(current_location, destination_place):
     url = Template(url_template).substitute(d)
     print(url)
     res = requests.get(url).json()
-    time.sleep(1)
+    time.sleep(0.2)
     return round(res['routes'][0]['legs'][0]['duration']['value'] / 60)
 
 
@@ -100,18 +100,21 @@ if __name__ == "__main__":
                         'hasWifi': True,
                         'capacity': 21,
                         'hasMicrowave': None,
-                        'hasSocket': None,
+                        'hasSocket': True,
                         'hasFood': None,
                         'hasCoffee': None,
-                        'noEating': None,
+                        'noEating': True,
                         'hasComputer': None}
 
-    filtered_places = filter(current_location)
+    filtered_places = place_filter(current_location)
     print(filtered_places)
+    for filtered_place in filtered_places:
+        print((filtered_place.hasTable, filtered_place.hasWifi,
+               filtered_place.hasSocket, filtered_place.noEating))
 
-    k_nearset = get_k_nearest(current_location, filtered_places, 5)
-    print(k_nearset)
+    # k_nearset = get_k_nearest(current_location, filtered_places, 5)
+    # print(k_nearset)
 
-    k_google_nearset = get_google_k_nearest(
-        current_location, k_nearset, 3)
-    print(k_google_nearset)
+    # k_google_nearset = get_google_k_nearest(
+    #     current_location, k_nearset, 3)
+    # print(k_google_nearset)
