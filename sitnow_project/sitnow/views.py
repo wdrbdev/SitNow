@@ -19,6 +19,219 @@ from sitnow.utils.csv_2_json import *
 from sitnow.utils.get_places import *
 # Create your views here.
 
+BUILDINGS_JSON = [
+    {
+        "building": "St Andrews Building",
+        "latitude": 55.8717315,
+        "longitude": -4.279621199999999
+    },
+    {
+        "building": "Kelvin Hall",
+        "latitude": 55.86900070000001,
+        "longitude": -4.2932081
+    },
+    {
+        "building": "Glasgow International College",
+        "latitude": 55.87027759999999,
+        "longitude": -4.296623
+    },
+    {
+        "building": "Robertson Building",
+        "latitude": 55.87060229999999,
+        "longitude": -4.296550499999999
+    },
+    {
+        "building": "Sir James Black Building",
+        "latitude": 55.87087339999999,
+        "longitude": -4.292354700000001
+    },
+    {
+        "building": "Wolfson Building",
+        "latitude": 55.8708469,
+        "longitude": -4.292517000000001
+    },
+    {
+        "building": "Davidson Building",
+        "latitude": 55.8709702,
+        "longitude": -4.2915936
+    },
+    {
+        "building": "Mathematics and Statistics Building",
+        "latitude": 55.87260729999999,
+        "longitude": -4.2944843
+    },
+    {
+        "building": "Joseph Black Building",
+        "latitude": 55.8719964,
+        "longitude": -4.2933843
+    },
+    {
+        "building": "Western Infirmary Lecture Theatre",
+        "latitude": 55.872027,
+        "longitude": -4.2941475
+    },
+    {
+        "building": "Graham Kerr Building",
+        "latitude": 55.8714317,
+        "longitude": -4.2929365
+    },
+    {
+        "building": "Kelvin Building",
+        "latitude": 55.8715313,
+        "longitude": -4.2917421
+    },
+    {
+        "building": "Isabella Elder Building",
+        "latitude": 55.8724783,
+        "longitude": -4.2921985
+    },
+    {
+        "building": "Bower Building",
+        "latitude": 55.872391,
+        "longitude": -4.2914581
+    },
+    {
+        "building": "Main Gatehouse",
+        "latitude": 55.8723468,
+        "longitude": -4.2893085
+    },
+    {
+        "building": "McIntyre Building",
+        "latitude": 55.87221649999999,
+        "longitude": -4.2888242
+    },
+    {
+        "building": "Main Building",
+        "latitude": 55.87147030000001,
+        "longitude": -4.2884926
+    },
+    {
+        "building": "Thomson Building",
+        "latitude": 55.8715264,
+        "longitude": -4.286881899999999
+    },
+    {
+        "building": "James Watt Building",
+        "latitude": 55.87113129999999,
+        "longitude": -4.2864642
+    },
+    {
+        "building": "Pearce Lodge",
+        "latitude": 55.8719143,
+        "longitude": -4.2858711
+    },
+    {
+        "building": "Gilmorehill Halls",
+        "latitude": 55.87211379999999,
+        "longitude": -4.284410200000001
+    },
+    {
+        "building": "Sir Charles Wilson Building",
+        "latitude": 55.8726314,
+        "longitude": -4.284052000000001
+    },
+    {
+        "building": "Glasgow University Union",
+        "latitude": 55.8723812,
+        "longitude": -4.2851665
+    },
+    {
+        "building": "Rankine Building",
+        "latitude": 55.8725956,
+        "longitude": -4.2857091
+    },
+    {
+        "building": "Stevenson Sports Building",
+        "latitude": 55.87288899999999,
+        "longitude": -4.2852912
+    },
+    {
+        "building": "Ivy Lodge",
+        "latitude": 55.8732522,
+        "longitude": -4.285847899999999
+    },
+    {
+        "building": "Southpark House",
+        "latitude": 55.8738786,
+        "longitude": -4.287020099999999
+    },
+    {
+        "building": "Florentine House",
+        "latitude": 55.87358709999999,
+        "longitude": -4.287916399999999
+    },
+    {
+        "building": "The Fraser Building",
+        "latitude": 55.873081,
+        "longitude": -4.287935299999999
+    },
+    {
+        "building": "McMillan Round Reading Room",
+        "latitude": 55.8727392,
+        "longitude": -4.2879725
+    },
+    {
+        "building": "Hetherington Building",
+        "latitude": 55.8742069,
+        "longitude": -4.2888531
+    },
+    {
+        "building": "Glasgow University Library",
+        "latitude": 55.8733667,
+        "longitude": -4.288945699999999
+    },
+    {
+        "building": "Hunterian Art Gallery",
+        "latitude": 55.8730183,
+        "longitude": -4.289102
+    },
+    {
+        "building": "Adam Smith Building",
+        "latitude": 55.8737664,
+        "longitude": -4.2898664
+    },
+    {
+        "building": "Lilybank House",
+        "latitude": 55.8740368,
+        "longitude": -4.2904601
+    },
+    {
+        "building": "Sir Alwyn Williams Building",
+        "latitude": 55.8739481,
+        "longitude": -4.2918572
+    },
+    {
+        "building": "Queen Margaret Union",
+        "latitude": 55.87370989999999,
+        "longitude": -4.2917144
+    },
+    {
+        "building": "Sir Alexander Stone Building",
+        "latitude": 55.8735569,
+        "longitude": -4.2909882
+    },
+    {
+        "building": "Gregory Building",
+        "latitude": 55.8740534,
+        "longitude": -4.2928603
+    },
+    {
+        "building": "Boyd Orr Building",
+        "latitude": 55.8735672,
+        "longitude": -4.2925851
+    },
+    {
+        "building": "Glasgow University Library",
+        "latitude": 55.8733667,
+        "longitude": -4.288945699999999
+    },
+    {
+        "building": "Fraser Building",
+        "latitude": 55.873081,
+        "longitude": -4.287935299999999
+    }
+]
+
 
 def index(request):
     form = SearchForm()
@@ -33,9 +246,11 @@ def index(request):
             # The supplied form contained errors -
             # just print them to the terminal.
             print(form.errors)
-    BUILDINGS_JSON_PATH = os.path.join(
-        BASE_DIR, "sitnow_project", "buildings.json")
-    locations = read_json(BUILDINGS_JSON_PATH)
+    # BUILDINGS_JSON_PATH = os.path.join(
+    #     BASE_DIR, "sitnow_project", "buildings.json")
+    # locations = read_json(BUILDINGS_JSON_PATH)
+    locations = BUILDINGS_JSON
+
     context_dict = {"form": form, "locations": locations,
                     "GOOGLE_JS_API_KEY": GOOGLE_JS_API_KEY}
     return render(request, "sitnow/index.html", context=context_dict)
@@ -59,10 +274,11 @@ def result(request):
                 search_location["longitude"])}
             d["start"] = start
 
-            BUILDINGS_JSON_PATH = os.path.join(
-                BASE_DIR, "sitnow_project", "buildings.json")
-            locations = read_json(BUILDINGS_JSON_PATH)
-            d["locations"] = locations
+            # BUILDINGS_JSON_PATH = os.path.join(
+            #     BASE_DIR, "sitnow_project", "buildings.json")
+            # locations = read_json(BUILDINGS_JSON_PATH)
+            # d["locations"] = locations
+            d["locations"] = BUILDINGS_JSON
 
             d["form"] = form
             d["GOOGLE_JS_API_KEY"] = GOOGLE_JS_API_KEY
