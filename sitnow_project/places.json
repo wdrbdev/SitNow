@@ -12,7 +12,7 @@
     "hasMicrowave": false,
     "hasSocket": true,
     "hasFood": false,
-    "noEating": false,
+    "noEating": true,
     "hasCoffee": false,
     "hasComputer": true,
     "latitude": 55.8733426,
@@ -21,7 +21,7 @@
   },
   {
     "name": "Student Service",
-    "building": "The Fraser Building",
+    "building": "Fraser Building",
     "level": 2,
     "google_id": "ChIJs2n0CtJFiEgRdLveBYNVzjk",
     "image_url": " https://payload.cargocollective.com/1/6/208556/2971675/Fraser-Building-1.jpg ",
@@ -230,7 +230,7 @@
     "hasWifi": true,
     "capacity": 65,
     "hasMicrowave": false,
-    "hasSocket": false,
+    "hasSocket": true,
     "hasFood": false,
     "noEating": false,
     "hasCoffee": false,
@@ -1001,7 +1001,7 @@
   },
   {
     "name": "Food for thought & Food to go",
-    "building": "The Fraser Building",
+    "building": "Fraser Building",
     "level": 3,
     "google_id": "ChIJs2n0CtJFiEgRdLveBYNVzjk",
     "image_url": "https://payload.cargocollective.com/1/6/208556/2971675/Glasgow-Fraser-Building-4.jpg",
@@ -1098,5 +1098,25 @@
     "latitude": 55.874075,
     "longitude": -4.288977,
     "address": "Hetherington Building, Glasgow G12, UK"
+  },
+  {
+    "name": "McMillan Round Reading Room",
+    "building": "McMillan Round Reading Room",
+    "level": 2,
+    "google_id": "ChIJVdE7ic1FiEgRf_rCeHQLg6U",
+    "image_url": "https://manchesterhistory.net/architecture/1930/roundlibrary8.jpg",
+    "permission": "None",
+    "hasTable": true,
+    "hasWifi": true,
+    "capacity": 351,
+    "hasMicrowave": false,
+    "hasSocket": true,
+    "hasFood": false,
+    "noEating": true,
+    "hasCoffee": false,
+    "hasComputer": true,
+    "latitude": 55.872741,
+    "longitude": -4.287971,
+    "address": "University Ave, Glasgow G12 8QF"
   }
 ]
