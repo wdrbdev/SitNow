@@ -6,7 +6,7 @@ Sit Now - Map
 {% endblock %}
 
 {% block header_block %}
-        <script type="text/javascript"> window.CSRF_TOKEN = "{{ csrf_token }}" </script>
+        <script type="text/javascript"> window.CSRF_TOKEN = "{{ csrf_token }}";{% if user.is_authenticated %} window.authenticated=true {% endif %}; </script>
         <script type="text/javascript" src="{% static 'js/MapMap.js' %}"></script>
         <link rel="stylesheet" href="{% static 'css/map.css' %}">
         {% comment %} Google {% endcomment %}

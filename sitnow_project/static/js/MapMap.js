@@ -194,7 +194,7 @@ function calculate_stars(template, rate) {
 
 async function addCommentCards(place) {
   $("#comments").empty();
-  const comments = await getComment(place);
+  const comments = await getComment(place, window.CSRF_TOKEN);
   const card = await getCardTemplate("comments_card.html");
   comments.forEach(comment => {
     let template = $.parseHTML(card);
@@ -243,11 +243,12 @@ async function initMap() {
   addMarkers(map);
 }
 
-async function getComment({ name, building, google_id }) {
+async function getComment({ name, building, google_id }, csrfmiddlewaretoken) {
   return await $.ajax({
     type: "POST",
     url: "/comments/",
     data: {
+      csrfmiddlewaretoken,
       name,
       building,
       google_id
@@ -260,6 +261,9 @@ async function getComment({ name, building, google_id }) {
 }
 
 async function addCommentForm(place) {
+  if (window.authenticated !== true) {
+    return;
+  }
   $("#new_comment").empty();
   $("#comments").empty();
   const card = await getCardTemplate("comment_card.html");
@@ -287,7 +291,6 @@ async function addCommentForm(place) {
   $(template)
     .find("#place_id")
     .val(place.id);
-  console.log(place.id);
   const starIcons = [
     "#comment-star-1",
     "#comment-star-2",
@@ -311,7 +314,6 @@ async function addCommentForm(place) {
             .removeClass("fa-star-o");
         }
         $("#rate-input").val(rating);
-        console.log($("#current-user-comment").val());
       });
   });
 
@@ -322,7 +324,6 @@ async function addCommentForm(place) {
 async function submitAction(csrfmiddlewaretoken) {
   $("#comment_form").submit(async function(event) {
     event.preventDefault();
-    console.log($("#rate-input").val());
     if ($("#rate-input").val().length === 0) {
       alert("Must choose a rate.");
       return;

@@ -5,6 +5,7 @@ from populate_sitnow import add_place
 from django.forms.models import model_to_dict
 
 
+# Test for calculation of distance by Google Directions API
 class test_google_distance(TestCase):
     def setUp(self):
         places = [
@@ -19,15 +20,14 @@ class test_google_distance(TestCase):
              'latitude': 55.8737664,
              'longitude': -4.2898664}, ]
         for place in places:
-            print(place['name'])
             p = Place.objects.create(name=place['name'], building=place['building'],
                                      google_id=place['google_id'],
                                      latitude=place['latitude'],
                                      longitude=place['longitude'])
             p.save()
 
+    # At the back of the library, it's closer to library according to the euclidean distance but farther to library than the Adam Smith building according to actual walking time calculated google map.
     def test_distance(self):
-        # At the back of the library, it's closer to library according to the euclidean distance but farther to library than the Adam Smith building according to actual walking time calculated google map.
         test_search = {'latitude': 55.873583,
                        'longitude': -4.289177,
                        }
@@ -39,6 +39,7 @@ class test_google_distance(TestCase):
         self.assertEqual(places[0].building, 'Adam Smith Building')
 
 
+# Test for calculation of the Euclidean distance
 class test_euclidean_distance(TestCase):
     def setUp(self):
         places1 = [{
@@ -89,6 +90,7 @@ class test_euclidean_distance(TestCase):
             "longitude": -4.2932081,
         }, ]
 
+        # Save places into DB
         all_places = [places1, places2, places3]
         for places in all_places:
             for place in places:
@@ -97,19 +99,21 @@ class test_euclidean_distance(TestCase):
                                          latitude=place['latitude'],
                                          longitude=place['longitude'])
                 p.save()
+
+    # Each place's nearest location would be other places in the same building
+    def test_distance(self):
         PLACES = []
         for place in list(Place.objects.all()):
             PLACES.append(model_to_dict(place))
 
-    def test_distance(self):
-        PLACES = []
-
         for place in PLACES:
-            nearest_places = get_places.get_k_nearest(place, PLACES, 2)
+            nearest_places = get_places.get_k_nearest(
+                place, list(Place.objects.all()), 2)
             for nearest_place in nearest_places:
-                self.assertEqual(nearest_place, place.building)
+                self.assertEqual(nearest_place.building, place['building'])
 
 
+# Test whether the get_places.place_filter() works correctly
 class test_filter(TestCase):
     def setUp(self):
         restaurants = [
@@ -210,6 +214,7 @@ class test_filter(TestCase):
                                          hasComputer=place['hasComputer'])
                 p.save()
 
+    # To find a studying place with table, wifi and socket but not providing food. The result should be places in the studying_places list above
     def test_find_studying_places(self):
         search_studying_places = {
             'hasTable': True,
@@ -229,6 +234,7 @@ class test_filter(TestCase):
         for place in places:
             self.assertEqual(place.name, "Studying Place")
 
+    # To find a place to eat, where provides food and coffee. The result should be places in the restaurants list above
     def test_find_restaurant(self):
         search_restaurants = {
             'hasTable': True,
@@ -248,6 +254,7 @@ class test_filter(TestCase):
         for place in places:
             self.assertEqual(place.name, "Restaurant")
 
+    # Give a search criteria for no search result. For example, no place will provide food but don't allow eating inside in our dataset. The number of result would be 0 in this case.
     def test_find_non_exist_place(self):
         search_restaurants = {
             'hasTable': None,

@@ -1,10 +1,11 @@
 from django import forms
 from django.contrib.auth.models import User
 from sitnow.models import Comment, Place, UserProfile
+from sitnow.utils.upload import user_directory_path
+
 
 # Form for user model provide by Django
-
-
+# For login and register
 class UserForm(forms.ModelForm):
     # Hide the password when user input the password by PasswordInput()
     password = forms.CharField(widget=forms.PasswordInput())
@@ -21,16 +22,8 @@ class UserForm(forms.ModelForm):
         self.fields["username"].help_text = None
 
 
-def user_directory_path(instance, filename):
-    upload_dir = 'profile_images'
-    filename = "profile_img." + filename.split(".")[-1]
-    filename = 'user_{0}/{1}'.format(instance.user.id, filename)
-    print(filename)
-    return os.path.join(upload_dir, filename)
-
 # Form for custom user profile
-
-
+# For login, register and modify user profile in /setting/
 class UserProfileForm(forms.ModelForm):
     PREFERRED_NAME_MAX_LENGTH = 255
     preferred_name = forms.CharField(
@@ -42,6 +35,7 @@ class UserProfileForm(forms.ModelForm):
         fields = ("preferred_name", 'picture',)
 
 
+# To search the places according to user location and choices in / and /result/
 class SearchForm(forms.Form):
     latitude = forms.FloatField(
         required=True, help_text="Your latitude", widget=forms.HiddenInput())

@@ -2,16 +2,7 @@ from django.db import models
 from django.template.defaultfilters import slugify
 from django.contrib.auth.models import User
 import os
-
-
-# Create your models here.
-
-def user_directory_path(instance, filename):
-    upload_dir = 'profile_images'
-    filename = "profile_img." + filename.split(".")[-1]
-    filename = 'user_{0}/{1}'.format(instance.user.id, filename)
-    print(filename)
-    return os.path.join(upload_dir, filename)
+from sitnow.utils.upload import user_directory_path
 
 
 # Add custom feature on user model provide by Django
@@ -31,6 +22,7 @@ class UserProfile(models.Model):
         return self.user.username
 
 
+# Information of each places with seats
 class Place(models.Model):
     CHAR_MAX_LENGTH = 255
     name = models.CharField(max_length=CHAR_MAX_LENGTH)
@@ -58,6 +50,7 @@ class Place(models.Model):
         return self.name + " @ " + self.building
 
 
+# Information about users' rating and comment of a place
 class Comment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     place = models.ForeignKey(Place, on_delete=models.CASCADE)
@@ -68,6 +61,7 @@ class Comment(models.Model):
         return self.user.username + " comments " + self.place.name
 
 
+# Information about users' favorite place
 class Favorite(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     place = models.ForeignKey(Place, on_delete=models.CASCADE)

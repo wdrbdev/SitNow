@@ -1,17 +1,3 @@
-                <div id="place3" class="" data-place-id={{place3.id}} data-name="{{ place3.name }}" data-building="{{ place3.building }}" data-latitude="{{place3.latitude}}" data-longitude="{{place3.longitude}}" data-rate={{place3.rate}} data-n-rates={{place3.n_rates}} onclick="initMapPlace3()" style="cursor: pointer;">
-                        <div class="row">
-                            {% if user.is_authenticated %}<span class="col-1">{% if place3.favorite.favorite %}<i id="place3_favorite" class="fa fa-heart" aria-hidden="true"></i></span>{% else %}<i id="place3_favorite" class="fa fa-heart-o" aria-hidden="true"></i></span>{% endif %}{% endif %}
-                            {% if user.is_authenticated %}<div class="col-11 row card">{% else %}<div class="col-12 row card">{% endif %}
-                                <div class="col-8 row">
-                                    <h5 id="place3_name" class="float-left col-12">{{ place3.name }}</h5>
-                                    <p id="place3_building" class="float-left  col-12">@ {{ place3.building }}</p>
-                                </div>
-                                <div class="col-4">
-                                    <span class="float-right">({{place3.n_rates}})</span><div class="stars-outer float-right d-inline"><span id="stars-inner" class="stars-inner"></span></div>
-                                </div>
-                            </div>
-
-                            {% comment %} <p class="text-muted">&nbsp;-&nbsp;{{ place3.address }} <br/>
-                            &nbsp;-&nbsp;Access:&nbsp;{% if place3.permission != "None" %}{{place3.permission}}{% else %}Not required.{% endif %}</p> {% endcomment %}
-                        </div>
-                </div>
+<div>
+    
+</div>

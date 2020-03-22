@@ -10,10 +10,7 @@ from string import Template
 import sys
 
 
-def distance(current_location, destination_place):
-    return sqrt((current_location['latitude'] - destination_place.latitude)**2 + (current_location['longitude'] - destination_place.longitude)**2)
-
-
+# Filter places according to users' choices
 def place_filter(current_location):
     places = Place.objects.all()
     for key, value in current_location.items():
@@ -40,6 +37,12 @@ def place_filter(current_location):
     return list(places)
 
 
+# Calculate distance of each place according to the Euclidean distance from latitude and longitude
+def distance(current_location, destination_place):
+    return sqrt((current_location['latitude'] - destination_place.latitude)**2 + (current_location['longitude'] - destination_place.longitude)**2)
+
+
+# Get the top k nearest places according to result of distance()
 def get_k_nearest(current_location, places, k=5):
     n_places = len(places)
     if(n_places < k):
@@ -56,6 +59,7 @@ def get_k_nearest(current_location, places, k=5):
         k, places, key=lambda p: distance(current_location, p))
 
 
+# Calculate distance of each place according to Google Directions API
 def google_distance(current_location, destination_place):
     url_template = 'https://maps.googleapis.com/maps/api/directions/json?origin=${start_latitude},${start_longitude}&destination=${end_latitude},${end_longitude}&mode=walking&language=en&key=${GOOGLE_API_KEY}'
     d = {'start_latitude': current_location['latitude'], 'start_longitude': current_location['longitude'],
@@ -67,6 +71,7 @@ def google_distance(current_location, destination_place):
     return round(res['routes'][0]['legs'][0]['duration']['value'] / 60)
 
 
+# Get the top k nearest places according to result of google_distance()
 def get_google_k_nearest(current_location, places, k=3):
     n_places = len(places)
     if(n_places < k):

@@ -13,6 +13,7 @@ PLACES_CSV_PATH = os.path.join(BASE_DIR, "sitnow_project", "places.csv")
 PLACES_JSON_PATH = os.path.join(BASE_DIR, "sitnow_project", "places.json")
 
 
+# Convert building information from csv to json
 def buildings_csv_to_json():
     a = np.array(genfromtxt(BUILDINGS_CSV_PATH, delimiter=',',
                             encoding="UTF-8", names=True, dtype=None))
@@ -23,6 +24,7 @@ def buildings_csv_to_json():
     return building_id_dict
 
 
+# Convert place information from csv to json
 def places_csv_to_json():
     a = np.array(genfromtxt(PLACES_CSV_PATH, delimiter=',',
                             encoding="UTF-8", names=True, dtype=None))
@@ -48,6 +50,7 @@ def places_csv_to_json():
     return places
 
 
+# Call Google Place API to get latitude and longitude
 def get_location_lat_lng(building_id_dict):
     places = []
     for key, value in building_id_dict.items():
@@ -60,6 +63,7 @@ def get_location_lat_lng(building_id_dict):
     return places
 
 
+# Call Google Place API to get latitude, longitude and address
 def get_place_lat_lng(places):
     for place in places:
         google_id = place['google_id']
@@ -70,11 +74,13 @@ def get_place_lat_lng(places):
     return places
 
 
+# Write array of dict into json file
 def write_json(json_array, json_path):
     with open(json_path, 'w', encoding='UTF-8') as f:
         json.dump(json_array, f, ensure_ascii=False, indent=4)
 
 
+# Read json file
 def read_json(json_path):
     with open(json_path) as json_file:
         data = json.load(json_file)
@@ -85,7 +91,7 @@ if __name__ == "__main__":
     # Convert csv of buildings locations to json and get latitude and longitude from google map api
     # locations = get_location(buildings_csv_to_json())
     # write_json(locations,BUILDINGS_JSON_PATH)
-    # print(read_json(PLACES_JSON_PATH))
+    print(read_json(PLACES_JSON_PATH))
 
     # Convert csv of places information to json and get latitude and longitude from google map api
     # places = places_csv_to_json()

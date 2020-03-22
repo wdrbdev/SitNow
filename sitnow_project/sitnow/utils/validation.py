@@ -1,3 +1,4 @@
+# Convert the JSON from the POST request of SearchForm to the input of get_places.place_filter()
 def validate_querydict(querydict):
     d = {}
     querydict = querydict.dict()
@@ -14,6 +15,9 @@ def validate_querydict(querydict):
               'hasCoffee',
               'hasComputer']
 
+    # For 0-4 persons: No capacity limit
+    # For 4-8 persons: Places with capacity > 12
+    # For above 8 persons: Places with capacity > 31
     int_switcher = {'1': 0, '2': 12, '3': 31}
     boolean_switcher = {'None': None, 'True': True}
     for key, value in querydict.items():

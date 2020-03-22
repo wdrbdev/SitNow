@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 
 import os
 
+# Include keys in development or production environment
 from sitnow_project.config.keys import *
 
 print_env()

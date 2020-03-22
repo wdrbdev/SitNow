@@ -16,6 +16,8 @@ from sitnow.models import Comment, Favorite, Place, UserProfile
 #     # exclude = ['session_data']
 # admin.site.register(Session, SessionAdmin)
 
+
+# Register all models to admin
 admin.site.register(UserProfile)
 admin.site.register(Comment)
 admin.site.register(Place)
