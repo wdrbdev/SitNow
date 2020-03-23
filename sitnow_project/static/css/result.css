@@ -80,3 +80,7 @@ p.text-muted {
   border-width: thin;
   margin: 3px;
 }
+
+.search {
+  border: none;
+}

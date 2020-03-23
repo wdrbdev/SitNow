@@ -1,25 +1,7 @@
-/* 
-
-@font-face {
-  font-family: "Adobe Garamond";
-  src: url(/static/fonts/AGaramondPro-Regular.otf);
-}
-
-@font-face {
-  font-family: "Adobe Garamond";
-  src: url(/static/fonts/AGaramondPro-Bold.otf);
-  font-weight: bold;
-}
-@font-face {
-  font-family: "Adobe Garamond";
-  src: url(/static/fonts/AGaramondPro-Italic.otf);
-  font-weight: normal;
-  font-style: italic;
-}
 
 html * {
-  font-family: "Adobe Garamond";
-} */
+  font-family: "Source Serif Pro", serif;
+}
 
 #body {
   /* display: flex;

@@ -62,7 +62,7 @@ div#place.row {
 }
 
 #favorite-content {
-  height: 768px;
+  max-height: 600px;
   overflow-x: scroll;
   overflow-y: scroll;
 }

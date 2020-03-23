@@ -1,5 +1,6 @@
 let infowindow, marker;
 
+// Get the place info by POST /place/
 async function getPlace({ name, building }, csrfmiddlewaretoken) {
   let place = await $.ajax({
     type: "POST",
@@ -17,6 +18,7 @@ async function getPlace({ name, building }, csrfmiddlewaretoken) {
   return place;
 }
 
+// Get card template html from /static/card_template/
 async function getCardTemplate(filename) {
   let html = await $.get("/static/card_template/" + filename, function(data) {
     return data;
@@ -24,6 +26,7 @@ async function getCardTemplate(filename) {
   return html;
 }
 
+// Add the place info
 async function addPlaceCard(place, target_id) {
   const card = await getCardTemplate("result_place_card.html");
   let template = $.parseHTML(card);
@@ -49,7 +52,6 @@ async function addPlaceCard(place, target_id) {
         ? `<i class="fa fa-check-square" aria-hidden="true"></i>`
         : `<i class="fa fa-minus-square" aria-hidden="true"></i>`
     );
-  // .text(place.hasTable ? "Yes" : "No");
   $(template)
     .find("#hasWifi")
     .html(
@@ -57,7 +59,6 @@ async function addPlaceCard(place, target_id) {
         ? `<i class="fa fa-check-square" aria-hidden="true"></i>`
         : `<i class="fa fa-minus-square" aria-hidden="true"></i>`
     );
-  // .text(place.hasWifi ? "Yes" : "No");
   $(template)
     .find("#capacity")
     .html(place.capacity);
@@ -68,7 +69,6 @@ async function addPlaceCard(place, target_id) {
         ? `<i class="fa fa-check-square" aria-hidden="true"></i>`
         : `<i class="fa fa-minus-square" aria-hidden="true"></i>`
     );
-  // .text(place.hasMicrowave ? "Yes" : "No");
   $(template)
     .find("#hasSocket")
     .html(
@@ -76,8 +76,6 @@ async function addPlaceCard(place, target_id) {
         ? `<i class="fa fa-check-square" aria-hidden="true"></i>`
         : `<i class="fa fa-minus-square" aria-hidden="true"></i>`
     );
-  // .text(place.hasSocket ? "Yes" : "No");
-
   $(template)
     .find("#hasFood")
     .html(
@@ -85,8 +83,6 @@ async function addPlaceCard(place, target_id) {
         ? `<i class="fa fa-check-square" aria-hidden="true"></i>`
         : `<i class="fa fa-minus-square" aria-hidden="true"></i>`
     );
-
-  // .text(place.hasFood ? "Yes" : "No");
   $(template)
     .find("#hasCoffee")
     .html(
@@ -94,8 +90,6 @@ async function addPlaceCard(place, target_id) {
         ? `<i class="fa fa-check-square" aria-hidden="true"></i>`
         : `<i class="fa fa-minus-square" aria-hidden="true"></i>`
     );
-
-  // .text(place.hasCoffee ? "Yes" : "No");
   $(template)
     .find("#noEating")
     .html(
@@ -103,8 +97,6 @@ async function addPlaceCard(place, target_id) {
         ? `<i class="fa fa-check-square" aria-hidden="true"></i>`
         : `<i class="fa fa-minus-square" aria-hidden="true"></i>`
     );
-
-  // .text(place.noEating ? "Yes" : "No");
   $(template)
     .find("#hasComputer")
     .html(
@@ -112,11 +104,11 @@ async function addPlaceCard(place, target_id) {
         ? `<i class="fa fa-check-square" aria-hidden="true"></i>`
         : `<i class="fa fa-minus-square" aria-hidden="true"></i>`
     );
-
-  // .text(place.hasComputer ? "Yes" : "No");
   // $(template)
   //   .find("#permission")
   //   .text(place.permission === null ? "Not required." : place.permission);
+
+  // For rating
   let starPercentage = (place.rate / 5) * 100;
   let starPercentageRounded = `${Math.round(starPercentage / 10) * 10}%`;
   $(template)
@@ -125,6 +117,7 @@ async function addPlaceCard(place, target_id) {
   // Add mini map
   initDirectionMap(template, target_id);
 
+  // Add place info to the corresponding html div
   target_ids = ["#place1", "#place2", "#place3"];
   target_ids.forEach(id => {
     if ($(id).length !== 0) {
@@ -150,6 +143,7 @@ async function initMap() {
       lng: parseFloat($("#start").data().longitude)
     };
   }
+
   // The map, centered at Glasgow University
   var map = new google.maps.Map(document.getElementById("map"), {
     zoom: 16,
@@ -166,7 +160,10 @@ async function initMap() {
         $("#current_location").attr("data-lat", lat);
         $("#current_location").attr("data-lng", lng);
 
+        // Fill current location
         fillLocation(pos);
+
+        // Show the option of current location only when Google API can get the current location
         showCurrentLocation();
       },
       function() {
@@ -178,6 +175,7 @@ async function initMap() {
     handleLocationError(false, infoWindow, map.getCenter());
   }
 
+  // Add markers of each result place
   place_targets = ["#place1", "#place2", "#place3"];
   place_targets.forEach(place_target => {
     if ($(place_target).length !== 0) {
@@ -190,6 +188,7 @@ async function initMap() {
         }
       });
 
+      // Add onClick event to show info window of each place
       marker.addListener("click", () => {
         if (infowindow) {
           infowindow.close();
@@ -211,18 +210,23 @@ async function initMap() {
   });
 }
 
+// onClick event for place1
 async function initMapPlace1() {
   if ($("#place1").length !== 0) {
     place = await getPlace($("#place1").data(), window.CSRF_TOKEN);
     addPlaceCard(place, "#place1");
   }
 }
+
+// onClick event for place2
 async function initMapPlace2() {
   if ($("#place2").length !== 0) {
     place = await getPlace($("#place2").data(), window.CSRF_TOKEN);
     addPlaceCard(place, "#place2");
   }
 }
+
+// onClick event for place2
 async function initMapPlace3() {
   if ($("#place3").length !== 0) {
     place = await getPlace($("#place3").data(), window.CSRF_TOKEN);
@@ -230,11 +234,13 @@ async function initMapPlace3() {
   }
 }
 
+// Fill latitude and longitude of current location into form
 function fillLocation({ lat, lng }) {
   $("#id_latitude").val(lat);
   $("#id_longitude").val(lng);
 }
 
+// Initialize map for the route from start location to the chosen place
 function initDirectionMap(template, target_id) {
   $("#google_map").prop("hidden", "hidden");
 
@@ -260,6 +266,7 @@ function initDirectionMap(template, target_id) {
   calculateAndDisplayRoute(target_id, directionsService, directionsRenderer);
 }
 
+// Calculate route from Google Directions API
 function calculateAndDisplayRoute(
   target_id,
   directionsService,
@@ -287,6 +294,7 @@ function calculateAndDisplayRoute(
   );
 }
 
+// Handle error (written by Google https://developers.google.com/maps/documentation/javascript/geolocation)
 function handleLocationError(browserHasGeolocation, infoWindow, pos) {
   infoWindow.setPosition(pos);
   infoWindow.setContent(
@@ -298,6 +306,7 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
   hideCurrentLocation();
 }
 
+// Hide the option of current location
 function hideCurrentLocation() {
   $("#current_location")
     .prop("hidden", true)
@@ -305,6 +314,7 @@ function hideCurrentLocation() {
     .val("");
 }
 
+// Show the option of current location
 function showCurrentLocation() {
   $("#current_location")
     .prop("hidden", false)
@@ -313,6 +323,7 @@ function showCurrentLocation() {
 }
 
 $(document).ready(function() {
+  // Add click event to the choice/filter button
   const idArray = [
     "hasTable",
     "hasWifi",
@@ -340,6 +351,7 @@ $(document).ready(function() {
     });
   });
 
+  // Add onClick event to each place to let user add places to favorite
   const place_ids = ["#place1", "#place2", "#place3"];
   place_ids.forEach(place_id => {
     if ($(place_id).length !== 0) {
@@ -349,6 +361,7 @@ $(document).ready(function() {
     }
   });
 
+  // If location info of dropdown choice changes, change the latitude and longitude value in the form
   $("select#location").change(function() {
     if (
       $(this)
@@ -367,6 +380,7 @@ $(document).ready(function() {
   insert_stars();
 });
 
+// Convert 5 stars rating to percentage to each places
 function insert_stars() {
   target_ids = ["#place1", "#place2", "#place3"];
   target_ids.forEach(id => {
@@ -381,6 +395,7 @@ function insert_stars() {
   });
 }
 
+// POST request to /favorite/ to add/remove favorite to the place
 async function add_favorite(event, { placeId }, csrfmiddlewaretoken) {
   await $.ajax({
     type: "POST",
@@ -390,10 +405,12 @@ async function add_favorite(event, { placeId }, csrfmiddlewaretoken) {
       placeId
     },
     success: data => {
-      console.log(data);
+      // console.log(data);
     },
     dataType: "json"
   });
+
+  // Reverse the heart iconfont after clicking
   if (event.target.classList.contains("fa-heart")) {
     $(event.target)
       .removeClass("fa-heart")

@@ -22,7 +22,9 @@
     {% comment %} Font Awesome 4 Icons {% endcomment %}  
     {% comment %} <script src="https://use.fontawesome.com/1d3b2eb351.js"></script> {% endcomment %}
     <link rel="stylesheet" href="{% static 'css/font-awesome.css' %}" />
-
+    
+    {% comment %} Google font {% endcomment %}
+    <link href="https://fonts.googleapis.com/css?family=Source+Serif+Pro&display=swap" rel="stylesheet"> 
 
     {% comment %} Local Source {% endcomment %}
     <link rel="stylesheet" href="{% static 'css/base.css' %}" />
@@ -57,10 +59,15 @@
                 <a class="nav-link" href="{% url 'sitnow:map' %}">Map</a>
             </li>
             {% if user.is_authenticated %}
+            {% if not request.user.is_staff %}
             <li id="nav-favorites" class="nav-item">
                 <a class="nav-link" href="{% url 'sitnow:favorites' %}"
-                >My Favorites</a
-                >
+                >My Favorites</a>
+            </li>
+            {% endif %}
+            <li id="nav-favorites" class="nav-item">
+                <a class="nav-link" href="{% url 'sitnow:logout' %}"
+                >Log out</a>
             </li>
             {% else %}
             <li id="nav-login" class="nav-item">
@@ -81,7 +88,7 @@
         {% endblock %}
     </div>
 
-    {% comment %} footer {% endcomment %}>
+    {% comment %} footer {% endcomment %}
         <footer id="footer" class="fixed-bottom" style="background-color: #003865;">
             <div class="container">
                     <span id="footer-main-text" class="align-middle">&copy; Internet Technology @ Glasgow University 2020.</span>

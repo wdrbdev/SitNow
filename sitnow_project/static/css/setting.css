@@ -6,11 +6,15 @@
 
 #setting-content {
   margin: 10vh auto;
-  height: 100vh;
+  max-height: 600px;
 }
 
 .links {
   margin: 3px;
   padding: 6px 3px;
   width: 100%;
+}
+
+.side-btn {
+  margin: 3px 0;
 }

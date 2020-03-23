@@ -4,7 +4,7 @@ a.btn.side-btn {
 
 #about-content {
   margin: 10vh auto;
-  height: 100vh;
+  max-height: 600px;
 }
 
 .icon-card {
