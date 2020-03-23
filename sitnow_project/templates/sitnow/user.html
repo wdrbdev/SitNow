@@ -11,7 +11,7 @@ Sit Now - Setting
 {% block body_block %}
 <div id="setting-content">
   <div class="container clearfix row">
-    <div id="left-panel" class="col-4 justify-content-center text-center">
+    <div id="left-panel" class="col-3 justify-content-center text-center">
       <h5 id="user-name">Welcome, <br/>{{ user_profile.preferred_name}}!</h5>
       {% if not request.user.is_staff %}
       <img src="/media/{{user_profile.picture}}" alt="User Profile Picture" class="rounded-circle" height="120px" width="120px"> 
