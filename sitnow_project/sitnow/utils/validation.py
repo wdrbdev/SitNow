@@ -2,7 +2,6 @@
 def validate_querydict(querydict):
     d = {}
     querydict = querydict.dict()
-    print(querydict)
     fields = ['latitude', 'longitude',
               'permission',
               'hasTable',

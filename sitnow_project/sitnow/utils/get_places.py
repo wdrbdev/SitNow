@@ -53,8 +53,6 @@ def get_k_nearest(current_location, places, k=5):
     d = {}
     for place in places:
         d[place] = distance(current_location, place)
-    print(heapq.nsmallest(
-        k, d.items(), key=lambda p: p[1]))
     return heapq.nsmallest(
         k, places, key=lambda p: distance(current_location, p))
 
@@ -65,7 +63,6 @@ def google_distance(current_location, destination_place):
     d = {'start_latitude': current_location['latitude'], 'start_longitude': current_location['longitude'],
          'end_latitude': destination_place.latitude, 'end_longitude': destination_place.longitude, 'GOOGLE_API_KEY': keys.GOOGLE_API_KEY}
     url = Template(url_template).substitute(d)
-    print(url)
     res = requests.get(url).json()
     time.sleep(0.2)
     return round(res['routes'][0]['legs'][0]['duration']['value'] / 60)
@@ -80,7 +77,5 @@ def get_google_k_nearest(current_location, places, k=3):
     d = {}
     # for place in places:
     #     d[place] = google_distance(current_location, place)
-    # print(heapq.nsmallest(
-    #     k, d.items(), key=lambda p: p[1]))
     return heapq.nsmallest(
         k, places, key=lambda p: google_distance(current_location, p))

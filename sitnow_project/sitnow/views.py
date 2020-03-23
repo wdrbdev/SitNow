@@ -97,7 +97,6 @@ def result(request):
                     # Name the top 3 places as place1, place2, and place3
                     d["place" + str(i)] = place_dict
                     i += 1
-                    print(place_dict)
             # If no search result
             else:
                 d['isEmpty'] = True
@@ -206,7 +205,6 @@ def places(request):
 def post_comment(request):
     if request.method == 'POST':
         data = dict(request.POST)
-        print(data)
         place = Place.objects.get(pk=int(data['place_id'][0]))
         user = User.objects.get(pk=request.user.id)
 
@@ -230,7 +228,6 @@ def comments(request):
     if request.method == "POST":
         place = get_place(request)
         comments = list(Comment.objects.filter(place=place))
-        print(comments)
         comment_dicts = []
         for comment in comments:
             comment_dict = model_to_dict(comment)
