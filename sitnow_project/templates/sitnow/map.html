@@ -6,7 +6,7 @@ Sit Now - Map
 {% endblock %}
 
 {% block header_block %}
-        <script type="text/javascript"> window.CSRF_TOKEN = "{{ csrf_token }}";{% if user.is_authenticated %} window.authenticated=true {% endif %}; </script>
+        <script type="text/javascript"> window.CSRF_TOKEN = "{{ csrf_token }}";{% if user.is_authenticated %} window.authenticated=true; {% endif %} {% if request.user.is_staff %} window.is_staff=true; {% endif %} </script>
         <script type="text/javascript" src="{% static 'js/MapMap.js' %}"></script>
         <link rel="stylesheet" href="{% static 'css/map.css' %}">
         {% comment %} Google {% endcomment %}
@@ -15,21 +15,20 @@ Sit Now - Map
 
 {% block body_block %}
 <div id="map-content">
-    <div class="container clearfix">
-        <div class="row wel-grids">
-            <div class="col-md-6 wel-grid">
+    <div class="container">
+        <div class="row container-fluid">
+            <div class="col-md-12 col-lg-6">
                 <div class="map">
                     <div id="map"></div>
                 </div>
             </div>
 
-            <div id="place-container"class="col-md-6 wel-grid">
-                <div id="place"></div>
+            <div id="place-container"class="col-md-12 col-lg-6">
+                <div id="place"><h5 class="text-muted">Click a place on the map to show the place information.</h5></div>
                 {% if user.is_authenticated %}
                 <div id="new_comment" class="overflow-auto"></div>
                 {% endif %}                
                 <div id="comments"></div>
-
             </div>
 
         </div>
