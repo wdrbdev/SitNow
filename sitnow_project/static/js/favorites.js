@@ -1,3 +1,4 @@
+// Add a place to user's favorite by POST to/favorite/
 async function addFavorite(event, placeId, csrfmiddlewaretoken) {
   await $.ajax({
     type: "POST",
@@ -9,6 +10,9 @@ async function addFavorite(event, placeId, csrfmiddlewaretoken) {
     success: () => {},
     dataType: "json"
   });
+
+  
+  // Reverse the heart iconfont after clicking
   if (event.target.classList.contains("fa-heart")) {
     $(event.target)
       .removeClass("fa-heart")

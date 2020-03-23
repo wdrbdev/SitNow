@@ -1,10 +1,7 @@
-// Note: This example requires that you consent to location sharing when
-// prompted by your browser. If you see the error "The Geolocation service
-// failed.", it means you probably did not give permission for the browser to
-// locate you.
 var map, infoWindow, marker;
 var uOfG = { lat: 55.872928, lng: -4.289289 };
 
+// Initialize google map to get user's current location, but not shown on HTML
 function initMap() {
   map = new google.maps.Map(document.getElementById("google_map"), {
     zoom: 16,
@@ -12,6 +9,7 @@ function initMap() {
   });
 
   infoWindow = new google.maps.InfoWindow();
+
 
   // Try HTML5 geolocation.
   if (navigator.geolocation) {
@@ -21,15 +19,14 @@ function initMap() {
         lng = position.coords.longitude;
         var pos = { lat, lng };
 
+
+        // Fill current location
         $("#current_location").attr("data-lat", lat);
         $("#current_location").attr("data-lng", lng);
-
-        infoWindow.setPosition(pos);
-        infoWindow.setContent("Location set.");
-        infoWindow.open(map);
-        // map.setCenter(pos);
-
         fillLocation(pos);
+
+
+        // Show the option of current location only when Google API can get the current location
         showCurrentLocation();
       },
       function() {
@@ -40,22 +37,9 @@ function initMap() {
     // Browser doesn't support Geolocation
     handleLocationError(false, infoWindow, map.getCenter());
   }
-
-  google.maps.event.addListener(map, "click", event => {
-    if (document.infowindow) {
-      document.infowindow.close();
-    }
-    content = "Location set.";
-    infowindow = new google.maps.InfoWindow({ content });
-    infowindow.open(map, marker);
-    infoWindow.setPosition(event.latLng);
-    infoWindow.open(map);
-    // map.setCenter(event.latLng);
-
-    fillLocation(event.latLng);
-  });
 }
 
+// Handle error (written by Google https://developers.google.com/maps/documentation/javascript/geolocation)
 function handleLocationError(browserHasGeolocation, infoWindow, pos) {
   infoWindow.setPosition(pos);
   infoWindow.setContent(
@@ -67,6 +51,7 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
   hideCurrentLocation();
 }
 
+// Hide the option of current location
 function hideCurrentLocation() {
   $("#current_location")
     .prop("hidden", true)
@@ -74,6 +59,7 @@ function hideCurrentLocation() {
     .val("");
 }
 
+// Show the option of current location
 function showCurrentLocation() {
   $("#current_location")
     .prop("hidden", false)
@@ -81,24 +67,14 @@ function showCurrentLocation() {
     .val("current_location");
 }
 
+// Fill latitude and longitude of current location into form
 function fillLocation({ lat, lng }) {
   $("#id_latitude").val(lat);
   $("#id_longitude").val(lng);
 }
 
-function backup() {
-  map = new google.maps.Map(document.getElementById("google_map"), {
-    center: { lat: 55.872928, lng: -4.289289 },
-    zoom: 16
-  });
-
-  google.maps.event.addListener(map, "click", event => {
-    fillLocation(event.latLng);
-    setMarker(event.latLng);
-  });
-}
-
 $(document).ready(function() {
+  // Add click event to the choice/filter button
   const idArray = [
     "hasTable",
     "hasWifi",
@@ -125,7 +101,9 @@ $(document).ready(function() {
       }
     });
   });
+  
 
+  // If location info of dropdown choice changes, change the latitude and longitude value in the form
   $("select#location").change(function() {
     if (
       $(this)

@@ -1,6 +1,6 @@
+// Switch active nav-item according to current visiting site/path
 $(document).ready(function() {
   let site = window.location.pathname.replace(/\//g, "");
-
   switch (site) {
     case "":
       $("#nav-home").addClass("active");
