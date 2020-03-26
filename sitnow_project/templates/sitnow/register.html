@@ -21,19 +21,20 @@ Sign Up
     </div>
 
     {% if registered %}
-    <div>Thank you for registering!</div>
+    <div>Thank you for registering.</div>
+    <a href="{% url 'sitnow:login' %}">Go to the login page.</a><br />
     <a href="{% url 'sitnow:index' %}">Return to the homepage.</a><br />
     {% else %}
     {% comment %} <div>Register here!</div> {% endcomment %}
-    <form id="user_form" method="post" action="{% url 'sitnow:register' %}" enctype="multipart/form-data" class="d-flex justify-content-center">
+    <form id="user_form" method="post" action="{% url 'sitnow:register' %}" enctype="multipart/form-data" class="justify-content-center">
       {% csrf_token %}
       {% comment %} Display each form {% endcomment %}
       <div class="form-group">
-          {% crispy user_form %}
-          {% crispy  profile_form %}
+          {{ user_form|crispy }}
+          {{ profile_form|crispy }}
       </div>
       {% comment %} Provide a button to click to submit the form. {% endcomment %}
-      <div class="d-flex justify-content-center"><button id="register-btn" class="btn" type="submit" name="submit">Register</button></div>
+      <div class="d-flex justify-content-center"><button id="register-btn" class="btn" type="submit" name="register" class="btn-block">Register</button></div>
     </form>
     {% endif %}
 
