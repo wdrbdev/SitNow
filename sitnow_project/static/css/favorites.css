@@ -70,3 +70,8 @@ div#place.row {
   overflow-x: scroll;
   overflow-y: scroll;
 }
+
+.col-smaller-padding {
+  padding-left: 6px;
+  padding-right: 6px;
+}

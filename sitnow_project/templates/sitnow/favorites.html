@@ -15,27 +15,28 @@ Sit Now - Setting
 {% block setting_block %}
     <div id="favorite-content">
     {% for favorite in favorites %}
-        <div id="place" class="row places">
+        <div id="place" class="row places col-smaller-padding">
             {% comment %} <div class="col-3"> {% endcomment %}
                 <img src="{{favorite.place.image_url}}" alt="Place Image" height="auto" width="100%" class="place_image col-3" />
             {% comment %} </div> {% endcomment %}
-            <div id="meta-data" class="col-8 row">
+            <div id="meta-data" class="row col-md-12 col-lg-8">
                 <div  class="col-12 row">
-                    <strong class="place-name col-8">{% if user.is_authenticated %}{% if favorite.favorite %}<i id="place_favorite" class="fa fa-heart" aria-hidden="true" onclick="addFavorite(event,{{favorite.place.id}},window.CSRF_TOKEN)"></i>{% else %}<i id="place_favorite" class="fa fa-heart-o" aria-hidden="true" onclick="addFavorite(event,{{favorite.place.id}},window.CSRF_TOKEN)"></i>{% endif %}{% else %}{% endif %}{{favorite.place.name}} </strong>
-                    <span data-rate="{{favorite.rate}}" class="place-rate col-4"><span class="stars-outer"><span id="stars-inner" class="stars-inner" style="width: {{favorite.rate}}%;"></span></span><span>({{favorite.n_rates}})</span>
+                    <strong class="place-name col-md-12 col-lg-8">{% if user.is_authenticated %}{% if favorite.favorite %}<i id="place_favorite" class="fa fa-heart" aria-hidden="true" onclick="addFavorite(event,{{favorite.place.id}},window.CSRF_TOKEN)"></i>{% else %}<i id="place_favorite" class="fa fa-heart-o" aria-hidden="true" onclick="addFavorite(event,{{favorite.place.id}},window.CSRF_TOKEN)"></i>{% endif %}{% else %}{% endif %}{{favorite.place.name}} </strong>
+                    <span data-rate="{{favorite.rate}}" class="place-rate col-4 "><span class="stars-outer"><span id="stars-inner" class="stars-inner" style="width: {{favorite.rate}}%;"></span></span><small>({{favorite.n_rates}})</small>
                 </div>
-                <div class="col-12 row">
-                    <strong class="place-building col-8">@{{favorite.place.building}}</strong>
-                    <span class="place-capacity col-4">Capacity: {{favorite.place.capacity}}</span>
+                <div class="col-12 row ">
+                    <strong class="place-building col-md-12 col-lg-8 ">@{{favorite.place.building}}</strong>
+                    <small class="place-capacity col-4 ">Capacity: {{favorite.place.capacity}}</small>
                 </div>
                 <div class="col-12">
                     {% comment %} <span class="place-level">Level: {{favorite.place.level}}</span> {% endcomment %}
                     {% comment %} <span class="place-permission">Access permission: {% if not favorite.place.permission %}Not required.{% else %}{{favorite.place.permission}}{% endif %}</span> {% endcomment %}
                 </div>
-                <div>
+                <div class="col-12">
                         <button type="button" class="btn {% if favorite.place.hasTable %}btn-primary{% else %}btn-light{% endif %} btn-margin">Table</button>
                         <button type="button" class="btn {% if favorite.place.hasWifi %}btn-primary{% else %}btn-light{% endif %} btn-margin">Wifi</button>
                         <button type="button" class="btn {% if favorite.place.hasSocket %}btn-primary{% else %}btn-light{% endif %} btn-margin">Socket</button>
+                        <br class="d-none d-md-block d-lg-none"/>
                         <button type="button" class="btn {% if favorite.place.hasComputer %}btn-primary{% else %}btn-light{% endif %} btn-margin">Computer</button>
                         <button type="button" class="btn {% if favorite.place.noEating %}btn-primary{% else %}btn-light{% endif %} btn-margin">No Eating</button>
                         <br/>
