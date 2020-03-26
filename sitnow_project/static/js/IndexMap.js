@@ -10,7 +10,6 @@ function initMap() {
 
   infoWindow = new google.maps.InfoWindow();
 
-
   // Try HTML5 geolocation.
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(
@@ -19,12 +18,10 @@ function initMap() {
         lng = position.coords.longitude;
         var pos = { lat, lng };
 
-
         // Fill current location
         $("#current_location").attr("data-lat", lat);
         $("#current_location").attr("data-lng", lng);
         fillLocation(pos);
-
 
         // Show the option of current location only when Google API can get the current location
         showCurrentLocation();
@@ -86,6 +83,7 @@ $(document).ready(function() {
     "hasComputer"
   ];
   idArray.forEach(id => {
+    $("#id_" + id).val("None");
     $("#" + id).click(function() {
       let data = $("#id_" + id).val();
       if (data === "None") {
@@ -101,7 +99,6 @@ $(document).ready(function() {
       }
     });
   });
-  
 
   // If location info of dropdown choice changes, change the latitude and longitude value in the form
   $("select#location").change(function() {

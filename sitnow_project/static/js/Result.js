@@ -335,6 +335,7 @@ $(document).ready(function() {
     "hasComputer"
   ];
   idArray.forEach(id => {
+    $("#id_" + id).val("None");
     $("#" + id).click(function() {
       let data = $("#id_" + id).val();
       if (data === "None") {
