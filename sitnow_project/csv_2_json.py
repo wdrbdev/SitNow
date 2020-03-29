@@ -2,7 +2,7 @@ import numpy as np
 from pandas import read_csv
 import os
 from numpy import genfromtxt
-from populate_sitnow import *
+from population_script import *
 import json
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))

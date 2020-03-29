@@ -1,7 +1,7 @@
 from django.test import TestCase
 from sitnow.models import Comment, Place
 from sitnow.utils import get_places
-from populate_sitnow import add_place
+from population_script import add_place
 from django.forms.models import model_to_dict
 
 
