@@ -189,7 +189,7 @@ async function addPlaceCard(place) {
 
 // Convert 5 stars rating system as percentage from 0% to 100%
 function calculate_stars(template, rate) {
-  const starPercentage = (rate / 6) * 100;
+  const starPercentage = (rate / 5) * 100;
   const starPercentageRounded = `${Math.round(starPercentage / 10) * 10}%`;
   $(template)
     .find(".stars-inner")
