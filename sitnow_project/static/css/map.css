@@ -53,12 +53,12 @@
 
 #map-content {
   margin: 24px auto;
-  max-height: 600px;
+  max-height: 500px;
 }
 
-.building-block {
+/* .building-block {
   margin: 0;
-}
+} */
 
 hr {
   margin: 8px 0;

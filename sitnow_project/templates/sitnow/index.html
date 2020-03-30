@@ -39,7 +39,7 @@ SitNow
                         method="post"
                         action="{% url 'sitnow:result' %}"
                         >
-                        <div class="form-group">
+                        <div class="form-group no-margin-bottom">
                             <p>Choose your start location</p>
                             <select id="location" name="location" class="form-control" required>
                                 <option value="">- Select your start location -</option>
@@ -54,12 +54,12 @@ SitNow
                             {{ hidden }}
                         {% endfor %}
                         {% for field in form.visible_fields %}
-                        <div class="form-group form">
+                        <div class="form-group form no-margin-bottom">
                             {{ field|as_crispy_field }}
                         </div>
                         {% endfor %}
                         
-                        <div id="index-btns" class="form-group">
+                        <div id="index-btns" class="form-group no-margin-bottom">
                         <p>Choose your filter</p>
                         <button id="hasTable" type="button" class="btn btn-light choice-btn">Table</button>
                         <button id="hasWifi" type="button" class="btn btn-light choice-btn">WIFI</button>

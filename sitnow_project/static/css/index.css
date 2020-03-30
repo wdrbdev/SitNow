@@ -35,7 +35,7 @@
 #index-content {
   margin: 15vh auto;
   /* height: 100vh; */
-  max-height: 600px;
+  max-height: 500px;
   /* display: flex;
   flex-direction: column;
   justify-content: center;
@@ -44,4 +44,8 @@
 
 .choice-btn {
   margin: 3px 0;
+}
+
+.no-margin-bottom * {
+  margin-bottom: 0;
 }
