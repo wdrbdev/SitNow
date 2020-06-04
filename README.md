@@ -1,5 +1,11 @@
 # Sit Now
 
+### Introduction
+A seat finder application to get the nearest location to sit and take a rest in the University ofGlasgow according to various user requirements.
+
+### Website
+https://sitnow.pythonanywhere.com/
+
 ### Local Deployment
 
 1. Clone the `lightcoker/Sit-Now` repository into your working directory.
