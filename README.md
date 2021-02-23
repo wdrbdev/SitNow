@@ -50,7 +50,7 @@ A seat finder app of Glasgow University.
 
 - Search result: Top three nearest location would be shown, including the information and the direction to the place. Users can also change their filtering conditions on the search bar above.
 
-<img src="https://raw.githubusercontent.com/lightcoker/Sit-Now/master/doc/img/screenshot_homepage.jpg" alt="search result" style="zoom:24%;" />
+![search result](https://raw.githubusercontent.com/lightcoker/Sit-Now/master/doc/img/screenshot_search_result.jpg)
 
 - Map of all places: Users could click on the map and see all places with pictures and information in the system.
 
