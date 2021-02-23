@@ -4,13 +4,13 @@ A seat finder app of Glasgow University.
 
 ## Contents
 
-1. [Objective](##Objective)
-2. [Feature](##Feature)
-3. [Technologies](##Technologies)
-4. [ER Diagram](##ER%20Diagram)
-5. [Site Map](##Site%20Map) 
-6. [Screenshot](##Screenshot)
-7. [Local Deployment](##Local%20Deployment) 
+1. [Objective](#Objective)
+2. [Feature](#Feature)
+3. [Technologies](#Technologies)
+4. [ER Diagram](#ER%20Diagram)
+5. [Site Map](#Site%20Map) 
+6. [Screenshot](#Screenshot)
+7. [Local Deployment](#Local%20Deployment) 
 
 ## Objective
 
