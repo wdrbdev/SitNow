@@ -68,7 +68,7 @@ A seat finder app of Glasgow University.
 
 ## Local Deployment
 
-1. Clone the `lightcoker/Sit-Now` repository into your working directory.
+1. Clone the repository into your working directory.
 
 2. Initialize a python 3.7.5 (virtual) environment and install packages by `$ pip install -r requirements.txt`.
 
