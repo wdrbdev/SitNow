@@ -36,35 +36,35 @@ A seat finder app of Glasgow University.
 
 ## ER Diagram
 
-<img src="https://raw.githubusercontent.com/wdrbdev/Sit-Now/master/doc/img/ER_diagram_w_background.png" alt="ER diagram" style="zoom:24%;" />
+<img src="https://github.com/wdrbdev/SitNow/blob/master/doc/img/ER_diagram_w_background.png?raw=true" alt="ER diagram" style="zoom:24%;" />
 
 ## Site Map
 
-<img src="https://raw.githubusercontent.com/wdrbdev/Sit-Now/master/doc/img/site_map.png" alt="site map" style="zoom:48%;" />
+<img src="https://github.com/wdrbdev/SitNow/blob/master/doc/img/site_map.png?raw=true" alt="site map" style="zoom:48%;" />
 
 ## Screenshot
 
 - Homepage: Users can choose their location and filtering conditions to find seat locations.
 
-<img src="https://raw.githubusercontent.com/wdrbdev/Sit-Now/master/doc/img/screenshot_homepage.jpg" alt="home page" style="zoom:24%;" />
+<img src="https://github.com/wdrbdev/SitNow/blob/master/doc/img/screenshot_homepage.jpg?raw=true" alt="home page" style="zoom:24%;" />
 
 - Search result: Top three nearest location would be shown, including the information and the direction to the place. Users can also change their filtering conditions on the search bar above.
 
-![search result](https://raw.githubusercontent.com/wdrbdev/Sit-Now/master/doc/img/screenshot_search_result.jpg)
+![search result](https://github.com/wdrbdev/SitNow/blob/master/doc/img/screenshot_search_result.jpg?raw=true)
 
 - Map of all places: Users could click on the map and see all places with pictures and information in the system.
 
-<img src="https://raw.githubusercontent.com/wdrbdev/Sit-Now/master/doc/img/screenshot_map.jpg" alt="map" />
+<img src="https://github.com/wdrbdev/SitNow/blob/master/doc/img/screenshot_map.jpg?raw=true" alt="map" />
 
 - Rating and comments: Users can rate and comment on the place after logging in. The rate would be averaged and shown as the overall rating of the place.
 
-![comment 1](https://raw.githubusercontent.com/wdrbdev/Sit-Now/master/doc/img/screenshot_comment_1.jpg)
+<img src="https://github.com/wdrbdev/SitNow/blob/master/doc/img/screenshot_comment_1.jpg?raw=true" alt="comment1" />
 
-![comment 2](https://raw.githubusercontent.com/wdrbdev/Sit-Now/master/doc/img/screenshot_comment_2.jpg)
+<img src="https://github.com/wdrbdev/SitNow/blob/master/doc/img/screenshot_comment_2.jpg?raw=true" alt="comment2" />
 
 - Favourite place: Users could add favourite places to their collection after logging in.
 
-![favourite](https://raw.githubusercontent.com/wdrbdev/Sit-Now/master/doc/img/screenshot_favorite.jpg)
+<img src="https://github.com/wdrbdev/SitNow/blob/master/doc/img/screenshot_favorite.jpg?raw=true" alt="favorite" />
 
 ## Local Deployment
 
